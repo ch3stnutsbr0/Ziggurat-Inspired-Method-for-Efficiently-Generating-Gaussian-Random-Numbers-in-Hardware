@@ -6,7 +6,7 @@
 
 #define ZT_MAX_LAYERS 256
 #define ZT_MAX_REFINEMENT 16
-#define PI 3.141592653589793238462643383279502884
+#include "gaussian_constants.h"
 
 typedef struct { double a[ZT_MAX_LAYERS], w[ZT_MAX_LAYERS], d[ZT_MAX_LAYERS];
                  double x[ZT_MAX_LAYERS+1], y[ZT_MAX_LAYERS+1]; } table_t;
@@ -14,19 +14,37 @@ static table_t tabs[1+2*ZT_MAX_REFINEMENT];
 static unsigned nlayer, nh, nt;
 static pcg_rng rng;
 static zt_counters counts;
-static double uniform(void) { return pcg_uniform(&rng); }
+
+static double uniform(void) { 
+    return pcg_uniform(&rng); 
+}
 
 /* Probability density function for standard normal distribution */
-static double pdf(double x) { return exp(-0.5*x*x)/sqrt(2.0*PI); }
+static double pdf(double x) { 
+    return exp(-0.5*x*x)/sqrt(2.0*ZT_PI); 
+}
 
 /* MATLAB compute_partitions uses G(x)=x*phi(x)+Q(x), G(Inf)=0. */
-static double area(double x) { return x==INFINITY ? 0.0 : x*pdf(x)+0.5*erfc(x/sqrt(2.0)); }
+static double area(double x) { 
+    return x==INFINITY ? 0.0 : x*pdf(x)+0.5*erfc(x/sqrt(2.0)); 
+}
+
 static double inv_area(double target,double lo,double hi) {
-    for(int k=0;k<100;k++){ double mid=lo+(hi-lo)*0.5; if(area(mid)>target)lo=mid;else hi=mid; }
+    for(int k=0;k<100;k++){ 
+        double mid=lo+(hi-lo)*0.5; 
+        if(area(mid)>target)lo=mid;else hi=mid;
+     }
     return lo+(hi-lo)*0.5;
 }
+
+
 /* Composite Simpson quadrature approximates MATLAB integral(...,1e-10,1e-12). */
-static double inv_pdf(double y) { return sqrt(fmax(0.0,-2.0*log(sqrt(2.0*PI)*y))); }
+static double inv_pdf(double y) { 
+    return sqrt(fmax(0.0,-2.0*log(sqrt(2.0*ZT_PI)*y))); 
+}
+
+
+
 static void fit(table_t *t,unsigned i) {
     double yl=t->y[i+1], yh=t->y[i], l0=0,l1=0; const int m=4096;
     for(int j=0;j<=m;j++){
