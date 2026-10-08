@@ -1,0 +1,19 @@
+Performance comparison: 5 runs per algorithm, 10000000 samples/run, seed=1.
+No CSV export, counters disabled; initialization excluded.
+macOS-26.2-arm64-arm-64bit
+Apple clang version 17.0.0 (clang-1700.6.3.2)
+O0 trapezoid Mean:             0.00024779; Variance:         0.99927498
+O0 basic Mean:             0.00038031; Variance:         1.00024029
+O0 trapezoid: median=47.56 ns/sample; trials=[57.01, 47.67, 47.48, 47.31, 47.56]
+O0 basic: median=31.33 ns/sample; trials=[31.34, 31.33, 31.1, 31.5, 31.3]
+O0 basic speedup: 1.52x
+O2 trapezoid Mean:             0.00024779; Variance:         0.99927498
+O2 basic Mean:             0.00038031; Variance:         1.00024029
+O2 trapezoid: median=14.22 ns/sample; trials=[14.22, 12.62, 12.74, 14.69, 14.55]
+O2 basic: median=6.21 ns/sample; trials=[5.92, 5.92, 6.82, 10.44, 6.21]
+O2 basic speedup: 2.29x
+O3 trapezoid Mean:             0.00024779; Variance:         0.99927498
+O3 basic Mean:             0.00038031; Variance:         1.00024029
+O3 trapezoid: median=13.58 ns/sample; trials=[17.83, 13.29, 13.58, 15.57, 13.06]
+O3 basic: median=8.14 ns/sample; trials=[8.17, 8.14, 7.94, 8.96, 7.87]
+O3 basic speedup: 1.67x
