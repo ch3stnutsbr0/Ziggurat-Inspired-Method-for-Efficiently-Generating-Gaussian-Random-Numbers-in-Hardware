@@ -1,0 +1,19 @@
+algorithms:
+  basic:
+    enabled: true
+    layers: [8]
+    seeds: [1]
+
+  trapezoid:
+    enabled: true
+    layers: [8]
+    heads: [0]
+    tails: [0]
+    seeds: [1]
+
+  trapezoid_refined:
+    enabled: true
+    layers: [8]
+    heads: [2]
+    tails: [4]
+    seeds: [1]

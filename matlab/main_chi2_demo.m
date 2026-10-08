@@ -5,11 +5,11 @@ seedProposed = 1; %seeding for our algorithm
 seedBuiltin = 2; %seeding for builtin GRNG
 
 N = 8;
-numSamples = 2^25;
+numSamples = 1e6;
 
 
 config = struct('numBins',512, 'testRange',[-8,8], ...
-    'minExpectedCount',5, 'alpha',0.05);
+    'minExpectedCount',5, 'alpha',0.01);
 rng(seedProposed,'twister');
 
 % Case A: no recursive head or tail tables.
@@ -25,7 +25,7 @@ tables.head = cell(1,2);
 tables.tail = cell(1,4);
 for level = 1:numel(tables.head)
     if level == 1
-        parent = tables.main;
+        parent = tables.main;  
     else
         parent = tables.head{level-1};
     end
