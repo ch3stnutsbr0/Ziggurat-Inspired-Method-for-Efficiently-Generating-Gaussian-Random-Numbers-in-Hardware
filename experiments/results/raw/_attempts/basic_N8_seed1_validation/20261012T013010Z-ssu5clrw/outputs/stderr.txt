@@ -1,0 +1,1 @@
+Usage: /Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/benchmark [--algorithm trapezoid|basic] [--samples N] [--seed N] [--layers N] [--head H] [--tail T] [--output FILE] [--counters]

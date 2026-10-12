@@ -1,0 +1,131 @@
+{
+  "parameter_id": "trapezoid_N8_H2_T4_seed1",
+  "algorithm_label": "trapezoid_refined",
+  "algorithm": "trapezoid",
+  "N": 8,
+  "H": 2,
+  "T": 4,
+  "seed": 1,
+  "experiment_id": "trapezoid_N8_H2_T4_seed1_performance_rep2",
+  "repetition": 2,
+  "mode": "performance",
+  "samples": 1000000,
+  "argv": [
+    "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/benchmark",
+    "--algorithm",
+    "trapezoid",
+    "--layers",
+    "8",
+    "--head",
+    "2",
+    "--tail",
+    "4",
+    "--seed",
+    "1",
+    "--samples",
+    "1000000"
+  ],
+  "command": "'/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/benchmark' --algorithm trapezoid --layers 8 --head 2 --tail 4 --seed 1 --samples 1000000",
+  "output_directory": "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/experiments/results/raw/trapezoid_N8_H2_T4_seed1_performance_rep2",
+  "output_handling": "Python runner captures stdout here; C creates no files",
+  "status": "successful",
+  "returncode": 0,
+  "started_at": "2026-10-12T01:30:12.500270+00:00",
+  "ended_at": "2026-10-12T01:30:12.531582+00:00",
+  "wall_clock_duration_seconds": 0.031026459066197276,
+  "subprocess_invocation_attempted": true,
+  "provenance": {
+    "benchmark_sha256": "a4c789731dd59e1ff03e1165d4fcb5e4f3d86ffc68e0bf1f5a54cc60a02b478d",
+    "benchmark_build": {
+      "path": "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/benchmark",
+      "sha256": "a4c789731dd59e1ff03e1165d4fcb5e4f3d86ffc68e0bf1f5a54cc60a02b478d",
+      "size_bytes": 35656,
+      "modified_time_ns": 1791768349172766244
+    },
+    "configuration": {
+      "algorithms": {
+        "basic": {
+          "enabled": true,
+          "layers": [
+            8
+          ],
+          "seeds": [
+            1
+          ]
+        },
+        "trapezoid": {
+          "enabled": true,
+          "layers": [
+            8
+          ],
+          "heads": [
+            0
+          ],
+          "tails": [
+            0
+          ],
+          "seeds": [
+            1
+          ]
+        },
+        "trapezoid_refined": {
+          "enabled": true,
+          "layers": [
+            8
+          ],
+          "heads": [
+            2
+          ],
+          "tails": [
+            4
+          ],
+          "seeds": [
+            1
+          ]
+        }
+      },
+      "performance": {
+        "enabled": true,
+        "samples": 1000000,
+        "repetitions": 3
+      },
+      "validation": {
+        "enabled": true,
+        "samples": 1000000
+      }
+    },
+    "python_version": "3.12.7 | packaged by Anaconda, Inc. | (main, Oct  4 2024, 08:22:19) [Clang 14.0.6 ]",
+    "working_directory": "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG",
+    "timing_note": "Python wall-clock measures subprocess invocation including initialization and I/O; C sampling time is separate. Binary checks and Python file writes are outside subprocess timing."
+  },
+  "attempt_history": [],
+  "benchmark_results": {
+    "num_samples": 1000000,
+    "sampling_time_seconds": 0.023745,
+    "throughput_samples_per_second": 42114130.299,
+    "time_per_sample_ns": 23.74,
+    "mean": -0.00018936,
+    "variance": 1.00066153,
+    "checksum": -189.36164580348418,
+    "source": "C stdout; values retain printed precision (time 6, moments 8 decimal places)"
+  },
+  "binary_statistics": null,
+  "output_files": {
+    "summary.json": {
+      "size_bytes": 322,
+      "sha256": "d8df38629ca8ef7e83787579fe88c9ee954ecdc37f5b401e74890e358b577bb4"
+    },
+    "config.json": {
+      "size_bytes": 1039,
+      "sha256": "bbf95c27e520a2b22e15a29e367f716ff3d0ca58c754aa349441e806dc25df17"
+    },
+    "stdout.txt": {
+      "size_bytes": 325,
+      "sha256": "e39c47cf452bc5b71574ee428cc068f3c069cf9f07c6cb5f9c8e8b4546fd7b2e"
+    },
+    "stderr.txt": {
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

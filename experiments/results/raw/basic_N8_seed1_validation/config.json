@@ -1,0 +1,7 @@
+{
+  "algorithm": "basic",
+  "N": 8,
+  "seed": 1,
+  "num_samples": 1000000,
+  "compiler_optimization": "O2"
+}

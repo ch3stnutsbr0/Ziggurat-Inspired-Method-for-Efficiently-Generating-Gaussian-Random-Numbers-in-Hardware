@@ -1,0 +1,32 @@
+{
+  "parameter_id": "trapezoid_N8_H0_T0_seed1",
+  "algorithm_label": "trapezoid",
+  "algorithm": "trapezoid",
+  "N": 8,
+  "H": 0,
+  "T": 0,
+  "seed": 1,
+  "experiment_id": "trapezoid_N8_H0_T0_seed1_performance_rep3",
+  "repetition": 3,
+  "mode": "performance",
+  "samples": 1000000,
+  "argv": [
+    "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/benchmark",
+    "--algorithm",
+    "trapezoid",
+    "--layers",
+    "8",
+    "--head",
+    "0",
+    "--tail",
+    "0",
+    "--seed",
+    "1",
+    "--samples",
+    "1000000"
+  ],
+  "command": "'/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/benchmark' --algorithm trapezoid --layers 8 --head 0 --tail 0 --seed 1 --samples 1000000",
+  "output_directory": "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/experiments/results/raw/trapezoid_N8_H0_T0_seed1_performance_rep3",
+  "output_handling": "Python runner captures stdout here; C creates no files",
+  "num_samples": 1000000
+}

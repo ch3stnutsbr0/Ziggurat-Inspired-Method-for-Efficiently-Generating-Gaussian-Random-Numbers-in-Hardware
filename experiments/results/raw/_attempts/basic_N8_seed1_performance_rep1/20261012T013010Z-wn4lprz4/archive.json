@@ -1,0 +1,11 @@
+{
+  "experiment_id": "basic_N8_seed1_performance_rep1",
+  "prior_status": "successful",
+  "prior_build_sha256": "a6e43387968dcc81b492522f15deda870932a2dc18bf39835efaee88aa9d5eed",
+  "action": "refresh",
+  "reason": "Explicit --refresh-performance; archive and regenerate",
+  "archived_at": "2026-10-12T01:30:10.174596+00:00",
+  "original_directory": "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/experiments/results/raw/basic_N8_seed1_performance_rep1",
+  "archived_directory": "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/experiments/results/raw/_attempts/basic_N8_seed1_performance_rep1/20261012T013010Z-wn4lprz4/outputs",
+  "current_build_sha256": "a4c789731dd59e1ff03e1165d4fcb5e4f3d86ffc68e0bf1f5a54cc60a02b478d"
+}

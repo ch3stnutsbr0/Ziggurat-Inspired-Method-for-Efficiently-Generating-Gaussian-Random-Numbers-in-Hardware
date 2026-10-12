@@ -1,0 +1,94 @@
+{
+  "parameter_id": "basic_N8_seed1",
+  "algorithm_label": "basic",
+  "algorithm": "basic",
+  "N": 8,
+  "H": null,
+  "T": null,
+  "seed": 1,
+  "experiment_id": "basic_N8_seed1_validation",
+  "repetition": 1,
+  "mode": "validation",
+  "samples": 1000000,
+  "argv": [
+    "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/benchmark",
+    "--algorithm",
+    "basic",
+    "--layers",
+    "8",
+    "--seed",
+    "1",
+    "--samples",
+    "1000000",
+    "--output-dir",
+    "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/experiments/results/raw/basic_N8_seed1_validation"
+  ],
+  "command": "'/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/benchmark' --algorithm basic --layers 8 --seed 1 --samples 1000000 --output-dir '/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/experiments/results/raw/basic_N8_seed1_validation'",
+  "output_directory": "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/experiments/results/raw/basic_N8_seed1_validation",
+  "output_handling": "C writes samples.bin, summary.json, config.json",
+  "status": "failed",
+  "returncode": 2,
+  "started_at": "2026-10-12T01:22:15.174207+00:00",
+  "ended_at": "2026-10-12T01:22:15.177071+00:00",
+  "wall_clock_duration_seconds": 0.002597708022221923,
+  "subprocess_invocation_attempted": true,
+  "provenance": {
+    "benchmark_sha256": "a6e43387968dcc81b492522f15deda870932a2dc18bf39835efaee88aa9d5eed",
+    "configuration": {
+      "algorithms": {
+        "basic": {
+          "enabled": true,
+          "layers": [
+            8
+          ],
+          "seeds": [
+            1
+          ]
+        },
+        "trapezoid": {
+          "enabled": true,
+          "layers": [
+            8
+          ],
+          "heads": [
+            0
+          ],
+          "tails": [
+            0
+          ],
+          "seeds": [
+            1
+          ]
+        },
+        "trapezoid_refined": {
+          "enabled": true,
+          "layers": [
+            8
+          ],
+          "heads": [
+            2
+          ],
+          "tails": [
+            4
+          ],
+          "seeds": [
+            1
+          ]
+        }
+      },
+      "performance": {
+        "enabled": true,
+        "samples": 1000000,
+        "repetitions": 3
+      },
+      "validation": {
+        "enabled": true,
+        "samples": 1000000
+      }
+    },
+    "python_version": "3.12.7 | packaged by Anaconda, Inc. | (main, Oct  4 2024, 08:22:19) [Clang 14.0.6 ]",
+    "working_directory": "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG",
+    "timing_note": "Python wall-clock measures subprocess invocation including initialization and I/O; C sampling time is separate. Binary checks and Python file writes are outside subprocess timing."
+  },
+  "error": "RuntimeError: Benchmark exited with status 2: Usage: /Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/benchmark [--algorithm trapezoid|basic] [--samples N] [--seed N] [--layers N] [--head H] [--tail T] [--output FILE] [--counters]"
+}

@@ -1,0 +1,13 @@
+Algorithm:        basic
+Configuration:    N=8 (H/T not applicable)
+Seed:             1
+Binary output mode: I/O excluded from timing; memory writes affect throughput.
+Samples:          1000000
+Time:             0.047749 s
+Throughput:       20.943 M samples/s
+Time per sample:  47.75 ns
+Checksum:         1165.7554488843384
+Samples/second:   20942847.115
+Output directory: /Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/experiments/results/raw/basic_N8_seed1_validation
+Mean:             0.00116576
+Variance:         1.00120194

@@ -1,0 +1,120 @@
+{
+  "parameter_id": "basic_N8_seed1",
+  "algorithm_label": "basic",
+  "algorithm": "basic",
+  "N": 8,
+  "H": null,
+  "T": null,
+  "seed": 1,
+  "experiment_id": "basic_N8_seed1_performance_rep1",
+  "repetition": 1,
+  "mode": "performance",
+  "samples": 1000000,
+  "argv": [
+    "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/benchmark",
+    "--algorithm",
+    "basic",
+    "--layers",
+    "8",
+    "--seed",
+    "1",
+    "--samples",
+    "1000000"
+  ],
+  "command": "'/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/benchmark' --algorithm basic --layers 8 --seed 1 --samples 1000000",
+  "output_directory": "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/experiments/results/raw/basic_N8_seed1_performance_rep1",
+  "output_handling": "Python runner captures stdout here; C creates no files",
+  "status": "successful",
+  "returncode": 0,
+  "started_at": "2026-10-12T01:22:15.101993+00:00",
+  "ended_at": "2026-10-12T01:22:15.128315+00:00",
+  "wall_clock_duration_seconds": 0.025789166800677776,
+  "subprocess_invocation_attempted": true,
+  "provenance": {
+    "benchmark_sha256": "a6e43387968dcc81b492522f15deda870932a2dc18bf39835efaee88aa9d5eed",
+    "configuration": {
+      "algorithms": {
+        "basic": {
+          "enabled": true,
+          "layers": [
+            8
+          ],
+          "seeds": [
+            1
+          ]
+        },
+        "trapezoid": {
+          "enabled": true,
+          "layers": [
+            8
+          ],
+          "heads": [
+            0
+          ],
+          "tails": [
+            0
+          ],
+          "seeds": [
+            1
+          ]
+        },
+        "trapezoid_refined": {
+          "enabled": true,
+          "layers": [
+            8
+          ],
+          "heads": [
+            2
+          ],
+          "tails": [
+            4
+          ],
+          "seeds": [
+            1
+          ]
+        }
+      },
+      "performance": {
+        "enabled": true,
+        "samples": 1000000,
+        "repetitions": 3
+      },
+      "validation": {
+        "enabled": true,
+        "samples": 1000000
+      }
+    },
+    "python_version": "3.12.7 | packaged by Anaconda, Inc. | (main, Oct  4 2024, 08:22:19) [Clang 14.0.6 ]",
+    "working_directory": "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG",
+    "timing_note": "Python wall-clock measures subprocess invocation including initialization and I/O; C sampling time is separate. Binary checks and Python file writes are outside subprocess timing."
+  },
+  "benchmark_results": {
+    "num_samples": 1000000,
+    "sampling_time_seconds": 0.016756,
+    "throughput_samples_per_second": 59680114.596,
+    "time_per_sample_ns": 16.76,
+    "mean": 0.00116576,
+    "variance": 1.00120194,
+    "checksum": 1165.7554488843384,
+    "source": "C stdout; values retain printed precision (time 6, moments 8 decimal places)"
+  },
+  "binary_statistics": null,
+  "output_files": {
+    "summary.json": {
+      "size_bytes": 320,
+      "sha256": "258d8b059e073df0d78b6612fd2495616a2f3450828f45959c1236303e081526"
+    },
+    "config.json": {
+      "size_bytes": 927,
+      "sha256": "dc999265f51d73ccfcd83de2cf90566a2ce124bd09eda459b60e3eb7f7f6aa27"
+    },
+    "stdout.txt": {
+      "size_bytes": 332,
+      "sha256": "ad20e39db35a10eb4925853581b1c4cb223830c4217907a3954611c456066308"
+    },
+    "stderr.txt": {
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}
