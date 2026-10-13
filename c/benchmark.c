@@ -1,6 +1,7 @@
 #define _POSIX_C_SOURCE 200809L
 #include "ziggurat_trapezoid.h"
 #include "ziggurat_basic.h"
+#include "gaussian_prng.h"
 #include <errno.h>
 #include <fcntl.h>
 #include <math.h>
@@ -116,11 +117,14 @@ static FILE *open_experiment_file(const char *path,int overwrite){
     return f;
 }
 int main(int argc,char **argv){
-    uint64_t samples=10000000,seed=1,prng_iterations=10000000;unsigned n=128,h=2,tail=4;const char *output=NULL,*output_dir=NULL;int overwrite=0;int layers_set=0; int show=0,profile_prng=0,iterations_set=0; const char *algorithm="trapezoid";
+    uint64_t samples=10000000,seed=1,prng_iterations=10000000,warmup=0;unsigned n=128,h=2,tail=4;const char *output=NULL,*output_dir=NULL;int overwrite=0;int layers_set=0; int show=0,profile_prng=0,iterations_set=0,report_json=0; const char *algorithm="trapezoid", *prng="pcg32"; prng_type type=PRNG_PCG32;
     for(int i=1;i<argc;i++){
         if(!strcmp(argv[i],"--algorithm")&&i+1<argc)algorithm=argv[++i];
+        else if(!strcmp(argv[i],"--prng")&&i+1<argc)prng=argv[++i];
         else if(!strcmp(argv[i],"--samples")&&i+1<argc)samples=parse_unsigned(argv[++i],UINT64_MAX,10);
         else if(!strcmp(argv[i],"--seed")&&i+1<argc)seed=parse_unsigned(argv[++i],UINT64_MAX,0);
+        else if(!strcmp(argv[i],"--warmup")&&i+1<argc)warmup=parse_unsigned(argv[++i],UINT64_MAX,10);
+        else if(!strcmp(argv[i],"--report-json"))report_json=1;
         else if(!strcmp(argv[i],"--layers")&&i+1<argc){n=(unsigned)parse_unsigned(argv[++i],UINT_MAX,10);layers_set=1;}
         else if(!strcmp(argv[i],"--head")&&i+1<argc)h=(unsigned)parse_unsigned(argv[++i],UINT_MAX,10);
         else if(!strcmp(argv[i],"--tail")&&i+1<argc)tail=(unsigned)parse_unsigned(argv[++i],UINT_MAX,10);
@@ -130,8 +134,11 @@ int main(int argc,char **argv){
         else if(!strcmp(argv[i],"--counters"))show=1;
         else if(!strcmp(argv[i],"--profile-prng"))profile_prng=1;
         else if(!strcmp(argv[i],"--prng-iterations")&&i+1<argc){prng_iterations=parse_unsigned(argv[++i],UINT64_MAX,10);iterations_set=1;}
-        else {fprintf(stderr,"Usage: %s [--algorithm trapezoid|basic] [--samples N] [--seed N] [--layers N] [--head H] [--tail T] [--output FILE | --output-dir DIR [--overwrite]] [--counters] [--profile-prng [--prng-iterations N]]\n",argv[0]);return 2;}
+        else {fprintf(stderr,"Usage: %s [--algorithm trapezoid|basic] [--prng pcg32|xoshiro256plus] [--samples N] [--seed N] [--layers N] [--head H] [--tail T] [--output FILE | --output-dir DIR [--overwrite]] [--counters] [--warmup N] [--report-json] [--profile-prng [--prng-iterations N]]\n",argv[0]);return 2;}
     }
+    if(!prng_parse(prng,&type)){fprintf(stderr,"Unknown PRNG: %s\n",prng);return 2;}
+    /* Existing profiling fields count PCG32 words and are intentionally PCG-specific. */
+    if(profile_prng && type!=PRNG_PCG32){fprintf(stderr,"--profile-prng currently supports pcg32 only\n");return 2;}
     if(output && output_dir){fprintf(stderr,"--output and --output-dir cannot be used together\n");return 2;}
     if(overwrite && !output_dir){fprintf(stderr,"--overwrite requires --output-dir\n");return 2;}
     int basic=!strcmp(algorithm,"basic");
@@ -141,8 +148,8 @@ int main(int argc,char **argv){
         fprintf(stderr,"--prng-iterations requires --profile-prng and a positive count\n");return 2;
     }
     if(!layers_set) n=basic?128:8;
-    if(basic && !zb_init(seed,n)) { fprintf(stderr,"Unsupported or invalid classical layer count %u; supported: 8 16 32 64 128 256\n",n); return 2; }
-    if(!basic && !zt_init(seed,n,h,tail)){fprintf(stderr,"Invalid table configuration\n");return 2;}
+    if(basic && !zb_init_prng(seed,n,type)) { fprintf(stderr,"Unsupported or invalid classical layer count %u; supported: 8 16 32 64 128 256\n",n); return 2; }
+    if(!basic && !zt_init_prng(seed,n,h,tail,type)){fprintf(stderr,"Invalid table configuration\n");return 2;}
     /* Output uses at most 512 KiB, regardless of the requested sample count. */
     const size_t chunk_size=65536;
     size_t capacity=samples<chunk_size?(size_t)samples:chunk_size;
@@ -192,8 +199,20 @@ int main(int argc,char **argv){
             if(!f){perror(output);goto output_failure;}
         }
     }
-    double (*generate)(void)=basic?zb_gaussian:zt_gaussian;
+    double (*generate)(void)=basic?zb_generator(type):zt_generator(type);
+    /* Optional Gaussian warm-up: fully outside all timed loops. Reset to the
+     * requested seed afterward so measured samples retain the original stream. */
+    if(warmup){
+        volatile double warmup_checksum=0.0;
+        for(uint64_t i=0;i<warmup;i++)warmup_checksum+=generate();
+        if(!isfinite((double)warmup_checksum) ||
+           !(basic?zb_init_prng(seed,n,type):zt_init_prng(seed,n,h,tail,type))){
+            fprintf(stderr,"Gaussian warm-up or reinitialization failed\n");goto output_failure;
+        }
+        printf("Warm-up samples:  %" PRIu64 " (outside timing; reset to seed afterward)\n",warmup);
+    }
     printf("Algorithm:        %s\n",algorithm);
+    printf("PRNG:             %s\n",prng);
     if(basic) printf("Configuration:    N=%u (H/T not applicable)\n",n);
     else printf("Configuration:    N=%u H=%u T=%u\n",n,h,tail);
     printf("Seed:             %" PRIu64 "\n",seed);
@@ -239,16 +258,16 @@ int main(int argc,char **argv){
             goto output_failure;
         }
         if(fprintf(summary_file,
-            "{\n  \"sampling_time_seconds\": %.17g,\n  \"throughput_samples_per_second\": %.17g,\n"
+            "{\n  \"prng\": \"%s\",\n  \"sampling_time_seconds\": %.17g,\n  \"throughput_samples_per_second\": %.17g,\n"
             "  \"time_per_sample_ns\": %.17g,\n  \"mean\": %.17g,\n"
             "  \"variance\": %.17g,\n  \"checksum\": %.17g,\n"
             "  \"num_samples\": %" PRIu64 "\n}\n",
-            elapsed,throughput,ns_per_sample,mean,variance,(double)checksum,samples)<0){
+            prng,elapsed,throughput,ns_per_sample,mean,variance,(double)checksum,samples)<0){
             perror(summary_path);goto output_failure;
         }
         int summary_close=fclose(summary_file);summary_file=NULL;
         if(summary_close!=0){perror(summary_path);goto output_failure;}
-        if(fprintf(config_file,"{\n  \"algorithm\": \"%s\",\n  \"N\": %u,\n",algorithm,n)<0){
+        if(fprintf(config_file,"{\n  \"algorithm\": \"%s\",\n  \"prng\": \"%s\",\n  \"N\": %u,\n",algorithm,prng,n)<0){
             perror(config_path);goto output_failure;
         }
         if(!basic && fprintf(config_file,"  \"H\": %u,\n  \"T\": %u,\n",h,tail)<0){
@@ -342,7 +361,19 @@ int main(int argc,char **argv){
     else if(output)printf("Output:           %s\n",output);
     if(samples>1)printf("Mean:             %.8f\nVariance:         %.8f\n",sum/(double)samples,(sumsq-sum*sum/(double)samples)/(double)(samples-1));
     if(show && !ZT_ENABLE_COUNTERS) printf("Counters disabled; build with make debug.\n");
-    if(show && ZT_ENABLE_COUNTERS){zt_counters c;if(basic)zb_get_counters(&c);else zt_get_counters(&c);printf("Counters: total=%" PRIu64 " rect=%" PRIu64 " triangle=%" PRIu64 " head=%" PRIu64 " tail=%" PRIu64 " head-refined=%" PRIu64 " tail-refined=%" PRIu64 "\n",c.total_samples,c.rectangle_acceptances,c.triangle_acceptances,c.head_region_hits,c.tail_region_hits,c.head_refined_paths,c.tail_refined_paths);printf("Rejection tests=%" PRIu64 " rejected=%" PRIu64 " retries=%" PRIu64 "\n",c.rejection_region_tests,c.rejected_candidates,c.retries);}
+    if(show && ZT_ENABLE_COUNTERS){zt_counters c;if(basic){if(type==PRNG_PCG32)zb_get_counters(&c);else zb_get_counters_xoshiro256plus(&c);}else{if(type==PRNG_PCG32)zt_get_counters(&c);else zt_get_counters_xoshiro256plus(&c);}printf("Counters: total=%" PRIu64 " rect=%" PRIu64 " triangle=%" PRIu64 " head=%" PRIu64 " tail=%" PRIu64 " head-refined=%" PRIu64 " tail-refined=%" PRIu64 "\n",c.total_samples,c.rectangle_acceptances,c.triangle_acceptances,c.head_region_hits,c.tail_region_hits,c.head_refined_paths,c.tail_refined_paths);printf("Rejection tests=%" PRIu64 " rejected=%" PRIu64 " retries=%" PRIu64 "\n",c.rejection_region_tests,c.rejected_candidates,c.retries);}
+    if(report_json){
+        /* Opt-in full precision for experiment collectors. PRNG metadata is
+         * additive; existing metric fields and precision are unchanged. */
+        printf("BENCHMARK_JSON: {\"algorithm\":\"%s\",\"prng\":\"%s\",\"N\":%u,\"H\":%u,\"T\":%u,"
+               "\"seed\":%" PRIu64 ",\"num_samples\":%" PRIu64 ",\"warmup_samples\":%" PRIu64 ","
+               "\"compiler_optimization\":\"%s\",\"sampling_time_seconds\":%.17g,"
+               "\"throughput_samples_per_second\":%.17g,\"time_per_sample_ns\":%.17g,"
+               "\"mean\":%.17g,\"variance\":%.17g,\"checksum\":%.17g}\n",
+               algorithm,prng,n,basic?0:h,basic?0:tail,seed,samples,warmup,BENCHMARK_OPTIMIZATION,
+               elapsed,(double)samples/elapsed,elapsed*1e9/(double)samples,
+               sum/(double)samples,(sumsq-sum*sum/(double)samples)/(double)(samples-1),(double)checksum);
+    }
     free(sample_path);free(summary_path);free(config_path);free(profile_path);
     return 0;
 output_failure:

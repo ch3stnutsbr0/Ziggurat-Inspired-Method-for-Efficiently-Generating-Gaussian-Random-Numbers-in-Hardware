@@ -1,6 +1,6 @@
 #include "ziggurat_trapezoid.h"
 #include <math.h>
-#include "pcg_rng.h"
+#include "prng.h"
 #include <stddef.h>
 #include <string.h>
 
@@ -12,7 +12,7 @@ typedef struct { double a[ZT_MAX_LAYERS], w[ZT_MAX_LAYERS], d[ZT_MAX_LAYERS];
                  double x[ZT_MAX_LAYERS+1], y[ZT_MAX_LAYERS+1]; } table_t;
 static table_t tabs[1+2*ZT_MAX_REFINEMENT];
 static unsigned nlayer, nh, nt;
-static pcg_rng rng;
+static sampler_rng rng;
 static pcg_profile prng_profile;
 static zt_counters counts;
 
@@ -20,7 +20,7 @@ static double uniform(void) {
 #ifdef ZT_PROFILE_BUILD
     return pcg_uniform_profiled(&rng,&prng_profile);
 #else
-    return pcg_uniform(&rng);
+    return sampler_uniform(&rng);
 #endif
 }
 
@@ -90,7 +90,7 @@ int zt_init(uint64_t seed,unsigned n,unsigned h,unsigned tail) {
     pcg_seed_profiled(&rng,&prng_profile,seed);
     pcg_profile_sampling(&prng_profile);
 #else
-    pcg_seed(&rng,seed);
+    sampler_seed(&rng,seed);
 #endif
     build(&tabs[0],n,0.0,INFINITY);
     for(unsigned j=1;j<=h;j++){table_t *p=&tabs[j-1],*c=&tabs[j];build(c,n,p->x[0],p->x[1]);}

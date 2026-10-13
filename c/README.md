@@ -263,3 +263,16 @@ seeds (100,000 samples per seed); only its PI literal is replaced with the
 identical shared double value. Numerical checks provide primary evidence of
 valid tables; statistical checks are supplemental. No existing test suite
 was present before these additions.
+
+### Optional Gaussian warm-up and full-precision collection
+
+`--warmup N` consumes N Gaussian values before timing, then reinitializes with
+ the requested seed. The measured sample sequence is therefore identical to a
+run without warm-up. Initialization and warm-up are excluded from all sampling
+ timers. The default is zero warm-up samples, preserving existing behavior.
+
+`--report-json` adds one `BENCHMARK_JSON:` line after sampling with full-precision
+numeric metrics and the compiler optimization label. It adds no work inside the
+sampling loops and does not change existing binary, summary, or config formats.
+The layer comparison driver uses these options and streams validation through
+an OS pipe, without creating raw sample files.

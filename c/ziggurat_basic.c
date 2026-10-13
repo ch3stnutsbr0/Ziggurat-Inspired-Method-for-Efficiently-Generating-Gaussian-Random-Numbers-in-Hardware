@@ -1,5 +1,5 @@
 #include "ziggurat_basic.h"
-#include "pcg_rng.h"
+#include "prng.h"
 #include "gaussian_constants.h"
 #include <math.h>
 #include <string.h>
@@ -17,7 +17,7 @@ static const ziggurat_config configurations[] = {
 static unsigned nlayer;
 static double cutoff, x[ZB_MAX_LAYERS], y[ZB_MAX_LAYERS];
 static double rectangle_probability;
-static pcg_rng rng;
+static sampler_rng rng;
 static pcg_profile prng_profile;
 static zt_counters counts;
 #if ZT_ENABLE_COUNTERS
@@ -29,7 +29,7 @@ static double uniform(void) {
 #ifdef ZT_PROFILE_BUILD
     return pcg_uniform_profiled(&rng,&prng_profile);
 #else
-    return pcg_uniform(&rng);
+    return sampler_uniform(&rng);
 #endif
 }
 /* Check the actual recurrence before permitting peak-rounding correction.
@@ -72,7 +72,7 @@ int zb_init(uint64_t seed, unsigned n) {
             pcg_seed_profiled(&rng,&prng_profile,seed);
             pcg_profile_sampling(&prng_profile);
 #else
-            pcg_seed(&rng,seed);
+            sampler_seed(&rng,seed);
 #endif
             return 1;
         }
