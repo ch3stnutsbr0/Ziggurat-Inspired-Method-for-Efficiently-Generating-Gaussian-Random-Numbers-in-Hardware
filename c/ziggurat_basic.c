@@ -18,13 +18,20 @@ static unsigned nlayer;
 static double cutoff, x[ZB_MAX_LAYERS], y[ZB_MAX_LAYERS];
 static double rectangle_probability;
 static pcg_rng rng;
+static pcg_profile prng_profile;
 static zt_counters counts;
 #if ZT_ENABLE_COUNTERS
 #define COUNT(field) (++counts.field)
 #else
 #define COUNT(field) ((void)0)
 #endif
-static double uniform(void) { return pcg_uniform(&rng); }
+static double uniform(void) {
+#ifdef ZT_PROFILE_BUILD
+    return pcg_uniform_profiled(&rng,&prng_profile);
+#else
+    return pcg_uniform(&rng);
+#endif
+}
 /* Check the actual recurrence before permitting peak-rounding correction.
  * The original 128-layer R is truncated and has a larger known residual.
  * No interior layer is clamped; invalid configurations disable sampling. */
@@ -56,10 +63,17 @@ static int build_tables(unsigned n, double r) {
 int zb_init(uint64_t seed, unsigned n) {
     nlayer=0;
     memset(&counts,0,sizeof counts);
+    pcg_profile_reset(&prng_profile);
     for(unsigned i=0;i<sizeof configurations/sizeof configurations[0];i++) {
         if(configurations[i].n==n) {
             if(!build_tables(n,configurations[i].r)) return 0;
+#ifdef ZT_PROFILE_BUILD
+            pcg_profile_initialization(&prng_profile);
+            pcg_seed_profiled(&rng,&prng_profile,seed);
+            pcg_profile_sampling(&prng_profile);
+#else
             pcg_seed(&rng,seed);
+#endif
             return 1;
         }
     }
@@ -102,3 +116,7 @@ double zb_gaussian(void) {
     return uniform()<0.5?-magnitude:magnitude;
 }
 void zb_get_counters(zt_counters *out) { if(out)*out=counts; }
+void zb_get_prng_profile(pcg_profile_counts *initialization, pcg_profile_counts *sampling) {
+    if(initialization)*initialization=prng_profile.initialization;
+    if(sampling)*sampling=prng_profile.sampling;
+}

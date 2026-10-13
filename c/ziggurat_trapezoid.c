@@ -13,10 +13,15 @@ typedef struct { double a[ZT_MAX_LAYERS], w[ZT_MAX_LAYERS], d[ZT_MAX_LAYERS];
 static table_t tabs[1+2*ZT_MAX_REFINEMENT];
 static unsigned nlayer, nh, nt;
 static pcg_rng rng;
+static pcg_profile prng_profile;
 static zt_counters counts;
 
 static double uniform(void) { 
-    return pcg_uniform(&rng); 
+#ifdef ZT_PROFILE_BUILD
+    return pcg_uniform_profiled(&rng,&prng_profile);
+#else
+    return pcg_uniform(&rng);
+#endif
 }
 
 /* Probability density function for standard normal distribution */
@@ -79,7 +84,14 @@ static void build(table_t *t,unsigned n,double left,double right) {
 int zt_init(uint64_t seed,unsigned n,unsigned h,unsigned tail) {
     if(n<2||n>ZT_MAX_LAYERS||h>ZT_MAX_REFINEMENT||tail>ZT_MAX_REFINEMENT)return 0;
     nlayer=n;nh=h;nt=tail; memset(&counts,0,sizeof counts); memset(tabs,0,sizeof tabs);
+    pcg_profile_reset(&prng_profile);
+#ifdef ZT_PROFILE_BUILD
+    pcg_profile_initialization(&prng_profile);
+    pcg_seed_profiled(&rng,&prng_profile,seed);
+    pcg_profile_sampling(&prng_profile);
+#else
     pcg_seed(&rng,seed);
+#endif
     build(&tabs[0],n,0.0,INFINITY);
     for(unsigned j=1;j<=h;j++){table_t *p=&tabs[j-1],*c=&tabs[j];build(c,n,p->x[0],p->x[1]);}
     for(unsigned j=1;j<=tail;j++){
@@ -127,6 +139,10 @@ double zt_gaussian(void) {
 }
 void zt_get_counters(zt_counters *o){if(o)*o=counts;}
 void zt_reset_counters(void){memset(&counts,0,sizeof counts);}
+void zt_get_prng_profile(pcg_profile_counts *initialization, pcg_profile_counts *sampling){
+    if(initialization)*initialization=prng_profile.initialization;
+    if(sampling)*sampling=prng_profile.sampling;
+}
 unsigned zt_layers(void){return nlayer;}
 double zt_table_x(unsigned table,unsigned boundary){if(table>=1+2*ZT_MAX_REFINEMENT||boundary>nlayer)return NAN;return tabs[table].x[boundary];}
 double zt_table_y(unsigned table,unsigned boundary){if(table>=1+2*ZT_MAX_REFINEMENT||boundary>nlayer)return NAN;return tabs[table].y[boundary];}

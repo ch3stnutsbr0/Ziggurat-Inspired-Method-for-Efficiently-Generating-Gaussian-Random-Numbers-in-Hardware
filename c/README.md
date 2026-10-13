@@ -202,6 +202,58 @@ reported as not applicable for classical sampling. Omitting `--layers`
 retains the old defaults (classical 128, trapezoid 8). Existing numeric seed
 syntax, including hexadecimal seeds, remains supported.
 
+## Optional PRNG profiling
+
+Build with `make O2`, then run, for example:
+
+```sh
+./benchmark --algorithm trapezoid --layers 8 --head 2 --tail 4 \
+    --samples 100000000 --seed 1 --profile-prng \
+    --prng-iterations 10000000 --output-dir results/prng_example
+```
+
+`--profile-prng` also supports `--algorithm basic` and an unrefined
+`--algorithm trapezoid --head 0 --tail 0` run. `--prng-iterations` sets the
+uniform calls in each microbenchmark repetition (default 10,000,000); it
+requires `--profile-prng`. Five repetitions and 100,000 warm-up calls per
+repetition are used. Omit `--output-dir` for a performance run without binary
+sample writes. With `--output-dir`, the extra results are in
+`prng_profile.json`; `samples.bin`, `summary.json`, and `config.json` retain
+their existing formats.
+
+The baseline pass runs first with PRNG counting disabled. It uses the existing
+benchmark loop, including checksum and moment updates. In binary output mode
+it also includes buffer writes and chunk timer overhead; disk writes are
+outside the timer. The generator is then initialized again from the same seed
+and an instrumented pass counts actual `pcg_uniform()` and `pcg_next()` calls.
+The initialization counters are separate: seeding uses two `pcg_next()` calls
+and zero uniforms. Sampling counters include every rejection retry, refined
+table selection, tail proposal, and sign draw. Each uniform currently calls
+`pcg_next()` twice to construct its 53-bit double; the two counts are recorded
+at their respective functions rather than inferred from Gaussian paths.
+Counters are 64-bit, saturate on overflow, and cause profiling to fail instead
+of reporting wrapped values.
+
+The isolated microbenchmark calls the same `pcg_uniform()` with counting
+disabled. It uses `CLOCK_MONOTONIC`, eight checksum lanes, and reports the
+median of five nanoseconds-per-call results. Its final checksum transfer is
+outside the timed loop. The profile output records compiler name, Makefile
+flags, and compile-time CPU architecture; use identical builds and machines
+for comparisons. A manually built binary reports unknown flags unless its
+build defines `BENCHMARK_CFLAGS`.
+
+`uniforms_per_gaussian_sample` and `pcg32_calls_per_gaussian_sample` are
+directly counted ratios. `median_uniform_ns` is measured independently.
+`estimated_prng_ns_per_sample` multiplies the first ratio by that median;
+`estimated_prng_fraction` divides it by the uninstrumented baseline
+nanoseconds per Gaussian sample. These last two values are **estimates**, not
+exact attribution. The isolated loop differs from Gaussian sampling in cache
+state, instruction overlap, branches, and checksum work. Its cost need not be
+additive within the Gaussian loop, and subtracting it from total time does
+not yield an exact non-PRNG cost. The fraction can even exceed one in noisy or
+noncomparable runs. The separately reported instrumented Gaussian time is
+diagnostic only and is never written into `summary.json`.
+
 `make test` runs construction/root/area checks, invalid and perturbed cutoff
 checks, initialization guards, exact reproducibility, one million samples per
 configuration with moment and tail-count checks, and CLI/binary output checks (which require Python 3 and NumPy). It

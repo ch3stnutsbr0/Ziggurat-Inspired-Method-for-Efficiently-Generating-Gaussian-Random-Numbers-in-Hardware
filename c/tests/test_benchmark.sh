@@ -20,6 +20,7 @@ for n in 0 7 129 257 4294967296 -8 junk 8junk; do
 done
 python3 tests/test_benchmark_output.py "$bin" "$work"
 python3 tests/test_benchmark_output_dir.py "$bin" "$work"
+python3 tests/test_prng_profile_cli.py "$bin" "$work"
 "$bin" --algorithm trapezoid --layers 16 --head 1 --tail 1 --samples 1000 > "$work/log"
 grep -q 'N=16 H=1 T=1' "$work/log"
 echo 'Benchmark defaults, layer selection, seed reporting, input validation and binary output PASS'

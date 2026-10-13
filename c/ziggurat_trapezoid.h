@@ -2,6 +2,7 @@
 #define ZIGGURAT_TRAPEZOID_H
 
 #include <stdint.h>
+#include "pcg_rng.h"
 
 #ifndef ZT_ENABLE_COUNTERS
 #define ZT_ENABLE_COUNTERS 0
@@ -26,6 +27,10 @@ int zt_init(uint64_t seed, unsigned layers, unsigned head_levels,
 double zt_gaussian(void);
 void zt_get_counters(zt_counters *out);
 void zt_reset_counters(void);
+void zt_get_prng_profile(pcg_profile_counts *initialization, pcg_profile_counts *sampling);
+int zt_init_profiled(uint64_t seed, unsigned layers, unsigned head_levels, unsigned tail_levels);
+double zt_gaussian_profiled(void);
+void zt_get_prng_profile_profiled(pcg_profile_counts *initialization, pcg_profile_counts *sampling);
 unsigned zt_layers(void);
 double zt_table_x(unsigned table, unsigned boundary); /* main=0, head 1..H, tail H+1.. */
 double zt_table_y(unsigned table, unsigned boundary);
