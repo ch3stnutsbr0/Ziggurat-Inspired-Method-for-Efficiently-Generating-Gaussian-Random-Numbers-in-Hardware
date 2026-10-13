@@ -1,0 +1,9 @@
+{
+  "sampling_time_seconds": 1.3030879991129041,
+  "throughput_samples_per_second": 76740788.088046581,
+  "time_per_sample_ns": 13.030879991129041,
+  "mean": 5.6892198905022048e-05,
+  "variance": 0.99984724739344955,
+  "checksum": 5689.2198905022051,
+  "num_samples": 100000000
+}

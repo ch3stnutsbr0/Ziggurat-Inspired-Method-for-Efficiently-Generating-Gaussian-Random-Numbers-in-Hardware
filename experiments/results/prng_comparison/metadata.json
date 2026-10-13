@@ -1,0 +1,48 @@
+{
+  "benchmark_sha256": "2726fc0af8c1ac36e4352fc1ae6819c39ed9f41ac109abfa0540ef7ba1a77efe",
+  "machine": "arm64",
+  "platform": "macOS-26.2-arm64-arm-64bit",
+  "compiler": "Apple clang version 17.0.0 (clang-1700.6.3.2)\nTarget: arm64-apple-darwin25.2.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+  "compiler_flags": "-std=c11 -Wall -Wextra -pedantic -O2",
+  "configuration": {
+    "prng": {
+      "type": "pcg32"
+    },
+    "algorithms": {
+      "basic": {
+        "enabled": true,
+        "layers": [
+          128
+        ],
+        "seeds": [
+          1
+        ]
+      },
+      "trapezoid_refined": {
+        "enabled": true,
+        "layers": [
+          128
+        ],
+        "heads": [
+          2
+        ],
+        "tails": [
+          4
+        ],
+        "seeds": [
+          1
+        ]
+      }
+    },
+    "performance": {
+      "enabled": true,
+      "samples": 10000000,
+      "repetitions": 5
+    },
+    "validation": {
+      "enabled": false
+    },
+    "output_dir": "experiments/results/prng_comparison"
+  },
+  "timing": "Existing C sampling loop; initialization and tables excluded; no warmup; volatile checksum retained"
+}

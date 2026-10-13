@@ -1,0 +1,73 @@
+{
+  "algorithm": "trapezoid",
+  "N": 32,
+  "prng": "xoshiro256plus",
+  "seed": 1,
+  "samples": 33554432,
+  "H": 2,
+  "T": 4,
+  "stream_bytes": 268435456,
+  "stream_sha256": "a9c5188cb4e022e78cafa32674aab21460fda6997a8932eecff5ace7800081e7",
+  "raw_samples_saved": false,
+  "validation_code_sha256": "3ee7f7d66ceadd12541b84eecf782d01b4d117d2305965993842a637a46c4bc9",
+  "mean": 3.765286721868037e-05,
+  "variance": 0.9996726677776991,
+  "absolute_mean_error": 3.765286721868037e-05,
+  "absolute_variance_error": 0.0003273322223008579,
+  "tests": {
+    "chi_square": {
+      "statistic": 152.97259591080393,
+      "p_value": 0.000653696638534073,
+      "critical_value": 125.45841940848238,
+      "significance_level": 0.05,
+      "reject": true,
+      "decision": "reject",
+      "p_value_rounded_to_zero": false,
+      "numerical_note": null,
+      "degrees_of_freedom": 101,
+      "configured_interior_bins": 100,
+      "initial_bins": 102,
+      "final_bins": 102,
+      "observed_total": 33554432,
+      "expected_total": 33554432.0,
+      "outside_range_count": 20,
+      "method": "Pearson Chi-square; fixed N(0,1), two unbounded tails and expected-count bin merging"
+    },
+    "kolmogorov_smirnov": {
+      "statistic": 0.00010049793246824645,
+      "p_value": 0.8869684367144819,
+      "critical_value": null,
+      "significance_level": 0.05,
+      "reject": false,
+      "decision": "fail-to-reject",
+      "p_value_rounded_to_zero": false,
+      "numerical_note": null,
+      "method": "Full-data two-sided KS; fixed N(0,1); scipy.stats.kstwo.sf calibration"
+    },
+    "anderson_darling": {
+      "statistic": 0.4272160902619362,
+      "p_value": 0.8213723167621895,
+      "critical_value": 2.492232513389367,
+      "significance_level": 0.05,
+      "reject": false,
+      "decision": "fail-to-reject",
+      "p_value_rounded_to_zero": false,
+      "numerical_note": null,
+      "p_value_below_resolution": false,
+      "p_value_resolution": 0.0001,
+      "method": "Full-data AD; fixed N(0,1); Marsaglia-Marsaglia finite-n approximation"
+    },
+    "cramer_von_mises": {
+      "statistic": 0.04921580110073197,
+      "p_value": 0.8810270733529709,
+      "critical_value": null,
+      "significance_level": 0.05,
+      "reject": false,
+      "decision": "fail-to-reject",
+      "p_value_rounded_to_zero": false,
+      "numerical_note": null,
+      "method": "Full-data CvM; fixed N(0,1); SciPy finite-sample calibration"
+    }
+  },
+  "tails": []
+}

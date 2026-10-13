@@ -1,0 +1,10 @@
+{
+  "num_samples": 100000000,
+  "sampling_time_seconds": 0.768067,
+  "throughput_samples_per_second": 130196975.088,
+  "time_per_sample_ns": 7.68,
+  "mean": 2.499e-05,
+  "variance": 0.99958682,
+  "checksum": 2499.3030198775855,
+  "source": "C stdout; values retain printed precision (time 6, moments 8 decimal places)"
+}

@@ -1,0 +1,20 @@
+experiment_id: experiment05
+prng:
+  type: xoshiro256plus
+layers: [8, 16, 32, 64, 128, 256]
+algorithms: [basic, trapezoid]
+seed: 1
+trapezoid:
+  head: 2
+  tail: 4
+samples_per_run: 33554432  # 2^25; fixed for all timing and validation runs.
+performance:
+  repetitions: 5
+  checkpoints: [100000, 1000000, 10000000, 33554432]
+validation:
+  significance_level: 0.05
+  chi_square:
+    bins: 100
+    range: [-5.0, 5.0]
+    minimum_expected_count: 5
+output_dir: experiments/results/experiment05

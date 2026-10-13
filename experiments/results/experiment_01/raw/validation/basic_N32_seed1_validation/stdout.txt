@@ -1,0 +1,13 @@
+Algorithm:        basic
+Configuration:    N=32 (H/T not applicable)
+Seed:             1
+Binary output mode: I/O excluded from timing; memory writes affect throughput.
+Samples:          100000000
+Time:             0.872656 s
+Throughput:       114.593 M samples/s
+Time per sample:  8.73 ns
+Checksum:         3647.2706892015926
+Samples/second:   114592691.512
+Output directory: /Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/experiments/results/experiment_01/raw/validation/basic_N32_seed1_validation
+Mean:             0.00003647
+Variance:         1.00000236

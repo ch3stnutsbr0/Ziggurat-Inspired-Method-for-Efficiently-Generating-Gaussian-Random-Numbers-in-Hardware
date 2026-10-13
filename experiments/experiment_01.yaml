@@ -1,0 +1,46 @@
+# Full Experiment 01. The original config.yaml remains the smoke-test profile.
+experiment_id: experiment_01
+output_dir: experiments/results/experiment_01/raw
+schedule_seed: 1
+keep_validation_samples: false
+normal_distribution:
+  mean: 0
+  standard_deviation: 1
+tail_thresholds: [2.0, 3.0, 4.0]
+
+algorithms:
+  basic:
+    enabled: true
+    layers: [8, 16, 32]
+    seeds: [1]
+  trapezoid:
+    enabled: true
+    layers: [8, 16, 32]
+    heads: [0]
+    tails: [0]
+    seeds: [1]
+  trapezoid_refined:
+    enabled: true
+    layers: [8, 16, 32]
+    heads: [0, 1, 2, 3, 4]
+    tails: [0, 1, 2, 3, 4]
+    seeds: [1]
+
+performance:
+  enabled: true
+  samples: 100000000
+  repetitions: 10
+
+profiling:
+  enabled: true
+  samples: 100000000
+  prng_iterations: 10000000
+
+validation:
+  enabled: true
+  samples: 100000000
+  significance_level: 0.05
+  chi_square:
+    bins: 100
+    range: [-5.0, 5.0]
+    minimum_expected_count: 5

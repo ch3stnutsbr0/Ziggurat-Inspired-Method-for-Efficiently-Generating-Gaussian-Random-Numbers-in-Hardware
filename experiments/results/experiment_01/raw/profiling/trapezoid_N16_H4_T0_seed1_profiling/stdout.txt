@@ -1,0 +1,28 @@
+Algorithm:        trapezoid
+Configuration:    N=16 H=4 T=0
+Seed:             1
+
+PRNG Profiling
+--------------
+Gaussian samples: 100000000
+Initialization uniform calls: 0
+Initialization PCG32 calls: 2
+Uniform calls: 412310876
+PCG32 calls: 824621752
+Uniforms per Gaussian sample: 4.12310876
+PCG32 calls per Gaussian sample: 8.24621752
+Median uniform generation time: 1.6531 ns
+Estimated PRNG time per Gaussian sample: 6.81591 ns
+Baseline Gaussian sampling time per sample: 8.93013 ns
+Estimated PRNG fraction: 0.763249
+Instrumented Gaussian time per sample: 9.27787 ns (separate pass)
+PRNG microbenchmark: 10000000 calls/repetition, 5 repetitions, 100000 warm-up calls
+Compiler: Clang 17.0.0 (clang-1700.6.3.2); flags: -std=c11 -Wall -Wextra -pedantic -O2; CPU architecture: arm64
+Samples:          100000000
+Time:             0.893013 s
+Throughput:       111.980 M samples/s
+Time per sample:  8.93 ns
+Checksum:         8875.9082538508137
+Samples/second:   111980452.748
+Mean:             0.00008876
+Variance:         0.99856613

@@ -1,0 +1,28 @@
+Algorithm:        basic
+Configuration:    N=8 (H/T not applicable)
+Seed:             1
+
+PRNG Profiling
+--------------
+Gaussian samples: 100000000
+Initialization uniform calls: 0
+Initialization PCG32 calls: 2
+Uniform calls: 370114458
+PCG32 calls: 740228916
+Uniforms per Gaussian sample: 3.70114458
+PCG32 calls per Gaussian sample: 7.40228916
+Median uniform generation time: 1.6425 ns
+Estimated PRNG time per Gaussian sample: 6.07913 ns
+Baseline Gaussian sampling time per sample: 16.9938 ns
+Estimated PRNG fraction: 0.357726
+Instrumented Gaussian time per sample: 17.8502 ns (separate pass)
+PRNG microbenchmark: 10000000 calls/repetition, 5 repetitions, 100000 warm-up calls
+Compiler: Clang 17.0.0 (clang-1700.6.3.2); flags: -std=c11 -Wall -Wextra -pedantic -O2; CPU architecture: arm64
+Samples:          100000000
+Time:             1.699381 s
+Throughput:       58.845 M samples/s
+Time per sample:  16.99 ns
+Checksum:         7999.2236993622528
+Samples/second:   58844955.918
+Mean:             0.00007999
+Variance:         1.00000407

@@ -1,0 +1,52 @@
+{
+  "status": "successful",
+  "experiment_id": "experiment03",
+  "reorganization_only": true,
+  "benchmarks_rerun": 0,
+  "original_files_verified": 7,
+  "numerical_results_and_figure_unchanged": true,
+  "experiment_01_unchanged": true,
+  "experiment_02_unchanged": true,
+  "raw_sample_files": 0,
+  "source_directory_removed": true,
+  "original_to_current_paths": {
+    ".DS_Store": ".DS_Store",
+    "figures/throughput_vs_layers.png": "figures/throughput_vs_layers.png",
+    "processed/trapezoid_validation_vs_layers.json": "processed/trapezoid_validation_vs_layers.json",
+    "processed/trapezoid_validation_vs_layers.csv": "processed/trapezoid_validation_vs_layers.csv",
+    "processed/performance_vs_layers.csv": "processed/performance_vs_layers.csv",
+    "processed/performance_runs.json": "raw/performance/performance_runs.json",
+    "metadata/layers_experiment.json": "artifacts/layers_experiment.json"
+  },
+  "original_file_sha256": {
+    ".DS_Store": "8093cc83656394beec833cc0c1319fccbc4a2c78f0ccbdbb19f0fc418ada096a",
+    "figures/throughput_vs_layers.png": "2875f8af1d263f2d0e9d2257b35bb253881788d9a04df71f80280e2b01484f09",
+    "processed/trapezoid_validation_vs_layers.json": "af3ca08efe68644c296cd1155093051bb864953d30eb45030fca37b77a75fc3c",
+    "processed/trapezoid_validation_vs_layers.csv": "f79526e7635e8db08519e60f96d146602c16dc6b1ec13ec6a2b2d5aa86bf8ceb",
+    "processed/performance_vs_layers.csv": "fe19748904044a431845be1f9b08de94d8429af399c38fa4a9e1d88f88d294d8",
+    "processed/performance_runs.json": "acf2dc4f35333845ecffa50289943f0d6508bcfd5814b7664dfe6e7cfeeaa33e",
+    "metadata/layers_experiment.json": "9828c20b9a97d04371db6e1fe0f8687069a1e3cd5e63812849511fb3636c97e4"
+  },
+  "output_file_sha256": {
+    ".DS_Store": "8093cc83656394beec833cc0c1319fccbc4a2c78f0ccbdbb19f0fc418ada096a",
+    "execution_order.json": "50f355a2feafb254ea4cbba05290708f3faa342ddce9277ee6257bc34abfd770",
+    "tables/trapezoid_validation_vs_layers.csv": "f79526e7635e8db08519e60f96d146602c16dc6b1ec13ec6a2b2d5aa86bf8ceb",
+    "tables/performance_vs_layers.csv": "fe19748904044a431845be1f9b08de94d8429af399c38fa4a9e1d88f88d294d8",
+    "artifacts/experiment03_config.json": "962f492432e8a670ab1013a46add888d83b674d2a45abb0d2d45de3ea62ae9ea",
+    "artifacts/layers_experiment.json": "6342c7044f2aad4b5d6544755218ac465529256402165c44a8f203cc172ffed2",
+    "artifacts/layers_comparison_measured.py": "f2c8bf818e8dba5702405bf651262b616ee745dd10c35728e536c988e9d235ce",
+    "artifacts/original_layers_experiment.json": "9828c20b9a97d04371db6e1fe0f8687069a1e3cd5e63812849511fb3636c97e4",
+    "figures/throughput_vs_layers.png": "2875f8af1d263f2d0e9d2257b35bb253881788d9a04df71f80280e2b01484f09",
+    "processed/trapezoid_validation_vs_layers.json": "af3ca08efe68644c296cd1155093051bb864953d30eb45030fca37b77a75fc3c",
+    "processed/trapezoid_validation_vs_layers.csv": "f79526e7635e8db08519e60f96d146602c16dc6b1ec13ec6a2b2d5aa86bf8ceb",
+    "processed/performance_vs_layers.csv": "fe19748904044a431845be1f9b08de94d8429af399c38fa4a9e1d88f88d294d8",
+    "reports/experiment_report.md": "a4c42a7aa49e6a94434ba674706c5da1695b382b28c664705c87a4ffb2b6391f",
+    "raw/performance/performance_runs.json": "acf2dc4f35333845ecffa50289943f0d6508bcfd5814b7664dfe6e7cfeeaa33e",
+    "raw/validation/trapezoid_N32_H2_T4_seed1_validation.json": "87718a2ef7ebd509df6e7efc0d4cb21069b3ce0f00e2cac2e01a827856e5f97d",
+    "raw/validation/trapezoid_N8_H2_T4_seed1_validation.json": "bc84c077bed9df617a0a22f089b519346f6c21b3508e335fe59e33e1ed1f33d3",
+    "raw/validation/trapezoid_N16_H2_T4_seed1_validation.json": "005d45646e4afa495d556ed35c74eadb7bf492f4f14949e0b869ca35f5aa491b",
+    "raw/validation/trapezoid_N256_H2_T4_seed1_validation.json": "6999672a259390218debb3987c02ed7db1c941ae7aabe79900e52142e694b9a7",
+    "raw/validation/trapezoid_N128_H2_T4_seed1_validation.json": "0e18ed81e56626b354e0105dce219dda4a0f8d938baa71ca8d753f6703169006",
+    "raw/validation/trapezoid_N64_H2_T4_seed1_validation.json": "5578093ff58b0f23c10918fefeee4a78c8675587d309a3d4b61ed73760cd46cb"
+  }
+}

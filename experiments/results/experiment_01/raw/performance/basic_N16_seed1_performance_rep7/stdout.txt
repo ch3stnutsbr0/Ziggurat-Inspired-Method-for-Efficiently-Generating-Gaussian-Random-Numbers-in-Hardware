@@ -1,0 +1,11 @@
+Algorithm:        basic
+Configuration:    N=16 (H/T not applicable)
+Seed:             1
+Samples:          100000000
+Time:             1.209940 s
+Throughput:       82.649 M samples/s
+Time per sample:  12.10 ns
+Checksum:         156.97116526730599
+Samples/second:   82648726.353
+Mean:             0.00000157
+Variance:         0.99985849

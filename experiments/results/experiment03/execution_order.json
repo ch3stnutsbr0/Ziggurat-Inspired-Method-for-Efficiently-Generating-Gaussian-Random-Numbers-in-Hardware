@@ -1,0 +1,413 @@
+{
+  "experiment_id": "experiment03",
+  "status": "successful",
+  "started_at": "2026-10-13T15:58:57.698393+00:00",
+  "ended_at": "2026-10-13T15:59:28.313014+00:00",
+  "planned": 66,
+  "completed": [
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "repetition": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "repetition": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "repetition": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 32,
+      "repetition": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "repetition": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 64,
+      "repetition": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 128,
+      "repetition": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 16,
+      "repetition": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "repetition": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 256,
+      "repetition": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "repetition": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 8,
+      "repetition": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "repetition": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "repetition": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 256,
+      "repetition": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 8,
+      "repetition": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 64,
+      "repetition": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "repetition": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 32,
+      "repetition": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "repetition": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 16,
+      "repetition": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 128,
+      "repetition": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "repetition": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "repetition": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "repetition": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 16,
+      "repetition": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 128,
+      "repetition": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 256,
+      "repetition": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "repetition": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 8,
+      "repetition": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "repetition": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "repetition": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 64,
+      "repetition": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "repetition": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 32,
+      "repetition": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "repetition": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 256,
+      "repetition": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 16,
+      "repetition": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "repetition": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "repetition": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "repetition": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "repetition": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 64,
+      "repetition": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 8,
+      "repetition": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 128,
+      "repetition": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "repetition": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 32,
+      "repetition": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "repetition": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 64,
+      "repetition": 5
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "repetition": 5
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 16,
+      "repetition": 5
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "repetition": 5
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 128,
+      "repetition": 5
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 256,
+      "repetition": 5
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "repetition": 5
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 8,
+      "repetition": 5
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 32,
+      "repetition": 5
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "repetition": 5
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "repetition": 5
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "repetition": 5
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "samples": 10000000,
+      "tests": 4
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "samples": 10000000,
+      "tests": 4
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "samples": 10000000,
+      "tests": 4
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "samples": 10000000,
+      "tests": 4
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "samples": 10000000,
+      "tests": 4
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "samples": 10000000,
+      "tests": 4
+    }
+  ],
+  "benchmark_sha256": "0e96c28d88b6d45c87aa75c12151bd5b8511cd9156ae7420fe6fe39233b1654c",
+  "note": "Recorded original execution schedule; reorganization ran no benchmarks."
+}

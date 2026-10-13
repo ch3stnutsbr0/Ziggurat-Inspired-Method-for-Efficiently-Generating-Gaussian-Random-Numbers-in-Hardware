@@ -1,0 +1,16 @@
+{
+  "status": "successful",
+  "verified_at": "2026-10-12T19:05:03.946851+00:00",
+  "validation_configurations_executed": 5,
+  "total_samples": 500000000,
+  "statistical_tests_completed": 20,
+  "sample_binaries_remaining": 0,
+  "experiment_01_unchanged": true,
+  "experiment_01_files_verified": 4958,
+  "benchmark_sha256_matches_experiment_01": true,
+  "validation_code_sha256_matches_experiment_01": true,
+  "performance_executions": 0,
+  "profiling_executions": 0,
+  "results_sha256": "59e7636e7bd8987e2bfa191bd8ec973c6d2ffe577dae183c368a7a50d16235cb",
+  "comparison_sha256": "4b41fca3a6f124d7d1d73584bf9d6ac08c44477494df6d534064d0029aeed42f"
+}

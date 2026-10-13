@@ -1,0 +1,36 @@
+{
+  "experiment_id": "experiment04",
+  "sample_counts": [
+    100000000,
+    33554432
+  ],
+  "layers": [
+    8,
+    16,
+    32,
+    64,
+    128,
+    256
+  ],
+  "H": 2,
+  "T": 4,
+  "seed": 1,
+  "performance_repetitions": 5,
+  "warmup_samples": 100000,
+  "compiler_optimization": "O2",
+  "validation_algorithms": [
+    "trapezoid"
+  ],
+  "raw_samples_saved": false,
+  "validation_settings": {
+    "significance_level": 0.05,
+    "chi_square": {
+      "bins": 100,
+      "range": [
+        -5.0,
+        5.0
+      ],
+      "minimum_expected_count": 5.0
+    }
+  }
+}

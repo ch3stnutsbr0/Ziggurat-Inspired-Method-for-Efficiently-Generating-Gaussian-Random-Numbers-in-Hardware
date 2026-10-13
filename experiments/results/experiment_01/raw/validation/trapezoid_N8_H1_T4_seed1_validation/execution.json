@@ -1,0 +1,98 @@
+{
+  "parameter_id": "trapezoid_N8_H1_T4_seed1",
+  "algorithm_label": "trapezoid_refined",
+  "algorithm": "trapezoid",
+  "N": 8,
+  "H": 1,
+  "T": 4,
+  "seed": 1,
+  "experiment_id": "trapezoid_N8_H1_T4_seed1_validation",
+  "kind": "validation",
+  "mode": "validation",
+  "repetition": 1,
+  "samples": 100000000,
+  "argv": [
+    "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/benchmark",
+    "--algorithm",
+    "trapezoid",
+    "--layers",
+    "8",
+    "--head",
+    "1",
+    "--tail",
+    "4",
+    "--samples",
+    "100000000",
+    "--seed",
+    "1",
+    "--output-dir",
+    "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/experiments/results/experiment_01/raw/validation/trapezoid_N8_H1_T4_seed1_validation"
+  ],
+  "command": "'/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/benchmark' --algorithm trapezoid --layers 8 --head 1 --tail 4 --samples 100000000 --seed 1 --output-dir '/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/experiments/results/experiment_01/raw/validation/trapezoid_N8_H1_T4_seed1_validation'",
+  "output_directory": "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/experiments/results/experiment_01/raw/validation/trapezoid_N8_H1_T4_seed1_validation",
+  "output_handling": "C binary output",
+  "execution_order": 873,
+  "status": "successful",
+  "returncode": 0,
+  "started_at": "2026-10-12T17:03:59.084726+00:00",
+  "ended_at": "2026-10-12T17:04:00.817923+00:00",
+  "wall_clock_duration_seconds": 1.7327987079042941,
+  "subprocess_invocation_attempted": true,
+  "provenance": {
+    "benchmark_sha256": "c6bfdc8812497daf9de82febc0a216d4766ed35b76bac556ca37576c9f6f66a9",
+    "benchmark": {
+      "path": "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/benchmark",
+      "sha256": "c6bfdc8812497daf9de82febc0a216d4766ed35b76bac556ca37576c9f6f66a9",
+      "size_bytes": 53736,
+      "modified_time_ns": 1791823129092766103
+    },
+    "git_commit": "f9a5e8f7f4134399dbd3fd26fac88916c4240874"
+  },
+  "attempt_history": [],
+  "benchmark_results": {
+    "sampling_time_seconds": 1.5618029991164804,
+    "throughput_samples_per_second": 64028561.89709617,
+    "time_per_sample_ns": 15.618029991164804,
+    "mean": 2.5565581191123196e-05,
+    "variance": 0.9998987102865773,
+    "checksum": 2556.5581191123197,
+    "num_samples": 100000000
+  },
+  "binary_statistics": {
+    "num_samples": 100000000,
+    "binary_size_bytes": 800000000,
+    "mean": 2.5565581191093465e-05,
+    "variance": 0.9998987102868637,
+    "variance_ddof": 1,
+    "method": "Two-pass chunked long-double NumPy moments; no hypothesis tests",
+    "c_mean": 2.5565581191123196e-05,
+    "c_variance": 0.9998987102865773,
+    "mean_difference": -2.973085644862594e-17,
+    "variance_difference": 2.864375403532904e-13,
+    "comparison_relative_tolerance": 1e-10,
+    "comparison_absolute_tolerance": 1e-10,
+    "matches_c_summary": true
+  },
+  "output_files": {
+    "summary.json": {
+      "size_bytes": 280,
+      "sha256": "31a93f74a2e0b8c99bd6628abaaca9e470d0c00e1920449666b3bc7567ad7d3f"
+    },
+    "config.json": {
+      "size_bytes": 135,
+      "sha256": "8667450dff4ddb58986feaec4ccf3b1def18bc9a2d9c89b3f61dd6820556e89f"
+    },
+    "stdout.txt": {
+      "size_bytes": 589,
+      "sha256": "3682ed2b0db7bc4ca1c3bb97a090cef4de9355ce5745df3817c7ebb5a90347b9"
+    },
+    "stderr.txt": {
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "samples.bin": {
+      "size_bytes": 800000000,
+      "sha256": "fd2034f68cccf2ec2516267d3df9f674a16dcf386b42e7330d7a7f429ff1ccf5"
+    }
+  }
+}

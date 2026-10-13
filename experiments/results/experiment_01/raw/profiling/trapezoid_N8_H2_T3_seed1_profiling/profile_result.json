@@ -1,0 +1,20 @@
+{
+  "gaussian_samples": 100000000,
+  "initialization_uniform_calls": 0,
+  "initialization_pcg32_calls": 2,
+  "uniform_calls": 435895911,
+  "pcg32_calls": 871791822,
+  "uniforms_per_gaussian_sample": 4.35895911,
+  "pcg32_calls_per_gaussian_sample": 8.71791822,
+  "median_uniform_ns": 1.6789,
+  "estimated_prng_ns_per_sample": 7.31826,
+  "baseline_gaussian_ns_per_sample": 13.243,
+  "estimated_prng_fraction": 0.552611,
+  "instrumented_gaussian_ns_per_sample": 13.573,
+  "source": "C stdout from --profile-prng; displayed numeric precision",
+  "compiler": "Clang 17.0.0 (clang-1700.6.3.2)",
+  "compiler_flags": "-std=c11 -Wall -Wextra -pedantic -O2",
+  "cpu_architecture": "arm64",
+  "experiment_id": "trapezoid_N8_H2_T3_seed1_profiling",
+  "benchmark_sha256": "c6bfdc8812497daf9de82febc0a216d4766ed35b76bac556ca37576c9f6f66a9"
+}

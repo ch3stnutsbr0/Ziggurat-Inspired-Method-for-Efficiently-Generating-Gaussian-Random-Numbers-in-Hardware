@@ -1,0 +1,11 @@
+Algorithm:        trapezoid
+Configuration:    N=8 H=1 T=1
+Seed:             1
+Samples:          100000000
+Time:             1.282075 s
+Throughput:       77.999 M samples/s
+Time per sample:  12.82 ns
+Checksum:         8254.6970691391452
+Samples/second:   77998557.027
+Mean:             0.00008255
+Variance:         0.99958427

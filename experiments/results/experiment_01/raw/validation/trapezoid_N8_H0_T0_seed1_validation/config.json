@@ -1,0 +1,9 @@
+{
+  "algorithm": "trapezoid",
+  "N": 8,
+  "H": 0,
+  "T": 0,
+  "seed": 1,
+  "num_samples": 100000000,
+  "compiler_optimization": "O2"
+}

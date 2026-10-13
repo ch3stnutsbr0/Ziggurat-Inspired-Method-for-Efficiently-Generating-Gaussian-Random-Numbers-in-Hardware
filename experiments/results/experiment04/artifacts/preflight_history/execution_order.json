@@ -1,0 +1,27 @@
+{
+  "experiment_id": "experiment04",
+  "status": "failed",
+  "started_at": "2026-10-13T16:19:21.580445+00:00",
+  "planned": 132,
+  "completed": [],
+  "sample_counts": [
+    100000000,
+    33554432
+  ],
+  "profiles": [],
+  "errors": [
+    "RuntimeError: samples_100000000 worker failed with exit code 1; saved partial results preserved"
+  ],
+  "raw_samples_saved": false,
+  "sampling_source_sha256": {
+    "c/benchmark.c": "0376ca3132a5819f6e0d165e6ea7657c9e6271d5e753aeade3f66fd6f7217c20",
+    "c/ziggurat_basic.c": "40c373eeb9121071010f966c59744bfff30e3cdb654cde8c92edfb8b30862255",
+    "c/ziggurat_trapezoid.c": "f1bbe868e339ef8915d8d3f116442591bcca01111f72d039a7f16b40ccbaf91c",
+    "c/ziggurat_basic_profiled.c": "fb0ce081f1f45f53fe0a7ad42a7b08e834c8507ecdaa1bbfa440f26e1558c3ed",
+    "c/ziggurat_trapezoid_profiled.c": "6ba76b1cea675a248dfa37d3452e46d4c461942d9adf2261071489414f743e9e"
+  },
+  "validation_code_sha256": "3ee7f7d66ceadd12541b84eecf782d01b4d117d2305965993842a637a46c4bc9",
+  "driver_sha256": "6ccfbd1d01f06ee9f9d451357b5183b33bc135220678968e26871d24c935b676",
+  "worker_sha256": "414d7db91780b771228415c24723bc2df210e21390f512081c8d8b9bad837b23",
+  "ended_at": "2026-10-13T16:19:22.913750+00:00"
+}

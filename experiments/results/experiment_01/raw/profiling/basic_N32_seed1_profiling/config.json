@@ -1,0 +1,33 @@
+{
+  "parameter_id": "basic_N32_seed1",
+  "algorithm_label": "basic",
+  "algorithm": "basic",
+  "N": 32,
+  "H": null,
+  "T": null,
+  "seed": 1,
+  "experiment_id": "basic_N32_seed1_profiling",
+  "kind": "profiling",
+  "mode": "performance",
+  "repetition": 1,
+  "samples": 100000000,
+  "argv": [
+    "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/benchmark",
+    "--algorithm",
+    "basic",
+    "--layers",
+    "32",
+    "--samples",
+    "100000000",
+    "--seed",
+    "1",
+    "--profile-prng",
+    "--prng-iterations",
+    "10000000"
+  ],
+  "command": "'/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/benchmark' --algorithm basic --layers 32 --samples 100000000 --seed 1 --profile-prng --prng-iterations 10000000",
+  "output_directory": "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/experiments/results/experiment_01/raw/profiling/basic_N32_seed1_profiling",
+  "output_handling": "Python captures C stdout",
+  "execution_order": 783,
+  "num_samples": 100000000
+}

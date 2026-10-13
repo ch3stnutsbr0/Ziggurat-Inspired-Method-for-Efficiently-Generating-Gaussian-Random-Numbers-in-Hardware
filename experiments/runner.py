@@ -24,6 +24,9 @@ MAX_PLANNED_RUNS = 100000
 
 def expand_configurations(config):
     configurations = []
+    prng = config.get("prng", {}).get("type", "pcg32")
+    if prng not in ("pcg32", "xoshiro256plus"):
+        raise ValueError("Unsupported prng.type")
     seen = set()
     for label, settings in config["algorithms"].items():
         if not settings["enabled"]:
@@ -35,6 +38,8 @@ def expand_configurations(config):
         if len(configurations) + size > MAX_PLANNED_RUNS:
             raise ValueError("Parameter matrix exceeds the 100,000-entry dry-run memory limit")
         for n, h, t, seed in product(settings["layers"], heads, tails, settings["seeds"]):
+            if label == "trapezoid_refined" and h == 0 and t == 0:
+                continue
             key = (algorithm, n, h, t, seed)
             if key in seen:
                 raise ValueError(f"Duplicate effective configuration: {key}")
@@ -43,7 +48,8 @@ def expand_configurations(config):
             if algorithm != "basic":
                 name += f"_H{h}_T{t}"
             configurations.append(dict(
-                parameter_id=f"{name}_seed{seed}", algorithm_label=label,
+                parameter_id=f"{name}_seed{seed}" + (f"_prng{prng}" if prng != "pcg32" else ""), algorithm_label=label,
+                prng=prng,
                 algorithm=algorithm, N=n, H=h, T=t, seed=seed,
             ))
     return configurations
@@ -76,6 +82,8 @@ def build_runs(config, configurations, repository):
                 directory = output / experiment_id
                 argv = [str(repository / "c/benchmark"), "--algorithm", parameters["algorithm"],
                         "--layers", str(parameters["N"])]
+                if parameters.get("prng", "pcg32") != "pcg32":
+                    argv += ["--prng", parameters["prng"]]
                 if parameters["algorithm"] == "trapezoid":
                     argv += ["--head", str(parameters["H"]), "--tail", str(parameters["T"])]
                 argv += ["--seed", str(parameters["seed"]), "--samples", str(settings["samples"])]
@@ -146,7 +154,7 @@ def dry_run(config, repository, *, resume=False, refresh_performance=False):
     else:
         warnings.append("Existing executable was not invoked; its CLI/build provenance is unverified")
     # Keep the valid parameter matrix available when only mode settings are missing.
-    if not any(error.startswith(("config:", "algorithms")) for error in errors):
+    if not any(error.startswith(("config:", "algorithms", "prng")) for error in errors):
         try:
             report["configurations"] = expand_configurations(config)
         except ValueError as exc:
@@ -251,6 +259,8 @@ def parse_benchmark_stdout(stdout, run):
         expected_configuration += f" H={run['H']} T={run['T']}"
     if fields.get("Algorithm") != run["algorithm"] or fields.get("Configuration") != expected_configuration:
         raise ValueError("Benchmark stdout algorithm/configuration does not match the scheduled run")
+    if fields.get("PRNG", "pcg32") != run.get("prng", "pcg32"):
+        raise ValueError("Benchmark stdout PRNG does not match the scheduled run")
     if int(fields.get("Seed", "-1")) != run["seed"] or int(fields.get("Samples", "-1")) != run["samples"]:
         raise ValueError("Benchmark stdout seed/sample count does not match the scheduled run")
     mapping = {
@@ -260,6 +270,8 @@ def parse_benchmark_stdout(stdout, run):
         "mean": ("Mean", ""), "variance": ("Variance", ""), "checksum": ("Checksum", ""),
     }
     summary = {"num_samples": run["samples"]}
+    if "PRNG" in fields:
+        summary["prng"] = fields["PRNG"]
     for name, (label, suffix) in mapping.items():
         value = fields.get(label)
         if value is None or (suffix and not value.endswith(suffix)):
@@ -273,6 +285,8 @@ def parse_benchmark_stdout(stdout, run):
 def check_summary(summary, run):
     if not isinstance(summary, dict) or type(summary.get("num_samples")) is not int or summary["num_samples"] != run["samples"]:
         raise ValueError("Invalid summary sample count")
+    if summary.get("prng", "pcg32") != run.get("prng", "pcg32"):
+        raise ValueError("Summary PRNG does not match the scheduled run")
     for name in ("sampling_time_seconds", "throughput_samples_per_second", "time_per_sample_ns",
                  "mean", "variance", "checksum"):
         value = summary.get(name)
@@ -307,6 +321,8 @@ def collect_outputs(run, directory, stdout, *, create=True):
         with (directory / "config.json").open(encoding="utf-8") as stream:
             configuration = json.load(stream)
         check_summary(summary, run)
+        if configuration.get("prng", "pcg32") != run.get("prng", "pcg32"):
+            raise ValueError("C config.json PRNG does not match the scheduled run")
         expected = {key: run[key] for key in ("algorithm", "N", "seed")}
         expected["num_samples"] = run["samples"]
         if run["algorithm"] != "basic":
@@ -400,6 +416,8 @@ def benchmark_identity(executable):
 def check_run_identity(saved, run):
     if not isinstance(saved, dict):
         raise ValueError("Saved run metadata must be a JSON object")
+    if saved.get("prng", "pcg32") != run.get("prng", "pcg32"):
+        raise ValueError("Saved run does not match the schedule: prng")
     for key in ("experiment_id", "algorithm", "N", "H", "T", "seed", "samples",
                 "repetition", "mode", "argv", "command", "output_directory"):
         if type(saved.get(key)) is not type(run[key]) or saved[key] != run[key]:

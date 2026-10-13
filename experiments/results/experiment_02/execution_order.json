@@ -1,0 +1,123 @@
+{
+  "experiment": "Experiment 02 \u2014 Seed 2 Validation",
+  "status": "successful",
+  "started_at": "2026-10-12T19:03:30.024144+00:00",
+  "planned": 5,
+  "completed": [
+    {
+      "experiment_id": "basic_N8_seed2_validation",
+      "execution_order": 1,
+      "samples": 100000000,
+      "tests_completed": 4,
+      "binary_deleted": true
+    },
+    {
+      "experiment_id": "trapezoid_N8_H0_T0_seed2_validation",
+      "execution_order": 2,
+      "samples": 100000000,
+      "tests_completed": 4,
+      "binary_deleted": true
+    },
+    {
+      "experiment_id": "trapezoid_N8_H2_T4_seed2_validation",
+      "execution_order": 3,
+      "samples": 100000000,
+      "tests_completed": 4,
+      "binary_deleted": true
+    },
+    {
+      "experiment_id": "trapezoid_N16_H2_T4_seed2_validation",
+      "execution_order": 4,
+      "samples": 100000000,
+      "tests_completed": 4,
+      "binary_deleted": true
+    },
+    {
+      "experiment_id": "trapezoid_N32_H2_T4_seed2_validation",
+      "execution_order": 5,
+      "samples": 100000000,
+      "tests_completed": 4,
+      "binary_deleted": true
+    }
+  ],
+  "errors": [],
+  "configurations": [
+    {
+      "parameter_id": "basic_N8_seed2",
+      "algorithm_label": "basic",
+      "algorithm": "basic",
+      "N": 8,
+      "H": null,
+      "T": null,
+      "seed": 2
+    },
+    {
+      "parameter_id": "trapezoid_N8_H0_T0_seed2",
+      "algorithm_label": "trapezoid",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "H": 0,
+      "T": 0,
+      "seed": 2
+    },
+    {
+      "parameter_id": "trapezoid_N8_H2_T4_seed2",
+      "algorithm_label": "trapezoid_refined",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "H": 2,
+      "T": 4,
+      "seed": 2
+    },
+    {
+      "parameter_id": "trapezoid_N16_H2_T4_seed2",
+      "algorithm_label": "trapezoid_refined",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "H": 2,
+      "T": 4,
+      "seed": 2
+    },
+    {
+      "parameter_id": "trapezoid_N32_H2_T4_seed2",
+      "algorithm_label": "trapezoid_refined",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "H": 2,
+      "T": 4,
+      "seed": 2
+    }
+  ],
+  "benchmark_sha256": "c6bfdc8812497daf9de82febc0a216d4766ed35b76bac556ca37576c9f6f66a9",
+  "validation_code_sha256": "3ee7f7d66ceadd12541b84eecf782d01b4d117d2305965993842a637a46c4bc9",
+  "driver_sha256": "8e78084f6097f67e5a616e198bdb1279fc909966a44bf399f160189cf2e59932",
+  "dependencies": {
+    "numpy": "1.26.4",
+    "scipy": "1.13.1",
+    "yaml": "6.0.1"
+  },
+  "python_version": "3.12.7 | packaged by Anaconda, Inc. | (main, Oct  4 2024, 08:22:19) [Clang 14.0.6 ]",
+  "python_executable": "/Users/liubenli/anaconda3/bin/python3",
+  "platform": "macOS-26.2-arm64-arm-64bit",
+  "resources": {
+    "available_disk_bytes": 44065562624,
+    "available_memory_bytes": 3605626880,
+    "required_disk_bytes": 2947483648,
+    "estimated_peak_memory_bytes": 3473741824
+  },
+  "keep_validation_samples": false,
+  "performance_enabled": false,
+  "profiling_enabled": false,
+  "artifact_hashes": {
+    "benchmark": "c6bfdc8812497daf9de82febc0a216d4766ed35b76bac556ca37576c9f6f66a9",
+    "runner.py": "a679434dc814c749b4abbf7ec5a52a66284f9580918dac25ef6be485fdd9508d",
+    "experiment_01_before.json": "20d4fa95f027a211f3c8f01af674de13b7e24c8de380ed1066680249d0a88845",
+    "experiment01.py": "7bfddadf82b389e71228a35748ffebb3fc1d124e70221e38bb652469105ae806",
+    "utils.py": "4df95614a6306e9a6e177b7e461af5aa1bdbb38a0c646213a18384bde5211081",
+    "experiment02.py": "8e78084f6097f67e5a616e198bdb1279fc909966a44bf399f160189cf2e59932",
+    "experiment_02.yaml": "62dad36f45263ca232e0106b0dd15166bc583396546dc62007e9b011a2d84a73",
+    "seed_1_reference_results.json": "4a28908b21edd3ace3a8327b2b58e9d2e540d4c669f83eee8f0eb4b6278c5e45",
+    "validation.py": "3ee7f7d66ceadd12541b84eecf782d01b4d117d2305965993842a637a46c4bc9"
+  },
+  "ended_at": "2026-10-12T19:05:03.947184+00:00"
+}

@@ -1,0 +1,30 @@
+{
+  "parameter_id": "basic_N8_seed1",
+  "algorithm_label": "basic",
+  "algorithm": "basic",
+  "N": 8,
+  "H": null,
+  "T": null,
+  "seed": 1,
+  "experiment_id": "basic_N8_seed1_performance_rep2",
+  "kind": "performance",
+  "mode": "performance",
+  "repetition": 2,
+  "samples": 100000000,
+  "argv": [
+    "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/benchmark",
+    "--algorithm",
+    "basic",
+    "--layers",
+    "8",
+    "--samples",
+    "100000000",
+    "--seed",
+    "1"
+  ],
+  "command": "'/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/benchmark' --algorithm basic --layers 8 --samples 100000000 --seed 1",
+  "output_directory": "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/experiments/results/experiment_01/raw/performance/basic_N8_seed1_performance_rep2",
+  "output_handling": "Python captures C stdout",
+  "execution_order": 131,
+  "num_samples": 100000000
+}

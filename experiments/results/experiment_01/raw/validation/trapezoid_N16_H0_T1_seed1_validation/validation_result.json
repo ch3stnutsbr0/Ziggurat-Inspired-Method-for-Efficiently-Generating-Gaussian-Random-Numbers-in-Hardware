@@ -1,0 +1,105 @@
+{
+  "experiment_id": "trapezoid_N16_H0_T1_seed1_validation",
+  "algorithm": "trapezoid",
+  "algorithm_label": "trapezoid_refined",
+  "N": 16,
+  "H": 0,
+  "T": 1,
+  "seed": 1,
+  "num_samples": 100000000,
+  "benchmark_sha256": "c6bfdc8812497daf9de82febc0a216d4766ed35b76bac556ca37576c9f6f66a9",
+  "sample_sha256": "90c1b6e642712de11139ee05ce0d5c8e1fb064244aa9220b718b09094533d134",
+  "sample_size_bytes": 800000000,
+  "summary_sha256": "9435c79e850e86777c3c9dc62bc26c92fcc4a7f282734ca6e6cc116707e946b6",
+  "config_sha256": "7da0965bdeb98093dac2ed954cd73ef7ed9cccc722f8dd015320987af7c25e22",
+  "keep_validation_samples": false,
+  "validation_code_sha256": "3ee7f7d66ceadd12541b84eecf782d01b4d117d2305965993842a637a46c4bc9",
+  "scipy_version": "1.13.1",
+  "numpy_version": "1.26.4",
+  "c_sampling_time_seconds": 0.9489950109273195,
+  "mean": -8.410822261151992e-05,
+  "variance": 1.0000009816486604,
+  "absolute_mean_error": 8.410822261151992e-05,
+  "absolute_variance_error": 9.816486603586583e-07,
+  "tests": {
+    "chi_square": {
+      "statistic": 5531.780745107307,
+      "p_value": 0.0,
+      "critical_value": 125.45841940848238,
+      "significance_level": 0.05,
+      "reject": true,
+      "decision": "reject",
+      "p_value_rounded_to_zero": true,
+      "numerical_note": "Computed p-value rounded to zero; it is not mathematically zero",
+      "degrees_of_freedom": 101,
+      "configured_interior_bins": 100,
+      "initial_bins": 102,
+      "final_bins": 102,
+      "observed_total": 100000000,
+      "expected_total": 100000000.0,
+      "outside_range_count": 0,
+      "method": "Pearson Chi-square; fixed N(0,1), two unbounded tails and expected-count bin merging"
+    },
+    "kolmogorov_smirnov": {
+      "statistic": 0.00047239784895292125,
+      "p_value": 8.269620083942667e-20,
+      "critical_value": null,
+      "significance_level": 0.05,
+      "reject": true,
+      "decision": "reject",
+      "p_value_rounded_to_zero": false,
+      "numerical_note": null,
+      "method": "Full-data two-sided KS; fixed N(0,1); scipy.stats.kstwo.sf calibration"
+    },
+    "anderson_darling": {
+      "statistic": 13.900393962860107,
+      "p_value": null,
+      "critical_value": 2.492232509358732,
+      "significance_level": 0.05,
+      "reject": true,
+      "decision": "reject",
+      "p_value_rounded_to_zero": false,
+      "numerical_note": null,
+      "p_value_below_resolution": true,
+      "p_value_resolution": 0.0001,
+      "method": "Full-data AD; fixed N(0,1); Marsaglia-Marsaglia finite-n approximation"
+    },
+    "cramer_von_mises": {
+      "statistic": 3.115024292562561,
+      "p_value": 4.212792503732743e-08,
+      "critical_value": null,
+      "significance_level": 0.05,
+      "reject": true,
+      "decision": "reject",
+      "p_value_rounded_to_zero": false,
+      "numerical_note": null,
+      "method": "Full-data CvM; fixed N(0,1); SciPy finite-sample calibration"
+    }
+  },
+  "tails": [
+    {
+      "threshold": 2.0,
+      "observed_count": 4552330,
+      "empirical_probability": 0.0455233,
+      "theoretical_probability": 0.045500263896358396,
+      "absolute_error": 2.3036103641606298e-05,
+      "relative_error": 0.0005062850557104128
+    },
+    {
+      "threshold": 3.0,
+      "observed_count": 269153,
+      "empirical_probability": 0.00269153,
+      "theoretical_probability": 0.002699796063260186,
+      "absolute_error": 8.266063260185981e-06,
+      "relative_error": 0.0030617361706217735
+    },
+    {
+      "threshold": 4.0,
+      "observed_count": 5451,
+      "empirical_probability": 5.451e-05,
+      "theoretical_probability": 6.334248366623973e-05,
+      "absolute_error": 8.832483666239729e-06,
+      "relative_error": 0.13944012225316743
+    }
+  ]
+}

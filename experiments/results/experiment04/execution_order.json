@@ -1,0 +1,1298 @@
+{
+  "experiment_id": "experiment04",
+  "status": "successful",
+  "started_at": "2026-10-13T16:21:48.128225+00:00",
+  "planned": 132,
+  "completed": [
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "repetition": 1,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "repetition": 1,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "repetition": 1,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 32,
+      "repetition": 1,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "repetition": 1,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 5
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 64,
+      "repetition": 1,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 6
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 128,
+      "repetition": 1,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 7
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 16,
+      "repetition": 1,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 8
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "repetition": 1,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 9
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 256,
+      "repetition": 1,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 10
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "repetition": 1,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 11
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 8,
+      "repetition": 1,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 12
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "repetition": 2,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 13
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "repetition": 2,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 14
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 256,
+      "repetition": 2,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 15
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 8,
+      "repetition": 2,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 16
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 64,
+      "repetition": 2,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 17
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "repetition": 2,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 18
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 32,
+      "repetition": 2,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 19
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "repetition": 2,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 20
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 16,
+      "repetition": 2,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 21
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 128,
+      "repetition": 2,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 22
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "repetition": 2,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 23
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "repetition": 2,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 24
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "repetition": 3,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 25
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 16,
+      "repetition": 3,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 26
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 128,
+      "repetition": 3,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 27
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 256,
+      "repetition": 3,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 28
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "repetition": 3,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 29
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 8,
+      "repetition": 3,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 30
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "repetition": 3,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 31
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "repetition": 3,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 32
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 64,
+      "repetition": 3,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 33
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "repetition": 3,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 34
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 32,
+      "repetition": 3,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 35
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "repetition": 3,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 36
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 256,
+      "repetition": 4,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 37
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 16,
+      "repetition": 4,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 38
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "repetition": 4,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 39
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "repetition": 4,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 40
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "repetition": 4,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 41
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "repetition": 4,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 42
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 64,
+      "repetition": 4,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 43
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 8,
+      "repetition": 4,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 44
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 128,
+      "repetition": 4,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 45
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "repetition": 4,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 46
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 32,
+      "repetition": 4,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 47
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "repetition": 4,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 48
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 64,
+      "repetition": 5,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 49
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "repetition": 5,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 50
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 16,
+      "repetition": 5,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 51
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "repetition": 5,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 52
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 128,
+      "repetition": 5,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 53
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 256,
+      "repetition": 5,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 54
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "repetition": 5,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 55
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 8,
+      "repetition": 5,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 56
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 32,
+      "repetition": 5,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 57
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "repetition": 5,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 58
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "repetition": 5,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 59
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "repetition": 5,
+      "samples": 100000000,
+      "sample_profile": "samples_100000000",
+      "execution_order": 60
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "samples": 100000000,
+      "tests": 4,
+      "sample_profile": "samples_100000000",
+      "execution_order": 61
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "samples": 100000000,
+      "tests": 4,
+      "sample_profile": "samples_100000000",
+      "execution_order": 62
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "samples": 100000000,
+      "tests": 4,
+      "sample_profile": "samples_100000000",
+      "execution_order": 63
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "samples": 100000000,
+      "tests": 4,
+      "sample_profile": "samples_100000000",
+      "execution_order": 64
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "samples": 100000000,
+      "tests": 4,
+      "sample_profile": "samples_100000000",
+      "execution_order": 65
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "samples": 100000000,
+      "tests": 4,
+      "sample_profile": "samples_100000000",
+      "execution_order": 66
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "repetition": 1,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 67
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "repetition": 1,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 68
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "repetition": 1,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 69
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 32,
+      "repetition": 1,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 70
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "repetition": 1,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 71
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 64,
+      "repetition": 1,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 72
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 128,
+      "repetition": 1,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 73
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 16,
+      "repetition": 1,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 74
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "repetition": 1,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 75
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 256,
+      "repetition": 1,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 76
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "repetition": 1,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 77
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 8,
+      "repetition": 1,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 78
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "repetition": 2,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 79
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "repetition": 2,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 80
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 256,
+      "repetition": 2,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 81
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 8,
+      "repetition": 2,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 82
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 64,
+      "repetition": 2,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 83
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "repetition": 2,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 84
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 32,
+      "repetition": 2,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 85
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "repetition": 2,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 86
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 16,
+      "repetition": 2,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 87
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 128,
+      "repetition": 2,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 88
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "repetition": 2,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 89
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "repetition": 2,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 90
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "repetition": 3,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 91
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 16,
+      "repetition": 3,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 92
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 128,
+      "repetition": 3,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 93
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 256,
+      "repetition": 3,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 94
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "repetition": 3,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 95
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 8,
+      "repetition": 3,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 96
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "repetition": 3,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 97
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "repetition": 3,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 98
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 64,
+      "repetition": 3,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 99
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "repetition": 3,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 100
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 32,
+      "repetition": 3,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 101
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "repetition": 3,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 102
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 256,
+      "repetition": 4,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 103
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 16,
+      "repetition": 4,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 104
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "repetition": 4,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 105
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "repetition": 4,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 106
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "repetition": 4,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 107
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "repetition": 4,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 108
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 64,
+      "repetition": 4,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 109
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 8,
+      "repetition": 4,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 110
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 128,
+      "repetition": 4,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 111
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "repetition": 4,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 112
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 32,
+      "repetition": 4,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 113
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "repetition": 4,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 114
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 64,
+      "repetition": 5,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 115
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "repetition": 5,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 116
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 16,
+      "repetition": 5,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 117
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "repetition": 5,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 118
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 128,
+      "repetition": 5,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 119
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 256,
+      "repetition": 5,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 120
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "repetition": 5,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 121
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 8,
+      "repetition": 5,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 122
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 32,
+      "repetition": 5,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 123
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "repetition": 5,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 124
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "repetition": 5,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 125
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "repetition": 5,
+      "samples": 33554432,
+      "sample_profile": "samples_33554432",
+      "execution_order": 126
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "samples": 33554432,
+      "tests": 4,
+      "sample_profile": "samples_33554432",
+      "execution_order": 127
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "samples": 33554432,
+      "tests": 4,
+      "sample_profile": "samples_33554432",
+      "execution_order": 128
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "samples": 33554432,
+      "tests": 4,
+      "sample_profile": "samples_33554432",
+      "execution_order": 129
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "samples": 33554432,
+      "tests": 4,
+      "sample_profile": "samples_33554432",
+      "execution_order": 130
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "samples": 33554432,
+      "tests": 4,
+      "sample_profile": "samples_33554432",
+      "execution_order": 131
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "samples": 33554432,
+      "tests": 4,
+      "sample_profile": "samples_33554432",
+      "execution_order": 132
+    }
+  ],
+  "sample_counts": [
+    100000000,
+    33554432
+  ],
+  "profiles": [
+    {
+      "sample_profile": "samples_100000000",
+      "samples": 100000000,
+      "status": "successful",
+      "executable_sha256": "0e96c28d88b6d45c87aa75c12151bd5b8511cd9156ae7420fe6fe39233b1654c",
+      "performance_executions": 60,
+      "validation_executions": 6,
+      "statistical_tests_completed": 24
+    },
+    {
+      "sample_profile": "samples_33554432",
+      "samples": 33554432,
+      "status": "successful",
+      "executable_sha256": "0e96c28d88b6d45c87aa75c12151bd5b8511cd9156ae7420fe6fe39233b1654c",
+      "performance_executions": 60,
+      "validation_executions": 6,
+      "statistical_tests_completed": 24
+    }
+  ],
+  "errors": [],
+  "raw_samples_saved": false,
+  "sampling_source_sha256": {
+    "c/benchmark.c": "0376ca3132a5819f6e0d165e6ea7657c9e6271d5e753aeade3f66fd6f7217c20",
+    "c/ziggurat_basic.c": "40c373eeb9121071010f966c59744bfff30e3cdb654cde8c92edfb8b30862255",
+    "c/ziggurat_trapezoid.c": "f1bbe868e339ef8915d8d3f116442591bcca01111f72d039a7f16b40ccbaf91c",
+    "c/ziggurat_basic_profiled.c": "fb0ce081f1f45f53fe0a7ad42a7b08e834c8507ecdaa1bbfa440f26e1558c3ed",
+    "c/ziggurat_trapezoid_profiled.c": "6ba76b1cea675a248dfa37d3452e46d4c461942d9adf2261071489414f743e9e"
+  },
+  "validation_code_sha256": "3ee7f7d66ceadd12541b84eecf782d01b4d117d2305965993842a637a46c4bc9",
+  "driver_sha256": "cdf086838618154fb7d261e3acdd6500ba88c2690152e1e4fa6ca4dd85a50254",
+  "worker_sha256": "ffc42232953e580d12ff4f0f7c1d0613650b0b65e89dfe109cfa4a0b02b47a2b",
+  "ended_at": "2026-10-13T16:25:35.413950+00:00",
+  "performance_executions": 120,
+  "validation_executions": 12,
+  "statistical_tests_completed": 48,
+  "seed1_100m_reproducibility_verified_N": [
+    8,
+    16,
+    32
+  ],
+  "validation_failures": [
+    {
+      "samples": 100000000,
+      "N": 8,
+      "test": "chi2",
+      "p_value": "4.675645263316411e-143"
+    },
+    {
+      "samples": 100000000,
+      "N": 16,
+      "test": "chi2",
+      "p_value": "1.060130848404047e-25"
+    },
+    {
+      "samples": 100000000,
+      "N": 32,
+      "test": "chi2",
+      "p_value": "2.703472704065035e-10"
+    },
+    {
+      "samples": 100000000,
+      "N": 64,
+      "test": "chi2",
+      "p_value": "0.02254452532813898"
+    },
+    {
+      "samples": 100000000,
+      "N": 128,
+      "test": "chi2",
+      "p_value": "0.00983166212421095"
+    },
+    {
+      "samples": 33554432,
+      "N": 8,
+      "test": "chi2",
+      "p_value": "4.985462505951791e-41"
+    },
+    {
+      "samples": 33554432,
+      "N": 16,
+      "test": "chi2",
+      "p_value": "0.0024136185981631707"
+    },
+    {
+      "samples": 33554432,
+      "N": 64,
+      "test": "chi2",
+      "p_value": "0.0497434594327326"
+    },
+    {
+      "samples": 33554432,
+      "N": 128,
+      "test": "ks",
+      "p_value": "0.04131677910506293"
+    }
+  ],
+  "earlier_experiment_results_unchanged": true
+}

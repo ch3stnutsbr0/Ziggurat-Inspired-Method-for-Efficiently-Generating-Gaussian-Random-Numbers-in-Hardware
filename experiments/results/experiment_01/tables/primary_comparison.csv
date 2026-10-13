@@ -1,0 +1,4 @@
+N,basic_all_tests_pass,basic_speed_Msamples_s,best_refined_H,best_refined_T,best_refined_all_tests_pass,best_refined_speed_Msamples_s,trapezoid_all_tests_pass,trapezoid_speed_Msamples_s
+8,True,58.55524362566731,,,,,False,101.16457939042755
+16,True,85.38827336756272,,,,,False,115.05819187869992
+32,True,114.1674707349104,,,,,False,129.618134608573

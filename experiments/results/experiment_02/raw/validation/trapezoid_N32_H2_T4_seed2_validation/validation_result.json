@@ -1,0 +1,118 @@
+{
+  "experiment_id": "trapezoid_N32_H2_T4_seed2_validation",
+  "algorithm": "trapezoid",
+  "algorithm_label": "trapezoid_refined",
+  "N": 32,
+  "H": 2,
+  "T": 4,
+  "seed": 2,
+  "num_samples": 100000000,
+  "benchmark_sha256": "c6bfdc8812497daf9de82febc0a216d4766ed35b76bac556ca37576c9f6f66a9",
+  "sample_sha256": "b4f2653e59b77d2928b064e244330c47c0562984524e06dfad194a86f754c9a5",
+  "sample_size_bytes": 800000000,
+  "summary_sha256": "f18252b555c1eaa39d9f9715bb50de99a28b54a3133b5cb64edca9e6ba75c092",
+  "config_sha256": "2083688c42954bcdba83934cbe6ba1f08b80c9a3284debabf8bb24c22524b346",
+  "keep_validation_samples": false,
+  "validation_code_sha256": "3ee7f7d66ceadd12541b84eecf782d01b4d117d2305965993842a637a46c4bc9",
+  "scipy_version": "1.13.1",
+  "numpy_version": "1.26.4",
+  "c_sampling_time_seconds": 0.8562430143356323,
+  "mean": 7.594541871895266e-05,
+  "variance": 0.9999983661449259,
+  "absolute_mean_error": 7.594541871895266e-05,
+  "absolute_variance_error": 1.6338550741235025e-06,
+  "tests": {
+    "chi_square": {
+      "statistic": 203.124736493761,
+      "p_value": 7.510269795597808e-09,
+      "critical_value": 125.45841940848238,
+      "significance_level": 0.05,
+      "reject": true,
+      "decision": "reject",
+      "p_value_rounded_to_zero": false,
+      "numerical_note": null,
+      "degrees_of_freedom": 101,
+      "configured_interior_bins": 100,
+      "initial_bins": 102,
+      "final_bins": 102,
+      "observed_total": 100000000,
+      "expected_total": 100000000.0,
+      "outside_range_count": 56,
+      "method": "Pearson Chi-square; fixed N(0,1), two unbounded tails and expected-count bin merging"
+    },
+    "kolmogorov_smirnov": {
+      "statistic": 0.00011666773433438582,
+      "p_value": 0.13140297383290012,
+      "critical_value": null,
+      "significance_level": 0.05,
+      "reject": false,
+      "decision": "fail-to-reject",
+      "p_value_rounded_to_zero": false,
+      "numerical_note": null,
+      "method": "Full-data two-sided KS; fixed N(0,1); scipy.stats.kstwo.sf calibration"
+    },
+    "anderson_darling": {
+      "statistic": 0.8974826633930206,
+      "p_value": 0.41580316455348354,
+      "critical_value": 2.492232509358732,
+      "significance_level": 0.05,
+      "reject": false,
+      "decision": "fail-to-reject",
+      "p_value_rounded_to_zero": false,
+      "numerical_note": null,
+      "p_value_below_resolution": false,
+      "p_value_resolution": 0.0001,
+      "method": "Full-data AD; fixed N(0,1); Marsaglia-Marsaglia finite-n approximation"
+    },
+    "cramer_von_mises": {
+      "statistic": 0.16390894144817317,
+      "p_value": 0.34984324178327275,
+      "critical_value": null,
+      "significance_level": 0.05,
+      "reject": false,
+      "decision": "fail-to-reject",
+      "p_value_rounded_to_zero": false,
+      "numerical_note": null,
+      "method": "Full-data CvM; fixed N(0,1); SciPy finite-sample calibration"
+    }
+  },
+  "tails": [
+    {
+      "threshold": 2.0,
+      "observed_count": 4548855,
+      "empirical_probability": 0.04548855,
+      "theoretical_probability": 0.045500263896358396,
+      "absolute_error": 1.171389635839376e-05,
+      "relative_error": 0.00025744677844233955
+    },
+    {
+      "threshold": 3.0,
+      "observed_count": 269770,
+      "empirical_probability": 0.0026977,
+      "theoretical_probability": 0.002699796063260186,
+      "absolute_error": 2.096063260186194e-06,
+      "relative_error": 0.0007763783675034537
+    },
+    {
+      "threshold": 4.0,
+      "observed_count": 6353,
+      "empirical_probability": 6.353e-05,
+      "theoretical_probability": 6.334248366623973e-05,
+      "absolute_error": 1.8751633376026984e-07,
+      "relative_error": 0.00296035650809525
+    }
+  ],
+  "validation_settings": {
+    "significance_level": 0.05,
+    "chi_square": {
+      "bins": 100,
+      "range": [
+        -5.0,
+        5.0
+      ],
+      "minimum_expected_count": 5.0
+    }
+  },
+  "driver_sha256": "8e78084f6097f67e5a616e198bdb1279fc909966a44bf399f160189cf2e59932",
+  "experiment_name": "Experiment 02 \u2014 Seed 2 Validation"
+}

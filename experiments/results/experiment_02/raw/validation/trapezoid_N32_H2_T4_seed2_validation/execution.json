@@ -1,0 +1,180 @@
+{
+  "parameter_id": "trapezoid_N32_H2_T4_seed2",
+  "algorithm_label": "trapezoid_refined",
+  "algorithm": "trapezoid",
+  "N": 32,
+  "H": 2,
+  "T": 4,
+  "seed": 2,
+  "experiment_id": "trapezoid_N32_H2_T4_seed2_validation",
+  "kind": "validation",
+  "mode": "validation",
+  "repetition": 1,
+  "samples": 100000000,
+  "argv": [
+    "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/benchmark",
+    "--algorithm",
+    "trapezoid",
+    "--layers",
+    "32",
+    "--head",
+    "2",
+    "--tail",
+    "4",
+    "--samples",
+    "100000000",
+    "--seed",
+    "2",
+    "--output-dir",
+    "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/experiments/results/experiment_02/raw/validation/trapezoid_N32_H2_T4_seed2_validation"
+  ],
+  "command": "'/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/benchmark' --algorithm trapezoid --layers 32 --head 2 --tail 4 --samples 100000000 --seed 2 --output-dir '/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/experiments/results/experiment_02/raw/validation/trapezoid_N32_H2_T4_seed2_validation'",
+  "output_directory": "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/experiments/results/experiment_02/raw/validation/trapezoid_N32_H2_T4_seed2_validation",
+  "output_handling": "C binary output",
+  "execution_order": 5,
+  "status": "successful",
+  "returncode": 0,
+  "started_at": "2026-10-12T19:04:44.961336+00:00",
+  "ended_at": "2026-10-12T19:04:45.927052+00:00",
+  "wall_clock_duration_seconds": 0.9653529159259051,
+  "subprocess_invocation_attempted": true,
+  "provenance": {
+    "benchmark_sha256": "c6bfdc8812497daf9de82febc0a216d4766ed35b76bac556ca37576c9f6f66a9",
+    "benchmark": {
+      "path": "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/benchmark",
+      "sha256": "c6bfdc8812497daf9de82febc0a216d4766ed35b76bac556ca37576c9f6f66a9",
+      "size_bytes": 53736,
+      "modified_time_ns": 1791823129092766103
+    },
+    "validation_code_sha256": "3ee7f7d66ceadd12541b84eecf782d01b4d117d2305965993842a637a46c4bc9",
+    "experiment_name": "Experiment 02 \u2014 Seed 2 Validation",
+    "configuration": {
+      "experiment_id": "experiment_02",
+      "name": "Experiment 02 \u2014 Seed 2 Validation",
+      "output_dir": "experiments/results/experiment_02/raw",
+      "keep_validation_samples": false,
+      "normal_distribution": {
+        "mean": 0,
+        "standard_deviation": 1
+      },
+      "tail_thresholds": [
+        2.0,
+        3.0,
+        4.0
+      ],
+      "performance": {
+        "enabled": false
+      },
+      "profiling": {
+        "enabled": false
+      },
+      "validation": {
+        "enabled": true,
+        "samples": 100000000,
+        "significance_level": 0.05,
+        "chi_square": {
+          "bins": 100,
+          "range": [
+            -5.0,
+            5.0
+          ],
+          "minimum_expected_count": 5
+        }
+      },
+      "configurations": [
+        {
+          "parameter_id": "basic_N8_seed2",
+          "algorithm_label": "basic",
+          "algorithm": "basic",
+          "N": 8,
+          "H": null,
+          "T": null,
+          "seed": 2
+        },
+        {
+          "parameter_id": "trapezoid_N8_H0_T0_seed2",
+          "algorithm_label": "trapezoid",
+          "algorithm": "trapezoid",
+          "N": 8,
+          "H": 0,
+          "T": 0,
+          "seed": 2
+        },
+        {
+          "parameter_id": "trapezoid_N8_H2_T4_seed2",
+          "algorithm_label": "trapezoid_refined",
+          "algorithm": "trapezoid",
+          "N": 8,
+          "H": 2,
+          "T": 4,
+          "seed": 2
+        },
+        {
+          "parameter_id": "trapezoid_N16_H2_T4_seed2",
+          "algorithm_label": "trapezoid_refined",
+          "algorithm": "trapezoid",
+          "N": 16,
+          "H": 2,
+          "T": 4,
+          "seed": 2
+        },
+        {
+          "parameter_id": "trapezoid_N32_H2_T4_seed2",
+          "algorithm_label": "trapezoid_refined",
+          "algorithm": "trapezoid",
+          "N": 32,
+          "H": 2,
+          "T": 4,
+          "seed": 2
+        }
+      ]
+    }
+  },
+  "attempt_history": [],
+  "benchmark_results": {
+    "sampling_time_seconds": 0.8562430143356323,
+    "throughput_samples_per_second": 116789273.98618372,
+    "time_per_sample_ns": 8.562430143356323,
+    "mean": 7.594541871893652e-05,
+    "variance": 0.9999983661452777,
+    "checksum": 7594.541871893652,
+    "num_samples": 100000000
+  },
+  "binary_statistics": {
+    "num_samples": 100000000,
+    "binary_size_bytes": 800000000,
+    "mean": 7.594541871895266e-05,
+    "variance": 0.9999983661449259,
+    "variance_ddof": 1,
+    "method": "Two-pass chunked long-double NumPy moments; no hypothesis tests",
+    "c_mean": 7.594541871893652e-05,
+    "c_variance": 0.9999983661452777,
+    "mean_difference": 1.6141059842877947e-17,
+    "variance_difference": -3.518296765037121e-13,
+    "comparison_relative_tolerance": 1e-10,
+    "comparison_absolute_tolerance": 1e-10,
+    "matches_c_summary": true
+  },
+  "output_files": {
+    "summary.json": {
+      "size_bytes": 281,
+      "sha256": "f18252b555c1eaa39d9f9715bb50de99a28b54a3133b5cb64edca9e6ba75c092"
+    },
+    "config.json": {
+      "size_bytes": 136,
+      "sha256": "2083688c42954bcdba83934cbe6ba1f08b80c9a3284debabf8bb24c22524b346"
+    },
+    "stdout.txt": {
+      "size_bytes": 592,
+      "sha256": "ff20f4f808f94ea8427f56db03f43a66495ba1c8796d70f71a09867f2f590635"
+    },
+    "stderr.txt": {
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "samples.bin": {
+      "size_bytes": 800000000,
+      "sha256": "b4f2653e59b77d2928b064e244330c47c0562984524e06dfad194a86f754c9a5"
+    }
+  }
+}

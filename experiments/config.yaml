@@ -1,3 +1,7 @@
+prng:
+  type: pcg32  # Also supports xoshiro256plus; omission defaults to pcg32.
+
+# Smoke-test profile. Full Experiment 01 is in experiment_01.yaml.
 algorithms:
   basic:
     enabled: true

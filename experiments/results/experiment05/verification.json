@@ -1,0 +1,89 @@
+{
+  "status": "successful",
+  "verified_at": "2026-10-13T19:16:53.976014+00:00",
+  "raw_sample_files": 0,
+  "statistical_tests_completed": 48,
+  "validation_rejections": [
+    {
+      "algorithm": "trapezoid",
+      "N": 8,
+      "test": "chi_square",
+      "statistic": 387.27895060433593,
+      "p_value": 4.0210017799040365e-35
+    },
+    {
+      "algorithm": "trapezoid",
+      "N": 8,
+      "test": "kolmogorov_smirnov",
+      "statistic": 0.00023449258035546094,
+      "p_value": 0.04993044134899938
+    },
+    {
+      "algorithm": "trapezoid",
+      "N": 16,
+      "test": "chi_square",
+      "statistic": 153.10983299930686,
+      "p_value": 0.000637157954044103
+    },
+    {
+      "algorithm": "trapezoid",
+      "N": 32,
+      "test": "chi_square",
+      "statistic": 152.97259591080393,
+      "p_value": 0.000653696638534073
+    },
+    {
+      "algorithm": "trapezoid",
+      "N": 64,
+      "test": "chi_square",
+      "statistic": 136.9147364624346,
+      "p_value": 0.010086631114668627
+    }
+  ],
+  "previous_results_and_existing_sources_unchanged": true,
+  "output_sha256": {
+    "execution_order.json": "2b2d9c8691d1461bd2f3371957a7aef8e05f4b2372a3e0789f2504a73134560e",
+    "tables/validation_results.csv": "2bd46810ccd26a419014da056b4a35ed2c439da9f908a97206dffbe20e706ad7",
+    "tables/performance_vs_samples.csv": "7cc5c24ef90152ecee635c1bbda213a4fe1ed41c3b25fadde787dc1acf2089da",
+    "artifacts/experiment05_benchmark.c": "616ef442cb3cb9548994b116a6786711ce000b6cd5301931cccd88373af304a8",
+    "artifacts/experiment05.py": "c40f659fe0ac1302fe36a7a3af68af237cae9de681e0c5accd3e2515c81eef61",
+    "artifacts/experiment05.yaml": "9d751c86b042cdd22cab8a1a79682c5d8792227bfd0964d2ae0ef95b0445ad05",
+    "artifacts/experiment05_executed.py": "97c997b459258272a8d0d4eb0215a2fa30a27957e8fc110f9056b504ed384f1f",
+    "artifacts/validation.py": "3ee7f7d66ceadd12541b84eecf782d01b4d117d2305965993842a637a46c4bc9",
+    "figures/speed_vs_samples.svg": "d7d5b34d8cd5c37323553a4382ddd46161dddf8469c92ae18be1571742e008e2",
+    "figures/speed_vs_samples.png": "275f2bfff3425ce299fde44012db0874bf424c4f0bd236bf6a5b4bbb9907ba4e",
+    "processed/validation_results.json": "e1509b7f85c79ebb366b99b11d7e7e4ca1afed5003162de8e4fc0fdca85582b4",
+    "processed/performance_vs_samples.csv": "7cc5c24ef90152ecee635c1bbda213a4fe1ed41c3b25fadde787dc1acf2089da",
+    "reports/experiment_report.md": "2a57fea0255c28b1741e09c31b89c4c90dcf8fe777a881781d0cbe573f0dab87",
+    "artifacts/c/prng.h": "c359f2112de67b7a4620e2f3e357b610c1491a23a8aed31eb32662093ca5365c",
+    "artifacts/c/xoshiro256plus.h": "8b2511087774788625c34f9d18044a31e14f8e198afb2c36691d145271c34d55",
+    "artifacts/c/pcg_rng.h": "aa984b50aba76debc67ce2e9e58978143497b72d0bb0fe6ce7be696099fe67af",
+    "artifacts/c/benchmark.c": "831353a3b6e65b32341818a36ca06267dd209851976b4d8e1032da289a68c539",
+    "artifacts/c/ziggurat_basic.h": "40ddd35ff065864176b79e8c8734d041444e51f668198e3c95a5e9bec8870890",
+    "artifacts/c/gaussian_constants.h": "6d5f5b69925279c9d8af46a21bc09712844ad8380ed716b5bc5826b79f56091a",
+    "artifacts/c/ziggurat_trapezoid_xoshiro256plus.c": "1f6829bdb9811c25551c717640421d242fff140934c3a0973e1203aba85e0db2",
+    "artifacts/c/ziggurat_trapezoid.h": "02ffb2e587f48c415d59c253af07eb40cb9485cb5b961ee48bd6fd193373fe55",
+    "artifacts/c/ziggurat_basic_profiled.c": "fb0ce081f1f45f53fe0a7ad42a7b08e834c8507ecdaa1bbfa440f26e1558c3ed",
+    "artifacts/c/prng.c": "9e48f9f6f32d3b14f312f3d3f315734c5fe594d9053ffd361f1066f3efcb3ed1",
+    "artifacts/c/ziggurat_trapezoid_profiled.c": "6ba76b1cea675a248dfa37d3452e46d4c461942d9adf2261071489414f743e9e",
+    "artifacts/c/ziggurat_basic_xoshiro256plus.c": "c07ae52d9eca966b8cb4d52ffcd6d547b30c0564d8938869d94ed7434ff06dd7",
+    "artifacts/c/xoshiro256plus.c": "6ec0f8dd4426ccc3ebee794d26bb8125ab62f2967e99cb4e5519dc5441b20ccb",
+    "artifacts/c/ziggurat_basic.c": "45e2a38397753bfce518fcd8e92170cfcccc841d83c82ca4f8f8b6dc4cbd34a6",
+    "artifacts/c/ziggurat_trapezoid.c": "0f29f1b468476f6fefc98e92fadec0292fa9f7d9f5c18e6688a04c616df3098e",
+    "artifacts/c/gaussian_prng.h": "1278aba2ec15c8a0e191bc1321e16b694a7291b445f95393ac872cfe7483ac1c",
+    "raw/performance/performance_runs.json": "da0b59947ab558cc4c1dd5c9cf0c5ca80cb1c7197c6f24197588cbc4b2019d78",
+    "raw/validation/basic_N64_validation.json": "0c1f80227ef38d461cb5488f4051988694f0673d273ed402295e43dfb1c8af68",
+    "raw/validation/basic_N256_validation.json": "6266800c270a7b4cd3d0be6ca127a30430cbdc56c9f5c9c06722e76a8147032b",
+    "raw/validation/basic_N16_validation.json": "ecf51bc2ad384b604f0967f38dc2837df78ba455ebb5d4c06f85433794559c40",
+    "raw/validation/basic_N32_validation.json": "69ce6bba9a37b27b7c92339d169685d00a6d02583bddac2e55bae2906aa05211",
+    "raw/validation/trapezoid_N128_validation.json": "21463f3a943e55f09d3c573ec55880d5a969ba19e6d1a97f6e4bec2a9abbb99d",
+    "raw/validation/trapezoid_N8_validation.json": "4d0f5fccdb4347efb778b89cc6be5b4b1d100d7d7ba950d43e23f142000700d2",
+    "raw/validation/trapezoid_N256_validation.json": "b7682f1054c9cb21ec8f094c088f07e50cb72250bab497805ad8bced6396dec0",
+    "raw/validation/trapezoid_N16_validation.json": "faaac468c82e221ea79e3a221d3bdbe10d2b5cce172ed69ab4966c306ae87724",
+    "raw/validation/trapezoid_N32_validation.json": "b8257760b38bedf20cc5053260f0d87046ea7db0573cbf2ff081d99be8326c54",
+    "raw/validation/basic_N128_validation.json": "5198b7099713d8c068e818be41eec96a0194df1c1d898dd03344ff3ea618b252",
+    "raw/validation/trapezoid_N64_validation.json": "eade1b7e96eb08eb9f29c3eff9b6a980c23b95630917f24888f290ae782fd674",
+    "raw/validation/basic_N8_validation.json": "edc8a0a0c44ea184eece18dc0fefb83aab896409e8445be51d607d827410d99e"
+  },
+  "figure_visual_qa": "Legend moved above panels, sample-count labels shortened; numerical data unchanged."
+}

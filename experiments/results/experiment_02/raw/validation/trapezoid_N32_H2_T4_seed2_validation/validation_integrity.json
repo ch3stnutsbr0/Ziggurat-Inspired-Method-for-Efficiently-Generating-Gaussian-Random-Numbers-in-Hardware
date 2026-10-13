@@ -1,0 +1,13 @@
+{
+  "validation_result_sha256": "6cc3dc5589877ce418eb042362bdab796f244ae8cb7edd67151e5efee9248c82",
+  "verified_at": "2026-10-12T19:05:02.917317+00:00",
+  "completed_tests": [
+    "chi_square",
+    "kolmogorov_smirnov",
+    "anderson_darling",
+    "cramer_von_mises"
+  ],
+  "processed_json_sha256": "59e7636e7bd8987e2bfa191bd8ec973c6d2ffe577dae183c368a7a50d16235cb",
+  "processed_csv_sha256": "b5025500d54cfcc13034bffcdef4ef2b5907cdc86cb7a1cee8b8806b64467d24",
+  "deletion_authorized_after_full_validation": true
+}

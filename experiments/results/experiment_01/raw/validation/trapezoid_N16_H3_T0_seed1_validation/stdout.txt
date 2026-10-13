@@ -1,0 +1,13 @@
+Algorithm:        trapezoid
+Configuration:    N=16 H=3 T=0
+Seed:             1
+Binary output mode: I/O excluded from timing; memory writes affect throughput.
+Samples:          100000000
+Time:             0.908447 s
+Throughput:       110.078 M samples/s
+Time per sample:  9.08 ns
+Checksum:         9073.8325632372434
+Samples/second:   110077965.267
+Output directory: /Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/experiments/results/experiment_01/raw/validation/trapezoid_N16_H3_T0_seed1_validation
+Mean:             0.00009074
+Variance:         0.99856778

@@ -1,0 +1,21 @@
+# Focused performance only: no validation and no raw sample output.
+prng:
+  type: pcg32
+algorithms:
+  basic:
+    enabled: true
+    layers: [128]
+    seeds: [1]
+  trapezoid_refined:
+    enabled: true
+    layers: [128]
+    heads: [2]
+    tails: [4]
+    seeds: [1]
+performance:
+  enabled: true
+  samples: 10000000
+  repetitions: 5
+validation:
+  enabled: false
+output_dir: experiments/results/prng_comparison

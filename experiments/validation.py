@@ -350,3 +350,159 @@ def validate_existing(config, repository):
     report["test_count"] = 4 * len(report["datasets"])
     _save_results(report, output)
     return report
+
+
+def run_tests_chunked(values, settings, tail_thresholds, *, block_size=1_000_000):
+    """Full-data fixed-N(0,1) tests with one sorted copy and bounded work arrays.
+
+    Statistics and calibrations match run_tests. No histogram approximation is
+    used for KS, AD, or CvM. SciPy's CvM calibration helper is the same function
+    called by scipy.stats.cramervonmises in the pinned SciPy release.
+    """
+    from scipy.stats import _hypotests
+    values = np.asarray(values, dtype=np.float64)
+    n = values.size
+    if n < 2:
+        raise ValueError('At least two samples are required')
+    alpha = settings['significance_level']
+    chi_settings = settings['chi_square']
+    edges = np.r_[-np.inf, np.linspace(*chi_settings['range'], chi_settings['bins'] + 1), np.inf]
+    observed = np.zeros(len(edges) - 1, dtype=np.int64)
+    total = np.longdouble(0)
+    tail_counts = {float(threshold): 0 for threshold in tail_thresholds}
+    for begin in range(0, n, block_size):
+        block = values[begin:begin + block_size]
+        if not np.all(np.isfinite(block)):
+            raise ValueError('Non-finite Gaussian sample')
+        total += np.sum(block, dtype=np.longdouble)
+        observed += np.histogram(block, bins=edges)[0]
+        absolute = np.abs(block)
+        for threshold in tail_counts:
+            tail_counts[threshold] += int(np.count_nonzero(absolute >= threshold))
+    mean = float(total / n)
+    squares = np.longdouble(0)
+    for begin in range(0, n, block_size):
+        centered = values[begin:begin + block_size] - mean
+        squares += np.sum(centered * centered, dtype=np.longdouble)
+    variance = float(squares / (n - 1))
+
+    left, right = edges[:-1], edges[1:]
+    probabilities = np.where(left >= 0, stats.norm.sf(left) - stats.norm.sf(right),
+                             stats.norm.cdf(right) - stats.norm.cdf(left))
+    expected = n * probabilities / probabilities.sum()
+    expected[np.argmax(expected)] += n - expected.sum()
+    merged_o, merged_e, merged_edges = merge_adjacent_bins(
+        observed, expected, edges, chi_settings['minimum_expected_count'])
+    merged_e[np.argmax(merged_e)] += n - merged_e.sum()
+    df = len(merged_e) - 1
+    chi_stat = float(np.sum((merged_o - merged_e) ** 2 / merged_e))
+    chi_p = float(stats.chi2.sf(chi_stat, df))
+    chi = _test_result(chi_stat, chi_p, alpha, critical_value=stats.chi2.isf(alpha, df),
+        degrees_of_freedom=df, configured_interior_bins=chi_settings['bins'],
+        initial_bins=len(observed), final_bins=len(merged_e),
+        observed_total=int(observed.sum()), expected_total=float(merged_e.sum()),
+        outside_range_count=int(observed[0] + observed[-1]),
+        method='Pearson Chi-square; fixed N(0,1), two unbounded tails and expected-count bin merging')
+
+    ordered = np.array(values, copy=True)
+    ordered.sort()
+    d_plus = d_minus = 0.0
+    cvm_sum = np.longdouble(0)
+    ad_sum = np.longdouble(0)
+    for begin in range(0, n, block_size):
+        end = min(begin + block_size, n)
+        x = ordered[begin:end]
+        rank = np.arange(begin + 1, end + 1, dtype=np.float64)
+        cdf = special.ndtr(x)
+        d_plus = max(d_plus, float(np.max(rank / n - cdf)))
+        d_minus = max(d_minus, float(np.max(cdf - (rank - 1) / n)))
+        cvm_sum += np.sum(((rank - .5) / n - cdf) ** 2, dtype=np.longdouble)
+        log_left = special.log_ndtr(x)
+        # Match the original AD expression: the reverse-ordered survival term.
+        reverse_x = ordered[n - end:n - begin][::-1]
+        log_right = special.log_ndtr(-reverse_x)
+        ad_sum += np.sum((2 * rank - 1) * (log_left + log_right), dtype=np.longdouble)
+    del ordered
+    ks_stat = max(d_plus, d_minus)
+    ks_p = float(stats.kstwo.sf(ks_stat, n))
+    cvm_stat = float(np.longdouble(1) / (12 * n) + cvm_sum)
+    cvm_p = float(max(0.0, 1.0 - _hypotests._cdf_cvm(cvm_stat, n)))
+    ad_stat = max(0.0, float(-n - ad_sum / n))
+    ad_critical = optimize.brentq(lambda z: _ad_cdf(z, n) - (1 - alpha), 0, 50)
+    ad_p = 1 - _ad_cdf(ad_stat, n)
+    below_resolution = ad_p < AD_RESOLUTION
+    tests = dict(
+        chi_square=chi,
+        kolmogorov_smirnov=_test_result(ks_stat, ks_p, alpha,
+            method='Full-data two-sided KS; fixed N(0,1); scipy.stats.kstwo.sf calibration'),
+        anderson_darling=_test_result(ad_stat, None if below_resolution else ad_p, alpha,
+            critical_value=ad_critical, p_value_below_resolution=below_resolution,
+            p_value_resolution=AD_RESOLUTION,
+            method='Full-data AD; fixed N(0,1); Marsaglia-Marsaglia finite-n approximation'),
+        cramer_von_mises=_test_result(cvm_stat, cvm_p, alpha,
+            method='Full-data CvM; fixed N(0,1); SciPy finite-sample calibration'),
+    )
+    tails = []
+    for threshold, count in tail_counts.items():
+        empirical = count / n
+        theoretical = float(2 * stats.norm.sf(threshold))
+        tails.append(dict(threshold=threshold, observed_count=count,
+                          empirical_probability=empirical, theoretical_probability=theoretical,
+                          absolute_error=abs(empirical - theoretical),
+                          relative_error=abs(empirical - theoretical) / theoretical))
+    return dict(mean=mean, variance=variance, absolute_mean_error=abs(mean),
+                absolute_variance_error=abs(variance - 1.0), tests=tests, tails=tails)
+
+
+def validate_one_experiment01(directory, config, benchmark_sha256):
+    """Validate, persist and verify all statistics before optional binary deletion."""
+    from utils import write_json
+    directory = Path(directory)
+    execution = _read_object(directory / 'execution.json')
+    summary = _read_object(directory / 'summary.json')
+    c_config = _read_object(directory / 'config.json')
+    sample_path = directory / 'samples.bin'
+    if execution.get('status') != 'successful' or execution.get('mode') != 'validation':
+        raise ValueError('Validation benchmark did not complete successfully')
+    if execution.get('provenance', {}).get('benchmark_sha256') != benchmark_sha256:
+        raise ValueError('Validation executable SHA-256 mismatch')
+    count = config['validation']['samples']
+    if c_config.get('num_samples') != count or sample_path.stat().st_size != count * 8:
+        raise ValueError('Validation binary count or size mismatch')
+    sample_hash = sha256_file(sample_path)
+    if execution.get('output_files', {}).get('samples.bin', {}).get('sha256') != sample_hash:
+        raise ValueError('Validation binary hash differs from execution manifest')
+    values = np.memmap(sample_path, dtype='<f8', mode='r', shape=(count,))
+    try:
+        numerical = run_tests_chunked(values, validation_settings(config), config['tail_thresholds'])
+    finally:
+        values._mmap.close()
+        del values
+    for key in ('mean', 'variance'):
+        if not math.isclose(numerical[key], summary[key], rel_tol=1e-10, abs_tol=1e-10):
+            raise ValueError(f'Full binary {key} disagrees with C summary')
+    result = dict(experiment_id=directory.name, algorithm=c_config['algorithm'],
+        algorithm_label=execution.get('algorithm_label'), N=c_config['N'],
+        H=c_config.get('H'), T=c_config.get('T'), seed=c_config['seed'],
+        num_samples=count, benchmark_sha256=benchmark_sha256,
+        sample_sha256=sample_hash, sample_size_bytes=count * 8,
+        summary_sha256=sha256_file(directory / 'summary.json'),
+        config_sha256=sha256_file(directory / 'config.json'),
+        keep_validation_samples=config['keep_validation_samples'],
+        validation_code_sha256=sha256_file(__file__),
+        scipy_version=scipy.__version__, numpy_version=np.__version__,
+        c_sampling_time_seconds=summary['sampling_time_seconds'], **numerical)
+    sidecar = directory / 'validation_result.json'
+    write_json(sidecar, result, replace=sidecar.exists())
+    saved = _read_object(sidecar)
+    if saved != result:
+        raise ValueError('Saved validation result failed readback')
+    integrity = dict(validation_result_sha256=sha256_file(sidecar),
+                     verified_at=datetime.now(timezone.utc).isoformat())
+    integrity_path = directory / 'validation_integrity.json'
+    write_json(integrity_path, integrity, replace=integrity_path.exists())
+    if _read_object(integrity_path)['validation_result_sha256'] != sha256_file(sidecar):
+        raise ValueError('Saved validation integrity record failed readback')
+    if not config['keep_validation_samples']:
+        sample_path.unlink()
+    return result

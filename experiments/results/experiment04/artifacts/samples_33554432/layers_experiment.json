@@ -1,0 +1,505 @@
+{
+  "status": "successful",
+  "started_at": "2026-10-13T16:24:37.137899+00:00",
+  "layers": [
+    8,
+    16,
+    32,
+    64,
+    128,
+    256
+  ],
+  "H": 2,
+  "T": 4,
+  "seed": 1,
+  "performance_samples": 33554432,
+  "performance_repetitions": 5,
+  "warmup_samples": 100000,
+  "warmup_seed_reset": true,
+  "validation_samples": 33554432,
+  "validation_algorithms": [
+    "trapezoid"
+  ],
+  "validation_settings": {
+    "significance_level": 0.05,
+    "chi_square": {
+      "bins": 100,
+      "range": [
+        -5.0,
+        5.0
+      ],
+      "minimum_expected_count": 5.0
+    }
+  },
+  "validation_code_sha256": "3ee7f7d66ceadd12541b84eecf782d01b4d117d2305965993842a637a46c4bc9",
+  "python_version": "3.12.7 | packaged by Anaconda, Inc. | (main, Oct  4 2024, 08:22:19) [Clang 14.0.6 ]",
+  "numpy_version": "1.26.4",
+  "scipy_version": "1.13.1",
+  "platform": "macOS-26.2-arm64-arm-64bit",
+  "resources": {
+    "available_disk_bytes": 32259088384,
+    "available_memory_bytes": 3406872576,
+    "estimated_peak_memory_bytes": 1802612736,
+    "memory_estimate": "input plus sorted copy, 24 bounded one-million-value work vectors, and 1 GiB reserve"
+  },
+  "executions": [
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "repetition": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "repetition": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "repetition": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 32,
+      "repetition": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "repetition": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 64,
+      "repetition": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 128,
+      "repetition": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 16,
+      "repetition": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "repetition": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 256,
+      "repetition": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "repetition": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 8,
+      "repetition": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "repetition": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "repetition": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 256,
+      "repetition": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 8,
+      "repetition": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 64,
+      "repetition": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "repetition": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 32,
+      "repetition": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "repetition": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 16,
+      "repetition": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 128,
+      "repetition": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "repetition": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "repetition": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "repetition": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 16,
+      "repetition": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 128,
+      "repetition": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 256,
+      "repetition": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "repetition": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 8,
+      "repetition": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "repetition": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "repetition": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 64,
+      "repetition": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "repetition": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 32,
+      "repetition": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "repetition": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 256,
+      "repetition": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 16,
+      "repetition": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "repetition": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "repetition": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "repetition": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "repetition": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 64,
+      "repetition": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 8,
+      "repetition": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 128,
+      "repetition": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "repetition": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 32,
+      "repetition": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "repetition": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 64,
+      "repetition": 5
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "repetition": 5
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 16,
+      "repetition": 5
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "repetition": 5
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 128,
+      "repetition": 5
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 256,
+      "repetition": 5
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "repetition": 5
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 8,
+      "repetition": 5
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 32,
+      "repetition": 5
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "repetition": 5
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "repetition": 5
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "repetition": 5
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "samples": 33554432,
+      "tests": 4
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "samples": 33554432,
+      "tests": 4
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "samples": 33554432,
+      "tests": 4
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "samples": 33554432,
+      "tests": 4
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "samples": 33554432,
+      "tests": 4
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "samples": 33554432,
+      "tests": 4
+    }
+  ],
+  "raw_samples_saved": false,
+  "driver_sha256": "ffc42232953e580d12ff4f0f7c1d0613650b0b65e89dfe109cfa4a0b02b47a2b",
+  "methodology": "Same original unbuffered timed C loop for both algorithms: generate, volatile checksum, sum, sumsq. Initialization, warmup, seed reset, and reports are outside timing. Separate C subprocesses per repetition, fixed seed 1; identical random streams across repetitions. Validation streams into RAM, uses existing full-data chunked tests, and contributes no performance timings.",
+  "compiler": "Apple clang version 17.0.0 (clang-1700.6.3.2)\nTarget: arm64-apple-darwin25.2.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+  "compiler_flags": [
+    "-std=c11",
+    "-Wall",
+    "-Wextra",
+    "-pedantic",
+    "-O2"
+  ],
+  "build_command": [
+    "/usr/bin/clang",
+    "-std=c11",
+    "-Wall",
+    "-Wextra",
+    "-pedantic",
+    "-O2",
+    "-DBENCHMARK_OPTIMIZATION=\"O2\"",
+    "-DBENCHMARK_CFLAGS=\"-std=c11 -Wall -Wextra -pedantic -O2\"",
+    "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/benchmark.c",
+    "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/ziggurat_basic.c",
+    "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/ziggurat_trapezoid.c",
+    "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/ziggurat_basic_profiled.c",
+    "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/ziggurat_trapezoid_profiled.c",
+    "-o",
+    "/private/tmp/gaussian-layers-o2-7z5qb3bq/benchmark",
+    "-lm"
+  ],
+  "compiler_messages": "",
+  "executable_sha256": "0e96c28d88b6d45c87aa75c12151bd5b8511cd9156ae7420fe6fe39233b1654c",
+  "source_sha256": {
+    "c/benchmark.c": "0376ca3132a5819f6e0d165e6ea7657c9e6271d5e753aeade3f66fd6f7217c20",
+    "c/ziggurat_basic.c": "40c373eeb9121071010f966c59744bfff30e3cdb654cde8c92edfb8b30862255",
+    "c/ziggurat_trapezoid.c": "f1bbe868e339ef8915d8d3f116442591bcca01111f72d039a7f16b40ccbaf91c",
+    "c/ziggurat_basic_profiled.c": "fb0ce081f1f45f53fe0a7ad42a7b08e834c8507ecdaa1bbfa440f26e1558c3ed",
+    "c/ziggurat_trapezoid_profiled.c": "6ba76b1cea675a248dfa37d3452e46d4c461942d9adf2261071489414f743e9e"
+  },
+  "original_benchmark_sha256": "c6bfdc8812497daf9de82febc0a216d4766ed35b76bac556ca37576c9f6f66a9",
+  "ended_at": "2026-10-13T16:25:34.495452+00:00",
+  "performance_executions": 60,
+  "validation_executions": 6,
+  "statistical_tests_completed": 24,
+  "earlier_experiment_results_unchanged": true,
+  "original_executable_samplers_prng_validation_matlab_unchanged": true,
+  "ad_pvalue_policy": "NA when omitted below existing AD calibration resolution; decision uses existing critical value. PASS means fail-to-reject at alpha 0.05; no multiple-testing adjustment.",
+  "output_sha256": {
+    "processed/samples_33554432/performance_vs_layers.csv": "dde8a1fe74367888cb648ef1cc5f24e9717542d37cff7d62f11e5f12590cf644",
+    "processed/samples_33554432/trapezoid_validation_vs_layers.csv": "87be8eee554b5759ff4b07bd4c7c81da7b1a162d109a1c549fa58c1a60ad49e4",
+    "raw/performance/samples_33554432/performance_runs.json": "ab1757f01a47ae78dcd1ed20108fda0dc7fd6796def29bd3f25fd83e1bf96566",
+    "processed/samples_33554432/trapezoid_validation_vs_layers.json": "08631c690471d3a15dc6e863011a0a3bd42857ff8f867c8d327dd6d7e965fb54",
+    "figures/samples_33554432/throughput_vs_layers.png": "e0e5ba842d965da2bc4450dfdefa06c3ca4bdbebc85a88aaf3fa614532f50e21"
+  },
+  "experiment_id": "experiment04",
+  "sample_profile": "samples_33554432",
+  "output_root": "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/experiments/results/experiment04"
+}

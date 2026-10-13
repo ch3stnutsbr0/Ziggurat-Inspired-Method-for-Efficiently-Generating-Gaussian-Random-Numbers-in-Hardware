@@ -1,0 +1,5 @@
+algorithm,prng,layers,head_refinement,tail_refinement,samples,seed,repetitions,median_Msamples_s,speedup_relative_to_pcg32,improvement_percent
+basic,xoshiro256plus,128,,,10000000,1,5,193.020380932285,1.198367032446744,19.836703244674393
+basic,pcg32,128,,,10000000,1,5,161.06950183550126,1.0,0.0
+trapezoid,xoshiro256plus,128,2,4,10000000,1,5,175.45090883772605,1.2884412845447493,28.844128454474927
+trapezoid,pcg32,128,2,4,10000000,1,5,136.1729951859769,1.0,0.0

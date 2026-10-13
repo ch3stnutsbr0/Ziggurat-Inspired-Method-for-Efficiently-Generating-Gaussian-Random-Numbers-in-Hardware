@@ -1,0 +1,21 @@
+algorithm,N,H,T,test,seed_1_statistic,seed_1_p_value,seed_2_statistic,seed_2_p_value,seed_1_decision,seed_2_decision,rejection_pattern,seed_1_p_value_below_resolution,seed_2_p_value_below_resolution,seed_1_p_value_rounded_to_zero,seed_2_p_value_rounded_to_zero
+basic,8,,,Pearson Chi-square,85.58049077922114,0.8639145442852253,99.18167497007713,0.5325627525308362,fail-to-reject,fail-to-reject,fail-to-reject under both seeds,False,False,False,False
+basic,8,,,KS,8.565051712361438e-05,0.455465501992931,7.523552160998426e-05,0.6231754262073439,fail-to-reject,fail-to-reject,fail-to-reject under both seeds,False,False,False,False
+basic,8,,,AD,1.0278997421264648,0.3429656082050754,0.5723770558834076,0.6744921067122139,fail-to-reject,fail-to-reject,fail-to-reject under both seeds,False,False,False,False
+basic,8,,,CvM,0.18772472607061788,0.29256764923983913,0.09544273264981394,0.6076810622999409,fail-to-reject,fail-to-reject,fail-to-reject under both seeds,False,False,False,False
+trapezoid,8,0,0,Pearson Chi-square,192084.52332953303,0.0,192808.99354561395,0.0,reject,reject,rejected under both seeds,False,False,True,True
+trapezoid,8,0,0,KS,0.0008698529683955347,3.7975119045737633e-66,0.0008639995381913845,2.890882520547909e-65,reject,reject,rejected under both seeds,False,False,False,False
+trapezoid,8,0,0,AD,200.39617581665516,,200.5004646629095,,reject,reject,rejected under both seeds,True,True,False,False
+trapezoid,8,0,0,CvM,14.868891597250911,1.664931081890586e-09,14.6918000630236,1.3541980870002135e-09,reject,reject,rejected under both seeds,False,False,False,False
+trapezoid_refined,8,2,4,Pearson Chi-square,975.4110980868203,4.675645263316411e-143,1045.8490923544953,7.414394363093014e-157,reject,reject,rejected under both seeds,False,False,False,False
+trapezoid_refined,8,2,4,KS,8.302017203931644e-05,0.4958488219328405,7.443542037999934e-05,0.6366498174477067,fail-to-reject,fail-to-reject,fail-to-reject under both seeds,False,False,False,False
+trapezoid_refined,8,2,4,AD,1.2043325453996658,0.2659031592376915,1.085349678993225,0.315434604176152,fail-to-reject,fail-to-reject,fail-to-reject under both seeds,False,False,False,False
+trapezoid_refined,8,2,4,CvM,0.13514692998506153,0.43818506628183185,0.0784508217223858,0.7008633902363677,fail-to-reject,fail-to-reject,fail-to-reject under both seeds,False,False,False,False
+trapezoid_refined,16,2,4,Pearson Chi-square,327.3889251037187,1.060130848404047e-25,296.4078808893095,4.3180492255208615e-21,reject,reject,rejected under both seeds,False,False,False,False
+trapezoid_refined,16,2,4,KS,8.740257909645166e-05,0.4295496908988826,6.571569960844847e-05,0.7808184019941911,fail-to-reject,fail-to-reject,fail-to-reject under both seeds,False,False,False,False
+trapezoid_refined,16,2,4,AD,0.6488188058137894,0.6030852331638787,0.8038115203380585,0.47830166542270314,fail-to-reject,fail-to-reject,fail-to-reject under both seeds,False,False,False,False
+trapezoid_refined,16,2,4,CvM,0.1055447364488664,0.5583690361499795,0.0984224487503362,0.5926632437653239,fail-to-reject,fail-to-reject,fail-to-reject under both seeds,False,False,False,False
+trapezoid_refined,32,2,4,Pearson Chi-square,215.55196589938794,2.703472704065035e-10,203.124736493761,7.510269795597808e-09,reject,reject,rejected under both seeds,False,False,False,False
+trapezoid_refined,32,2,4,KS,8.637867918770414e-05,0.44459464852525454,0.00011666773433438582,0.13140297383290012,fail-to-reject,fail-to-reject,fail-to-reject under both seeds,False,False,False,False
+trapezoid_refined,32,2,4,AD,0.772053524851799,0.5016374380389212,0.8974826633930206,0.41580316455348354,fail-to-reject,fail-to-reject,fail-to-reject under both seeds,False,False,False,False
+trapezoid_refined,32,2,4,CvM,0.11532509546181183,0.5148420683620188,0.16390894144817317,0.34984324178327275,fail-to-reject,fail-to-reject,fail-to-reject under both seeds,False,False,False,False

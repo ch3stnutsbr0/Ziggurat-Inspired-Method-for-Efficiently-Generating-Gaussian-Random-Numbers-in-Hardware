@@ -1,0 +1,1519 @@
+{
+  "experiment_id": "experiment05",
+  "status": "successful",
+  "started_at": "2026-10-13T19:15:13.389830+00:00",
+  "configuration": {
+    "experiment_id": "experiment05",
+    "prng": {
+      "type": "xoshiro256plus"
+    },
+    "layers": [
+      8,
+      16,
+      32,
+      64,
+      128,
+      256
+    ],
+    "algorithms": [
+      "basic",
+      "trapezoid"
+    ],
+    "seed": 1,
+    "trapezoid": {
+      "head": 2,
+      "tail": 4
+    },
+    "samples_per_run": 33554432,
+    "performance": {
+      "repetitions": 5,
+      "checkpoints": [
+        100000,
+        1000000,
+        10000000,
+        33554432
+      ]
+    },
+    "validation": {
+      "significance_level": 0.05,
+      "chi_square": {
+        "bins": 100,
+        "range": [
+          -5.0,
+          5.0
+        ],
+        "minimum_expected_count": 5
+      }
+    },
+    "output_dir": "experiments/results/experiment05"
+  },
+  "platform": "macOS-26.2-arm64-arm-64bit",
+  "numpy_version": "1.26.4",
+  "scipy_version": "1.13.1",
+  "memory_available_bytes": 3083108352,
+  "memory_estimate_bytes": 1802612736,
+  "source_sha256": {
+    "c/benchmark.c": "831353a3b6e65b32341818a36ca06267dd209851976b4d8e1032da289a68c539",
+    "c/prng.c": "9e48f9f6f32d3b14f312f3d3f315734c5fe594d9053ffd361f1066f3efcb3ed1",
+    "c/xoshiro256plus.c": "6ec0f8dd4426ccc3ebee794d26bb8125ab62f2967e99cb4e5519dc5441b20ccb",
+    "c/ziggurat_basic.c": "45e2a38397753bfce518fcd8e92170cfcccc841d83c82ca4f8f8b6dc4cbd34a6",
+    "c/ziggurat_basic_profiled.c": "fb0ce081f1f45f53fe0a7ad42a7b08e834c8507ecdaa1bbfa440f26e1558c3ed",
+    "c/ziggurat_basic_xoshiro256plus.c": "c07ae52d9eca966b8cb4d52ffcd6d547b30c0564d8938869d94ed7434ff06dd7",
+    "c/ziggurat_trapezoid.c": "0f29f1b468476f6fefc98e92fadec0292fa9f7d9f5c18e6688a04c616df3098e",
+    "c/ziggurat_trapezoid_profiled.c": "6ba76b1cea675a248dfa37d3452e46d4c461942d9adf2261071489414f743e9e",
+    "c/ziggurat_trapezoid_xoshiro256plus.c": "1f6829bdb9811c25551c717640421d242fff140934c3a0973e1203aba85e0db2",
+    "c/gaussian_constants.h": "6d5f5b69925279c9d8af46a21bc09712844ad8380ed716b5bc5826b79f56091a",
+    "c/gaussian_prng.h": "1278aba2ec15c8a0e191bc1321e16b694a7291b445f95393ac872cfe7483ac1c",
+    "c/pcg_rng.h": "aa984b50aba76debc67ce2e9e58978143497b72d0bb0fe6ce7be696099fe67af",
+    "c/prng.h": "c359f2112de67b7a4620e2f3e357b610c1491a23a8aed31eb32662093ca5365c",
+    "c/xoshiro256plus.h": "8b2511087774788625c34f9d18044a31e14f8e198afb2c36691d145271c34d55",
+    "c/ziggurat_basic.h": "40ddd35ff065864176b79e8c8734d041444e51f668198e3c95a5e9bec8870890",
+    "c/ziggurat_trapezoid.h": "02ffb2e587f48c415d59c253af07eb40cb9485cb5b961ee48bd6fd193373fe55",
+    "c/Makefile": "5aea1653032938402d6c4d60f84c85b9d107d50ecd2c8fd1caa5660ae82564ac",
+    "c/benchmark": "2726fc0af8c1ac36e4352fc1ae6819c39ed9f41ac109abfa0540ef7ba1a77efe",
+    "experiments/validation.py": "3ee7f7d66ceadd12541b84eecf782d01b4d117d2305965993842a637a46c4bc9",
+    "matlab/main_ks_demo.m": "1d5df86f7b6df5e459cad84010b82f5347793ed98d7e20be071c382fa5d665e9",
+    "matlab/build_tables.m": "24a23bb62370ee4f768a6f5ff677ee2dc6415a25b777bf0db29914480267e4af",
+    "matlab/cramer_von_mises_test.m": "4b807506d7326b7e637729b8cbd1d79c093087f9779b67852fd313f2d417e12e",
+    "matlab/build_recursive_table.m": "f262b42ccd03915dfa7405a8e3d8d765c8ff47a94f9d3aecea728d9e723df474",
+    "matlab/compute_partitions.m": "8ca7721b94fd3d9fabf9d2ffa243c33d1768c95e0126ae9065d2bb277c65f22b",
+    "matlab/sample_table.m": "c296e2241d18d517c75e194740455ee56ea6608c1487419df2a5014ea6e0b573",
+    "matlab/sample_recursive_table.m": "5e42cfad786fae4288bdfc864a895daeece4909bb5eb6b970cdfd3e369a59d8d",
+    "matlab/main_refine_demo.m": "6b7ce99aaef41b5f93c3dc7ffb87ff47a7ad145c893bb0afe5ade4d77f531824",
+    "matlab/main_cvm_demo.m": "3737a0c6faba74c84b28e396f52a5ee156eee6a0fbf41a046ad56846ac8dd62b",
+    "matlab/basic_trapezoid.m": "daa77c5f8219968438400f110f4cfda78539c47ddc11d2948e80599c851d1afb",
+    "matlab/ziggurat_gaussian_demo.m": "1d74bfd171341ae75327fc8f7bbec887e3e3f527ea49b104e6ff2cd5026095dd",
+    "matlab/main_runtime_demo.m": "873322f1d98485516334dd0c0d36354cb3d1d51c2d9eed8125418f02f99c97c8",
+    "matlab/main_basic_demo.m": "1d43dff237f8ec735472735d8f087a76e90afba8b3da65943962fb6af4a3dbce",
+    "matlab/chi_square_test.m": "1fe585112fb7e9cee3b5c6f69ce211d3d26d48c3695b3b885418a9415d1d1057",
+    "matlab/trapzig_randn.m": "8416789d6a4c2d1b81f1db979806eab54889fcf0a6051ee638efbdabba0e8b12",
+    "matlab/main_chi2_demo.m": "3552eb0f9a7efb8f02aa03d260b8d44e178a03563126a420469e7c15327f75d9",
+    "matlab/kolmogorov_smirnov_test.m": "1c6dd6916090b31d5d87edad5fe694b50828087b4301110baada01506c73f86c",
+    "matlab/anderson_darling_test.m": "0a9616b6b6b22bcdaa81d5529992b3b6634d1080866e50997c819c4f6d1d0325",
+    "matlab/main_ad_demo.m": "c8d5dba92439a89d8ce8e03a0716e637c4b8c02ab653916f6fbc3455b5a95972",
+    "matlab/fit_trapezoid.m": "083ee54b42347f77bdc0f88077b70d21c6027a97ed4c96869b0976a947001a66"
+  },
+  "raw_samples_saved": false,
+  "executions": [
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 1,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "128",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 1
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 1,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "256",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 2
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 1,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "16",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 3
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 32,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 1,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "32",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 4
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 1,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "64",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 5
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 64,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 1,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "64",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 6
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 128,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 1,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "128",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 7
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 16,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 1,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "16",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 8
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 1,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "32",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 9
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 256,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 1,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "256",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 10
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 1,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "8",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 11
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 8,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 1,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "8",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 12
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 2,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "8",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 13
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 2,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "64",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 14
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 256,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 2,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "256",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 15
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 8,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 2,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "8",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 16
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 64,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 2,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "64",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 17
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 2,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "256",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 18
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 32,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 2,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "32",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 19
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 2,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "32",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 20
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 16,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 2,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "16",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 21
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 128,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 2,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "128",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 22
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 2,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "128",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 23
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 2,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "16",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 24
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 3,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "256",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 25
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 16,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 3,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "16",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 26
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 128,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 3,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "128",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 27
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 256,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 3,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "256",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 28
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 3,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "32",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 29
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 8,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 3,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "8",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 30
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 3,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "128",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 31
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 3,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "64",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 32
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 64,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 3,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "64",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 33
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 3,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "8",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 34
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 32,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 3,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "32",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 35
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 3,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "16",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 36
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 256,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 4,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "256",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 37
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 16,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 4,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "16",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 38
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 4,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "256",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 39
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 4,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "64",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 40
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 4,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "8",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 41
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 4,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "16",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 42
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 64,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 4,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "64",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 43
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 8,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 4,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "8",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 44
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 128,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 4,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "128",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 45
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 4,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "32",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 46
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 32,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 4,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "32",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 47
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 4,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "128",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 48
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 64,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 5,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "64",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 49
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 5,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "32",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 50
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 16,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 5,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "16",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 51
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 5,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "16",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 52
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 128,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 5,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "128",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 53
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 256,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 5,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "256",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 54
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 5,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "256",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 55
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 8,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 5,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "8",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 56
+    },
+    {
+      "kind": "performance",
+      "algorithm": "basic",
+      "N": 32,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 5,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "basic",
+        "32",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 57
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 5,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "64",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 58
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 5,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "8",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 59
+    },
+    {
+      "kind": "performance",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "repetition": 5,
+      "command": [
+        "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+        "trapezoid",
+        "128",
+        "1",
+        "100000",
+        "1000000",
+        "10000000",
+        "33554432"
+      ],
+      "execution_order": 60
+    },
+    {
+      "kind": "validation",
+      "algorithm": "basic",
+      "N": 8,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "tests": 4,
+      "execution_order": 61
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "tests": 4,
+      "execution_order": 62
+    },
+    {
+      "kind": "validation",
+      "algorithm": "basic",
+      "N": 16,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "tests": 4,
+      "execution_order": 63
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "tests": 4,
+      "execution_order": 64
+    },
+    {
+      "kind": "validation",
+      "algorithm": "basic",
+      "N": 32,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "tests": 4,
+      "execution_order": 65
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "tests": 4,
+      "execution_order": 66
+    },
+    {
+      "kind": "validation",
+      "algorithm": "basic",
+      "N": 64,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "tests": 4,
+      "execution_order": 67
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "tests": 4,
+      "execution_order": 68
+    },
+    {
+      "kind": "validation",
+      "algorithm": "basic",
+      "N": 128,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "tests": 4,
+      "execution_order": 69
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "tests": 4,
+      "execution_order": 70
+    },
+    {
+      "kind": "validation",
+      "algorithm": "basic",
+      "N": 256,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "tests": 4,
+      "execution_order": 71
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "tests": 4,
+      "execution_order": 72
+    }
+  ],
+  "errors": [],
+  "compiler": "Apple clang version 17.0.0 (clang-1700.6.3.2)\nTarget: arm64-apple-darwin25.2.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+  "compiler_flags": [
+    "-std=c11",
+    "-Wall",
+    "-Wextra",
+    "-pedantic",
+    "-O2"
+  ],
+  "build_commands": [
+    [
+      "/usr/bin/clang",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-O2",
+      "-I",
+      "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c",
+      "-DBENCHMARK_OPTIMIZATION=\"O2\"",
+      "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/benchmark.c",
+      "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/ziggurat_basic.c",
+      "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/ziggurat_trapezoid.c",
+      "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/xoshiro256plus.c",
+      "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/prng.c",
+      "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/ziggurat_basic_xoshiro256plus.c",
+      "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/ziggurat_trapezoid_xoshiro256plus.c",
+      "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/ziggurat_basic_profiled.c",
+      "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/ziggurat_trapezoid_profiled.c",
+      "-o",
+      "/private/tmp/experiment05-y8lq_9ys/benchmark",
+      "-lm"
+    ],
+    [
+      "/usr/bin/clang",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-O2",
+      "-I",
+      "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c",
+      "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/experiments/experiment05_benchmark.c",
+      "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/ziggurat_basic.c",
+      "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/ziggurat_trapezoid.c",
+      "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/xoshiro256plus.c",
+      "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/prng.c",
+      "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/ziggurat_basic_xoshiro256plus.c",
+      "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/ziggurat_trapezoid_xoshiro256plus.c",
+      "-o",
+      "/private/tmp/experiment05-y8lq_9ys/checkpoint_benchmark",
+      "-lm"
+    ]
+  ],
+  "validation_executable_sha256": "456cb836c2eee395fad7e5159d0d06928b099be47735c2ee3c7926b1109a386e",
+  "timing_executable_sha256": "1386039bd5c0e58bd710ed74a3896b6b4294f4485a01d998da683a7741c0b6ab",
+  "ended_at": "2026-10-13T19:16:53.974987+00:00",
+  "performance_executions": 60,
+  "validation_executions": 12,
+  "statistical_tests_completed": 48,
+  "validation_rejections": [
+    {
+      "algorithm": "trapezoid",
+      "N": 8,
+      "test": "chi_square",
+      "statistic": 387.27895060433593,
+      "p_value": 4.0210017799040365e-35
+    },
+    {
+      "algorithm": "trapezoid",
+      "N": 8,
+      "test": "kolmogorov_smirnov",
+      "statistic": 0.00023449258035546094,
+      "p_value": 0.04993044134899938
+    },
+    {
+      "algorithm": "trapezoid",
+      "N": 16,
+      "test": "chi_square",
+      "statistic": 153.10983299930686,
+      "p_value": 0.000637157954044103
+    },
+    {
+      "algorithm": "trapezoid",
+      "N": 32,
+      "test": "chi_square",
+      "statistic": 152.97259591080393,
+      "p_value": 0.000653696638534073
+    },
+    {
+      "algorithm": "trapezoid",
+      "N": 64,
+      "test": "chi_square",
+      "statistic": 136.9147364624346,
+      "p_value": 0.010086631114668627
+    }
+  ],
+  "previous_results_and_existing_sources_unchanged": true,
+  "figure_visual_qa": "Legend moved above panels, sample-count labels shortened; numerical data unchanged.",
+  "driver_snapshot_note": "experiment05_executed.py preserves the executed driver; experiment05.py includes figure layout refinements only plus NA formatting for unavailable p-values."
+}

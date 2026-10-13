@@ -21,7 +21,7 @@ def main():
     parser.add_argument("--config", type=Path, default=Path(__file__).with_name("config.yaml"))
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--dry-run", action="store_true", help="Validate and print the schedule (default)")
-    mode.add_argument("--run", action="store_true", help="Execute the validated schedule sequentially")
+    mode.add_argument("--run", action="store_true", help="Execute the validated schedule sequentially using YAML prng.type (default pcg32)")
     mode.add_argument("--validate", action="store_true", help="Test existing validation samples against fixed N(0,1); never execute benchmarks")
     parser.add_argument("--resume", action="store_true", help="Verify and skip completed runs; archive and retry incomplete attempts")
     parser.add_argument("--refresh-performance", action="store_true", help="With --resume, explicitly archive and regenerate all performance results")
@@ -33,7 +33,13 @@ def main():
     try:
         config = load_config(args.config)
         repository = Path(__file__).resolve().parents[1]
-        if args.validate:
+        if isinstance(config, dict) and config.get("experiment_id") == "experiment_01":
+            if args.validate:
+                raise ValueError("Experiment 01 validates each dataset during --run; use --resume to continue")
+            from experiment01 import preflight, execute
+            report = execute(config, repository, resume=args.resume) if args.run else preflight(config, repository, resume=args.resume)
+            report["yaml_syntax"] = "valid"
+        elif args.validate:
             from validation import validate_existing
             report = validate_existing(config, repository)
         else:

@@ -1,6 +1,7 @@
 """Strict YAML configuration parsing for the dry-run planner."""
 
 from pathlib import Path
+import math
 
 import yaml
 
@@ -77,8 +78,41 @@ def validate_config(config):
                 good.append(value)
         return good
 
-    if not mapping(config, "config", {"algorithms", "performance", "validation", "output_dir"}):
+    if not mapping(config, "config", {"algorithms", "performance", "validation", "output_dir",
+                                      "experiment_id", "profiling", "keep_validation_samples",
+                                      "schedule_seed", "tail_thresholds", "normal_distribution", "prng"}):
         return errors
+    if "prng" in config:
+        section = config["prng"]
+        if mapping(section, "prng", {"type"}):
+            if section.get("type") not in ("pcg32", "xoshiro256plus"):
+                errors.append("prng.type: require pcg32 or xoshiro256plus")
+            if section.get("type") == "xoshiro256plus" and isinstance(config.get("profiling"), dict) and config["profiling"].get("enabled"):
+                errors.append("profiling: existing PCG32 call profiling requires prng.type pcg32")
+    if "experiment_id" in config and config["experiment_id"] != "experiment_01":
+        errors.append("experiment_id: supported value is experiment_01")
+    if "normal_distribution" in config:
+        distribution=config["normal_distribution"]
+        if not isinstance(distribution,dict) or distribution != {"mean":0,"standard_deviation":1}:
+            errors.append("normal_distribution: Experiment 01 requires mean 0 and standard_deviation 1")
+    if "keep_validation_samples" in config and type(config["keep_validation_samples"]) is not bool:
+        errors.append("keep_validation_samples: require true or false")
+    if "schedule_seed" in config:
+        integer(config["schedule_seed"], "schedule_seed", 0)
+    if "tail_thresholds" in config:
+        thresholds=config["tail_thresholds"]
+        if (not isinstance(thresholds,list) or not thresholds or
+                any(type(x) not in (int,float) or not math.isfinite(x) or x<=0 for x in thresholds) or
+                len(set(thresholds))!=len(thresholds)):
+            errors.append("tail_thresholds: require distinct positive numbers")
+    if "profiling" in config:
+        section=config["profiling"]
+        if mapping(section,"profiling",{"enabled","samples","prng_iterations"}):
+            if type(section.get("enabled")) is not bool:
+                errors.append("profiling.enabled: require true or false")
+            if section.get("enabled") is True:
+                integer(section.get("samples"),"profiling.samples",2)
+                integer(section.get("prng_iterations"),"profiling.prng_iterations",1)
     algorithms = config.get("algorithms")
     if mapping(algorithms, "algorithms", ALGORITHMS):
         enabled_count = 0
@@ -105,8 +139,7 @@ def validate_config(config):
                 tails = values(section, "tails", where, 0, 16, required)
                 if name == "trapezoid" and any(v != 0 for v in heads + tails):
                     errors.append(f"{where}: unrefined trapezoid requires heads/tails [0]")
-                if name == "trapezoid_refined" and 0 in heads and 0 in tails:
-                    errors.append(f"{where}: H=0,T=0 belongs to unrefined trapezoid")
+            # The refined Cartesian product may contain 0/0; expansion excludes it.
         if not enabled_count:
             errors.append("algorithms: at least one algorithm must be enabled")
     enabled_modes = 0
@@ -180,7 +213,7 @@ def sha256_file(path):
 def binary_statistics(path, samples):
     """Check little-endian float64 output with bounded-memory, two-pass moments."""
     import math
-    import struct
+    import numpy as np
 
     path = Path(path)
     expected = samples * 8
@@ -188,21 +221,27 @@ def binary_statistics(path, samples):
         actual = path.stat().st_size if path.is_file() else None
         raise ValueError(f"Invalid sample file size: expected {expected}, found {actual}: {path}")
 
-    def block_totals(mean=None):
-        with path.open("rb") as stream:
-            while block := stream.read(65536 * 8):
-                values = [item[0] for item in struct.iter_unpack("<d", block)]
-                if not all(math.isfinite(value) for value in values):
-                    raise ValueError(f"Non-finite sample in {path}")
-                yield math.fsum(values if mean is None else ((value - mean) ** 2 for value in values))
-
-    mean = math.fsum(block_totals()) / samples
-    variance = math.fsum(block_totals(mean)) / (samples - 1)
+    mapped = np.memmap(path, dtype='<f8', mode='r', shape=(samples,))
+    try:
+        total = np.longdouble(0)
+        for begin in range(0, samples, 1_000_000):
+            block = mapped[begin:begin+1_000_000]
+            if not np.all(np.isfinite(block)):
+                raise ValueError(f"Non-finite sample in {path}")
+            total += np.sum(block, dtype=np.longdouble)
+        mean = float(total / samples)
+        squares = np.longdouble(0)
+        for begin in range(0, samples, 1_000_000):
+            centered = mapped[begin:begin+1_000_000] - mean
+            squares += np.sum(centered*centered, dtype=np.longdouble)
+        variance = float(squares / (samples - 1))
+    finally:
+        mapped._mmap.close()
     if not math.isfinite(mean) or not math.isfinite(variance):
         raise ValueError(f"Non-finite binary moments in {path}")
     return dict(num_samples=samples, binary_size_bytes=expected, mean=mean,
                 variance=variance, variance_ddof=1,
-                method="Two-pass float64 moments with math.fsum; no hypothesis tests")
+                method="Two-pass chunked long-double NumPy moments; no hypothesis tests")
 
 
 def validation_settings(config):

@@ -1,15 +1,15 @@
 %% Pearson chi-square comparison with MATLAB's built-in Gaussian generator
 clear; close all; clc;
 
-seedProposed = 1; %seeding for our algorithm
+seedProposed = 2026; %seeding for our algorithm
 seedBuiltin = 2; %seeding for builtin GRNG
 
-N = 8;
-numSamples = 1e6;
+N = 128;
+numSamples = 1e8;
 
 
 config = struct('numBins',512, 'testRange',[-8,8], ...
-    'minExpectedCount',5, 'alpha',0.01);
+    'minExpectedCount',5, 'alpha',0.05);
 rng(seedProposed,'twister');
 
 % Case A: no recursive head or tail tables.
