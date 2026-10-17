@@ -8,6 +8,10 @@
 typedef struct { uint64_t s[4]; } xoshiro256plus_rng;
 void xoshiro256plus_seed(xoshiro256plus_rng *r, uint64_t seed);
 static inline uint64_t xoshiro256plus_next(xoshiro256plus_rng *r) {
+#ifdef ZT_TEST_PRNG_STEPS
+    extern uint64_t zt_test_prng_steps;
+    ++zt_test_prng_steps;
+#endif
     const uint64_t result = r->s[0] + r->s[3];
     const uint64_t t = r->s[1] << 17;
     r->s[2] ^= r->s[0];

@@ -276,3 +276,8 @@ numeric metrics and the compiler optimization label. It adds no work inside the
 sampling loops and does not change existing binary, summary, or config formats.
 The layer comparison driver uses these options and streams validation through
 an OS pipe, without creating raw sample files.
+
+## Optional precomputed uniforms
+
+See [Precomputed uniform mode](../experiments/PRECOMPUTED_UNIFORMS.md) for
+configuration, timing, exhaustion, repetition reuse, comparison, and small tests.

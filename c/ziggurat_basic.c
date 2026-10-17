@@ -25,11 +25,24 @@ static zt_counters counts;
 #else
 #define COUNT(field) ((void)0)
 #endif
+#ifdef ZT_BUFFERED_BUILD
+#include "uniform_buffer.h"
+static uniform_buffer *active_buffer;
+#elif defined(ZT_COUNTED_BUILD)
+static uint64_t uniform_calls;
+#endif
 static double uniform(void) {
+#ifdef ZT_BUFFERED_BUILD
+    return uniform_buffer_next(active_buffer);
+#elif defined(ZT_COUNTED_BUILD)
+    ++uniform_calls;
+    return sampler_uniform(&rng);
+#else
 #ifdef ZT_PROFILE_BUILD
     return pcg_uniform_profiled(&rng,&prng_profile);
 #else
     return sampler_uniform(&rng);
+#endif
 #endif
 }
 /* Check the actual recurrence before permitting peak-rounding correction.

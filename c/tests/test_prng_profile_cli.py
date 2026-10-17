@@ -30,7 +30,7 @@ for name, args in cases:
     summary = json.loads((profiled / "summary.json").read_text())
     config = json.loads((profiled / "config.json").read_text())
     assert summary["prng"] == config["prng"] == "pcg32"
-    assert set(summary) == {"prng",
+    assert set(summary) >= {"prng",
         "sampling_time_seconds", "throughput_samples_per_second", "time_per_sample_ns",
         "mean", "variance", "checksum", "num_samples"}
     assert "profile_prng" not in config

@@ -27,6 +27,10 @@ static inline void pcg_profile_initialization(pcg_profile *p) { p->active=&p->in
 static inline void pcg_profile_sampling(pcg_profile *p) { p->active=&p->sampling; }
 
 static inline uint32_t pcg_next(pcg_rng *r) {
+#ifdef ZT_TEST_PRNG_STEPS
+    extern uint64_t zt_test_prng_steps;
+    ++zt_test_prng_steps;
+#endif
     uint64_t old=r->state;
     r->state=old*6364136223846793005ULL+r->inc;
     uint32_t x=(uint32_t)(((old>>18u)^old)>>27u), rot=(uint32_t)(old>>59u);
