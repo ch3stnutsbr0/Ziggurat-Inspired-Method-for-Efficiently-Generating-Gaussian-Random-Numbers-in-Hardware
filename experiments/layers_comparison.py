@@ -191,8 +191,7 @@ def main():
     try:
         with tempfile.TemporaryDirectory(prefix='gaussian-layers-o2-', dir='/private/tmp') as temp:
             executable = Path(temp)/'benchmark'
-            sources = [repo/'c'/name for name in ('benchmark.c', 'ziggurat_basic.c', 'ziggurat_trapezoid.c',
-                      'ziggurat_basic_profiled.c', 'ziggurat_trapezoid_profiled.c')]
+            sources = sorted((repo/'c').glob('*.c'))
             flags = ['-std=c11', '-Wall', '-Wextra', '-pedantic', '-O2']
             build = ['/usr/bin/clang', *flags, '-DBENCHMARK_OPTIMIZATION="O2"',
                      '-DBENCHMARK_CFLAGS="'+ ' '.join(flags)+'"', *map(str,sources), '-o', str(executable), '-lm']

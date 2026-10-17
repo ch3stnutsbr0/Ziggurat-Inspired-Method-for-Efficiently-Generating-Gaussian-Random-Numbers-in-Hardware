@@ -84,7 +84,7 @@ def full_report(stdout, run):
         if (result['prng']!='xoshiro256plus' or result['algorithm']!=run['algorithm'] or
                 result['N']!=run['N'] or result['seed']!=run['seed'] or
                 result['compiler_optimization']!='O2' or result['warmup_samples']!=0 or
-                (run['algorithm']=='trapezoid' and (result['H'],result['T'])!=(2,4))):
+                (run['algorithm']=='trapezoid' and (result['H'],result['T'])!=(run.get('H',2),run.get('T',4)))):
             raise ValueError('Incorrect benchmark configuration')
         if result['sampling_time_seconds']<=0:
             raise ValueError('Nonpositive timing')
@@ -98,7 +98,7 @@ def collect(executable, run):
     argv=[str(executable),'--algorithm',run['algorithm'],'--layers',str(run['N']),
           '--prng','xoshiro256plus','--seed',str(run['seed']),'--samples',str(SAMPLES),
           '--report-json','--output',f'/dev/fd/{write_fd}']
-    if run['algorithm']=='trapezoid': argv+=['--head','2','--tail','4']
+    if run['algorithm']=='trapezoid': argv+=['--head',str(run.get('H',2)),'--tail',str(run.get('T',4))]
     try:
         process=subprocess.Popen(argv,stdout=subprocess.PIPE,stderr=subprocess.PIPE,pass_fds=(write_fd,))
         os.close(write_fd);write_fd=None
@@ -250,8 +250,7 @@ def main():
             core=[repo/'c'/name for name in ('ziggurat_basic.c','ziggurat_trapezoid.c','xoshiro256plus.c',
                     'prng.c','ziggurat_basic_xoshiro256plus.c','ziggurat_trapezoid_xoshiro256plus.c')]
             builds=[['/usr/bin/clang',*flags,'-I',str(repo/'c'),'-DBENCHMARK_OPTIMIZATION="O2"',
-                      str(repo/'c/benchmark.c'),*map(str,core),str(repo/'c/ziggurat_basic_profiled.c'),
-                      str(repo/'c/ziggurat_trapezoid_profiled.c'),'-o',str(normal),'-lm'],
+                      *map(str,sorted((repo/'c').glob('*.c'))),'-o',str(normal),'-lm'],
                     ['/usr/bin/clang',*flags,'-I',str(repo/'c'),str(Path(__file__).with_name('experiment05_benchmark.c')),
                      *map(str,core),'-o',str(timing),'-lm']]
             session.update(compiler=subprocess.check_output(['/usr/bin/clang','--version'],text=True),

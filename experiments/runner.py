@@ -27,6 +27,8 @@ def expand_configurations(config):
     prng = config.get("prng", {}).get("type", "pcg32")
     if prng not in ("pcg32", "xoshiro256plus"):
         raise ValueError("Unsupported prng.type")
+    uniform_mode = config.get("uniform_mode", "inline")
+    uniform_bytes = config.get("uniform_buffer_size_bytes", 2 * 1024**3)
     seen = set()
     for label, settings in config["algorithms"].items():
         if not settings["enabled"]:
@@ -48,11 +50,18 @@ def expand_configurations(config):
             if algorithm != "basic":
                 name += f"_H{h}_T{t}"
             configurations.append(dict(
-                parameter_id=f"{name}_seed{seed}" + (f"_prng{prng}" if prng != "pcg32" else ""), algorithm_label=label,
-                prng=prng,
+                parameter_id=f"{name}_seed{seed}" + (f"_prng{prng}" if prng != "pcg32" else "") + ("_precomputed" if uniform_mode == "precomputed" else ""), algorithm_label=label,
+                prng=prng, uniform_mode=uniform_mode, uniform_buffer_size_bytes=uniform_bytes,
                 algorithm=algorithm, N=n, H=h, T=t, seed=seed,
             ))
     return configurations
+
+
+def uniform_arguments(parameters):
+    if parameters.get("uniform_mode", "inline") == "precomputed":
+        return ["--uniform-mode", "precomputed", "--uniform-buffer-bytes",
+                str(parameters["uniform_buffer_size_bytes"]), "--report-json"]
+    return []
 
 
 def build_runs(config, configurations, repository):
@@ -84,6 +93,7 @@ def build_runs(config, configurations, repository):
                         "--layers", str(parameters["N"])]
                 if parameters.get("prng", "pcg32") != "pcg32":
                     argv += ["--prng", parameters["prng"]]
+                argv += uniform_arguments(parameters)
                 if parameters["algorithm"] == "trapezoid":
                     argv += ["--head", str(parameters["H"]), "--tail", str(parameters["T"])]
                 argv += ["--seed", str(parameters["seed"]), "--samples", str(settings["samples"])]
@@ -244,6 +254,18 @@ def dry_run(config, repository, *, resume=False, refresh_performance=False):
 
 def parse_benchmark_stdout(stdout, run):
     """Parse the current C text format without claiming more than printed precision."""
+    payloads = [line.split(": ", 1)[1] for line in stdout.splitlines() if line.startswith("BENCHMARK_JSON: ")]
+    if len(payloads) > 1:
+        raise ValueError("Duplicate BENCHMARK_JSON")
+    if payloads:
+        summary = json.loads(payloads[0])
+        check_summary(summary, run)
+        for key in ("algorithm", "N", "seed"):
+            if summary.get(key) != run[key]:
+                raise ValueError(f"JSON identity mismatch: {key}")
+        if run["algorithm"] != "basic" and any(summary.get(key) != run[key] for key in ("H", "T")):
+            raise ValueError("JSON refinement mismatch")
+        return summary
     fields = {}
     for line in stdout.splitlines():
         if ":" in line:
@@ -277,12 +299,23 @@ def parse_benchmark_stdout(stdout, run):
         if value is None or (suffix and not value.endswith(suffix)):
             raise ValueError(f"Missing or malformed benchmark stdout field: {label}")
         summary[name] = float(value[:-len(suffix)] if suffix else value)
+    summary.update(uniform_mode=fields.get("Uniform mode", "inline"), complete=True,
+                   buffer_exhausted=False, buffer_size_bytes=0, buffer_utilization=0.0)
+    if "Uniform values consumed" in fields:
+        summary["uniform_values_consumed"] = int(fields["Uniform values consumed"])
+        summary["uniforms_per_sample"] = summary["uniform_values_consumed"] / run["samples"]
+    summary["gaussian_samples_generated"] = run["samples"]
+    summary["throughput_million_samples_per_second"] = summary["throughput_samples_per_second"] / 1e6
     check_summary(summary, run)
     summary["source"] = "C stdout; values retain printed precision (time 6, moments 8 decimal places)"
     return summary
 
 
 def check_summary(summary, run):
+    if summary.get("complete", True) is not True or summary.get("buffer_exhausted", False):
+        raise ValueError("Incomplete/exhausted benchmark is not a throughput measurement")
+    if summary.get("uniform_mode", "inline") != run.get("uniform_mode", "inline"):
+        raise ValueError("Summary uniform mode does not match scheduled run")
     if not isinstance(summary, dict) or type(summary.get("num_samples")) is not int or summary["num_samples"] != run["samples"]:
         raise ValueError("Invalid summary sample count")
     if summary.get("prng", "pcg32") != run.get("prng", "pcg32"):
@@ -321,6 +354,8 @@ def collect_outputs(run, directory, stdout, *, create=True):
         with (directory / "config.json").open(encoding="utf-8") as stream:
             configuration = json.load(stream)
         check_summary(summary, run)
+        if configuration.get("uniform_mode", "inline") != run.get("uniform_mode", "inline"):
+            raise ValueError("C configuration uniform mode mismatch")
         if configuration.get("prng", "pcg32") != run.get("prng", "pcg32"):
             raise ValueError("C config.json PRNG does not match the scheduled run")
         expected = {key: run[key] for key in ("algorithm", "N", "seed")}
@@ -356,7 +391,7 @@ def collect_outputs(run, directory, stdout, *, create=True):
     return summary, comparison, files
 
 
-def execute_run(run, repository, provenance, *, history=None):
+def execute_run(run, repository, provenance, *, history=None, cache_directory=None):
     """Reserve a new directory, capture one process, and persist its final status."""
     directory = Path(run["output_directory"])
     record = dict(run, status="running", returncode=None, started_at=None, ended_at=None,
@@ -377,7 +412,12 @@ def execute_run(run, repository, provenance, *, history=None):
             write_json(directory / "execution.json", record, replace=True)
             started = time.perf_counter()
             try:
-                completed = subprocess.run(run["argv"], cwd=repository, capture_output=True, check=False)
+                invocation = list(run["argv"])
+                if run.get("uniform_mode", "inline") == "precomputed" and cache_directory:
+                    cache = Path(cache_directory) / f"{run['prng']}_{run['seed']}_{run['uniform_buffer_size_bytes']}.bin"
+                    invocation += ["--uniform-buffer-cache", str(cache)]
+                record["actual_argv"] = invocation
+                completed = subprocess.run(invocation, cwd=repository, capture_output=True, check=False)
                 stdout, stderr = completed.stdout, completed.stderr
                 record["returncode"] = completed.returncode
             finally:
@@ -416,6 +456,8 @@ def benchmark_identity(executable):
 def check_run_identity(saved, run):
     if not isinstance(saved, dict):
         raise ValueError("Saved run metadata must be a JSON object")
+    if saved.get("uniform_mode", "inline") != run.get("uniform_mode", "inline"):
+        raise ValueError("Saved run does not match the schedule: uniform_mode")
     if saved.get("prng", "pcg32") != run.get("prng", "pcg32"):
         raise ValueError("Saved run does not match the schedule: prng")
     for key in ("experiment_id", "algorithm", "N", "H", "T", "seed", "samples",
@@ -518,10 +560,11 @@ def execute_plan(plan, repository, config, *, resume=False, refresh_performance=
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError as exc:
             raise ValueError("Another runner is active in this output directory") from exc
-        return _execute_locked(plan, repository, config, resume, refresh_performance, output_root)
+        with tempfile.TemporaryDirectory(prefix="grng-uniform-") as cache_directory:
+            return _execute_locked(plan, repository, config, resume, refresh_performance, output_root, cache_directory)
 
 
-def _execute_locked(plan, repository, config, resume, refresh_performance, output_root):
+def _execute_locked(plan, repository, config, resume, refresh_performance, output_root, cache_directory):
     identity = benchmark_identity(repository / "c/benchmark")
     # Recheck all resume decisions while holding the lock, before changing any result.
     actions = [resume_action(run, identity, refresh_performance) if resume else
@@ -560,7 +603,7 @@ def _execute_locked(plan, repository, config, resume, refresh_performance, outpu
                 result = json.loads((Path(run["output_directory"]) / "execution.json").read_text())
                 result["session_action"] = "skipped"
             else:
-                result = execute_run(run, repository, provenance, history=history)
+                result = execute_run(run, repository, provenance, history=history, cache_directory=cache_directory)
                 result["session_action"] = "executed"
         except (Exception, KeyboardInterrupt) as exc:
             result = dict(run, status="failed", error=f"{type(exc).__name__}: {exc}", session_action="preparation_failed")

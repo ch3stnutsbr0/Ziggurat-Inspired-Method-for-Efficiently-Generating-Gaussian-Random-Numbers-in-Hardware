@@ -1,0 +1,17 @@
+experiment_id: experiment06
+prng:
+  type: xoshiro256plus
+algorithms: [trapezoid]
+layers: [8, 16, 32, 64, 128, 256]
+trapezoid:
+  head: 2
+  tail: 4
+seed: 1
+samples_per_run: 33554432
+validation:
+  significance_level: 0.05
+  chi_square:
+    bins: 512  # Interior bins; two additional unbounded tail bins.
+    range: [-5.0, 5.0]
+    minimum_expected_count: 5
+output_dir: experiments/results/experiment06

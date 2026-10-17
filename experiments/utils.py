@@ -80,8 +80,19 @@ def validate_config(config):
 
     if not mapping(config, "config", {"algorithms", "performance", "validation", "output_dir",
                                       "experiment_id", "profiling", "keep_validation_samples",
-                                      "schedule_seed", "tail_thresholds", "normal_distribution", "prng"}):
+                                      "schedule_seed", "tail_thresholds", "normal_distribution", "prng", "uniform_mode", "uniform_buffer_size_gib", "uniform_buffer_size_bytes"}):
         return errors
+    uniform_mode = config.get("uniform_mode", "inline")
+    if uniform_mode not in ("inline", "precomputed"):
+        errors.append("uniform_mode: require inline or precomputed")
+    if config.get("uniform_buffer_size_gib", 2) != 2 or type(config.get("uniform_buffer_size_gib", 2)) is not int:
+        errors.append("uniform_buffer_size_gib: production buffer must be exactly 2 GiB")
+    if "uniform_buffer_size_bytes" in config:
+        size = config["uniform_buffer_size_bytes"]
+        if type(size) is not int or size <= 0 or size % 8 or size > 2**31:
+            errors.append("uniform_buffer_size_bytes: test override must be a positive multiple of 8, at most 2 GiB")
+    if uniform_mode == "precomputed" and isinstance(config.get("profiling"), dict) and config["profiling"].get("enabled"):
+        errors.append("profiling: inline PRNG profiling cannot be used with precomputed uniforms")
     if "prng" in config:
         section = config["prng"]
         if mapping(section, "prng", {"type"}):

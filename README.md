@@ -7,3 +7,6 @@ MATLAB and C implementations and experiments for Gaussian random number generati
 - `experiments/`: verification Guassianility and performance, compare between different models and arguments
 
 See [the C README](c/README.md) for algorithm details and more benchmark options.
+
+Optional [precomputed uniform benchmarks](experiments/PRECOMPUTED_UNIFORMS.md)
+remove PRNG computation from the timed Gaussian sampling region.

@@ -1,0 +1,225 @@
+{
+  "experiment_id": "experiment06",
+  "status": "successful",
+  "started_at": "2026-10-14T20:27:10.536795+00:00",
+  "configuration": {
+    "experiment_id": "experiment06",
+    "prng": {
+      "type": "xoshiro256plus"
+    },
+    "algorithms": [
+      "trapezoid"
+    ],
+    "layers": [
+      8,
+      16,
+      32,
+      64,
+      128,
+      256
+    ],
+    "trapezoid": {
+      "head": 2,
+      "tail": 4
+    },
+    "seed": 1,
+    "samples_per_run": 33554432,
+    "validation": {
+      "significance_level": 0.05,
+      "chi_square": {
+        "bins": 512,
+        "range": [
+          -5.0,
+          5.0
+        ],
+        "minimum_expected_count": 5
+      }
+    },
+    "output_dir": "experiments/results/experiment06"
+  },
+  "source_sha256": {
+    "c/benchmark.c": "831353a3b6e65b32341818a36ca06267dd209851976b4d8e1032da289a68c539",
+    "c/ziggurat_trapezoid_xoshiro256plus.c": "1f6829bdb9811c25551c717640421d242fff140934c3a0973e1203aba85e0db2",
+    "c/ziggurat_basic_profiled.c": "fb0ce081f1f45f53fe0a7ad42a7b08e834c8507ecdaa1bbfa440f26e1558c3ed",
+    "c/prng.c": "9e48f9f6f32d3b14f312f3d3f315734c5fe594d9053ffd361f1066f3efcb3ed1",
+    "c/ziggurat_trapezoid_profiled.c": "6ba76b1cea675a248dfa37d3452e46d4c461942d9adf2261071489414f743e9e",
+    "c/ziggurat_basic_xoshiro256plus.c": "c07ae52d9eca966b8cb4d52ffcd6d547b30c0564d8938869d94ed7434ff06dd7",
+    "c/xoshiro256plus.c": "6ec0f8dd4426ccc3ebee794d26bb8125ab62f2967e99cb4e5519dc5441b20ccb",
+    "c/ziggurat_basic.c": "45e2a38397753bfce518fcd8e92170cfcccc841d83c82ca4f8f8b6dc4cbd34a6",
+    "c/ziggurat_trapezoid.c": "0f29f1b468476f6fefc98e92fadec0292fa9f7d9f5c18e6688a04c616df3098e",
+    "c/prng.h": "c359f2112de67b7a4620e2f3e357b610c1491a23a8aed31eb32662093ca5365c",
+    "c/xoshiro256plus.h": "8b2511087774788625c34f9d18044a31e14f8e198afb2c36691d145271c34d55",
+    "c/pcg_rng.h": "aa984b50aba76debc67ce2e9e58978143497b72d0bb0fe6ce7be696099fe67af",
+    "c/ziggurat_basic.h": "40ddd35ff065864176b79e8c8734d041444e51f668198e3c95a5e9bec8870890",
+    "c/gaussian_constants.h": "6d5f5b69925279c9d8af46a21bc09712844ad8380ed716b5bc5826b79f56091a",
+    "c/ziggurat_trapezoid.h": "02ffb2e587f48c415d59c253af07eb40cb9485cb5b961ee48bd6fd193373fe55",
+    "c/gaussian_prng.h": "1278aba2ec15c8a0e191bc1321e16b694a7291b445f95393ac872cfe7483ac1c",
+    "c/benchmark": "2726fc0af8c1ac36e4352fc1ae6819c39ed9f41ac109abfa0540ef7ba1a77efe",
+    "c/Makefile": "5aea1653032938402d6c4d60f84c85b9d107d50ecd2c8fd1caa5660ae82564ac",
+    "experiments/validation.py": "3ee7f7d66ceadd12541b84eecf782d01b4d117d2305965993842a637a46c4bc9",
+    "experiments/experiment05.py": "c40f659fe0ac1302fe36a7a3af68af237cae9de681e0c5accd3e2515c81eef61",
+    "experiments/runner.py": "bd9f0f5a989acf47555b3d50effe6d70cb5755052603b4877497176577e44b29",
+    "experiments/utils.py": "1d6545d2b872d24f5466519a5a61b25541067549a46e0562593c8d7237be6c25",
+    "matlab/main_ks_demo.m": "1d5df86f7b6df5e459cad84010b82f5347793ed98d7e20be071c382fa5d665e9",
+    "matlab/build_tables.m": "24a23bb62370ee4f768a6f5ff677ee2dc6415a25b777bf0db29914480267e4af",
+    "matlab/cramer_von_mises_test.m": "4b807506d7326b7e637729b8cbd1d79c093087f9779b67852fd313f2d417e12e",
+    "matlab/build_recursive_table.m": "f262b42ccd03915dfa7405a8e3d8d765c8ff47a94f9d3aecea728d9e723df474",
+    "matlab/compute_partitions.m": "8ca7721b94fd3d9fabf9d2ffa243c33d1768c95e0126ae9065d2bb277c65f22b",
+    "matlab/sample_table.m": "c296e2241d18d517c75e194740455ee56ea6608c1487419df2a5014ea6e0b573",
+    "matlab/sample_recursive_table.m": "5e42cfad786fae4288bdfc864a895daeece4909bb5eb6b970cdfd3e369a59d8d",
+    "matlab/main_refine_demo.m": "6b7ce99aaef41b5f93c3dc7ffb87ff47a7ad145c893bb0afe5ade4d77f531824",
+    "matlab/main_cvm_demo.m": "3737a0c6faba74c84b28e396f52a5ee156eee6a0fbf41a046ad56846ac8dd62b",
+    "matlab/basic_trapezoid.m": "daa77c5f8219968438400f110f4cfda78539c47ddc11d2948e80599c851d1afb",
+    "matlab/ziggurat_gaussian_demo.m": "1d74bfd171341ae75327fc8f7bbec887e3e3f527ea49b104e6ff2cd5026095dd",
+    "matlab/main_runtime_demo.m": "873322f1d98485516334dd0c0d36354cb3d1d51c2d9eed8125418f02f99c97c8",
+    "matlab/main_basic_demo.m": "1d43dff237f8ec735472735d8f087a76e90afba8b3da65943962fb6af4a3dbce",
+    "matlab/chi_square_test.m": "1fe585112fb7e9cee3b5c6f69ce211d3d26d48c3695b3b885418a9415d1d1057",
+    "matlab/trapzig_randn.m": "8416789d6a4c2d1b81f1db979806eab54889fcf0a6051ee638efbdabba0e8b12",
+    "matlab/main_chi2_demo.m": "3552eb0f9a7efb8f02aa03d260b8d44e178a03563126a420469e7c15327f75d9",
+    "matlab/kolmogorov_smirnov_test.m": "1c6dd6916090b31d5d87edad5fe694b50828087b4301110baada01506c73f86c",
+    "matlab/anderson_darling_test.m": "0a9616b6b6b22bcdaa81d5529992b3b6634d1080866e50997c819c4f6d1d0325",
+    "matlab/main_ad_demo.m": "c8d5dba92439a89d8ce8e03a0716e637c4b8c02ab653916f6fbc3455b5a95972",
+    "matlab/fit_trapezoid.m": "083ee54b42347f77bdc0f88077b70d21c6027a97ed4c96869b0976a947001a66"
+  },
+  "platform": "macOS-26.2-arm64-arm-64bit",
+  "numpy_version": "1.26.4",
+  "scipy_version": "1.13.1",
+  "executions": [
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 8,
+      "H": 2,
+      "T": 4,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "tests": 4,
+      "execution_order": 1
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 16,
+      "H": 2,
+      "T": 4,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "tests": 4,
+      "execution_order": 2
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 32,
+      "H": 2,
+      "T": 4,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "tests": 4,
+      "execution_order": 3
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 64,
+      "H": 2,
+      "T": 4,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "tests": 4,
+      "execution_order": 4
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 128,
+      "H": 2,
+      "T": 4,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "tests": 4,
+      "execution_order": 5
+    },
+    {
+      "kind": "validation",
+      "algorithm": "trapezoid",
+      "N": 256,
+      "H": 2,
+      "T": 4,
+      "prng": "xoshiro256plus",
+      "seed": 1,
+      "samples": 33554432,
+      "tests": 4,
+      "execution_order": 6
+    }
+  ],
+  "errors": [],
+  "performance_executions": 0,
+  "classical_executions": 0,
+  "raw_samples_saved": false,
+  "compiler": "Apple clang version 17.0.0 (clang-1700.6.3.2)\nTarget: arm64-apple-darwin25.2.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+  "compiler_flags": [
+    "-std=c11",
+    "-Wall",
+    "-Wextra",
+    "-pedantic",
+    "-O2"
+  ],
+  "build_command": [
+    "/usr/bin/clang",
+    "-std=c11",
+    "-Wall",
+    "-Wextra",
+    "-pedantic",
+    "-O2",
+    "-DBENCHMARK_OPTIMIZATION=\"O2\"",
+    "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/benchmark.c",
+    "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/ziggurat_basic.c",
+    "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/ziggurat_trapezoid.c",
+    "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/ziggurat_basic_profiled.c",
+    "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/ziggurat_trapezoid_profiled.c",
+    "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/xoshiro256plus.c",
+    "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/prng.c",
+    "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/ziggurat_basic_xoshiro256plus.c",
+    "/Users/liubenli/Documents/FALL 2026/Special Problem/Codes/Ziggurat-Trapezoid-GRNG/c/ziggurat_trapezoid_xoshiro256plus.c",
+    "-o",
+    "/private/tmp/experiment06-4ng9u75d/benchmark",
+    "-lm"
+  ],
+  "executable_sha256": "9c502f72575122c0c4a8fc9519c8a83a1217eccd5dc182e7c92c1aae57dd07ec",
+  "ended_at": "2026-10-14T20:27:48.478153+00:00",
+  "validation_executions": 6,
+  "statistical_tests_completed": 24,
+  "validation_rejections": [
+    {
+      "N": 8,
+      "test": "chi_square",
+      "statistic": 969.6629411027892,
+      "p_value": 1.0659468208209662e-33
+    },
+    {
+      "N": 8,
+      "test": "kolmogorov_smirnov",
+      "statistic": 0.00023449258035546094,
+      "p_value": 0.04993044134899938
+    },
+    {
+      "N": 16,
+      "test": "chi_square",
+      "statistic": 609.2001637099761,
+      "p_value": 0.0002104633078910032
+    },
+    {
+      "N": 64,
+      "test": "chi_square",
+      "statistic": 552.3367007085542,
+      "p_value": 0.028562106086994263
+    }
+  ],
+  "previous_results_and_sources_unchanged": true
+}

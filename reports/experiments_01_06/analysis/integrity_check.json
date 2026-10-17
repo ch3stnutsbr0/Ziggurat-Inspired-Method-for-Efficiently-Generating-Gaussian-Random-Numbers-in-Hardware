@@ -1,0 +1,16 @@
+{
+  "input_manifest_files_verified": 156,
+  "original_files_verified_hash_and_mtime": 5525,
+  "original_files_modified": 0,
+  "saved_validation_datasets": 137,
+  "saved_test_records": 548,
+  "timing_checkpoint_records": 1220,
+  "recomputed_medians_match_original_03_04_05": true,
+  "test_alpha_and_degrees_of_freedom_consistent": true,
+  "referenced_vector_figures": 8,
+  "report_pdf_pages": 44,
+  "experiments_rerun": false,
+  "new_gaussian_samples_generated": false,
+  "additional_statistical_tests_executed": false,
+  "status": "passed"
+}

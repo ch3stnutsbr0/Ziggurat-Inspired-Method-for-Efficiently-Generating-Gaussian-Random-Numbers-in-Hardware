@@ -18,7 +18,7 @@ def _write_csv(path, rows):
 
 def _key(row):
     return (row['algorithm'], row['N'], row.get('H'), row.get('T'),
-            row['seed'], row['benchmark_sha256'], row.get('prng', 'pcg32'))
+            row['seed'], row['benchmark_sha256'], row.get('prng', 'pcg32'), row.get('uniform_mode', 'inline'))
 
 
 def analyze_experiment01(config, repository):
@@ -40,7 +40,7 @@ def analyze_experiment01(config, repository):
                 raise ValueError(f'Incomplete run: {run_dir}')
             base = dict(experiment_id=run_dir.name,
                 algorithm=execution['algorithm'], algorithm_label=execution['algorithm_label'],
-                prng=execution.get('prng', 'pcg32'),
+                prng=execution.get('prng', 'pcg32'), uniform_mode=execution.get('uniform_mode', 'inline'),
                 N=execution['N'], H=execution['H'], T=execution['T'], seed=execution['seed'],
                 benchmark_sha256=execution['provenance']['benchmark_sha256'],
                 git_commit=execution['provenance'].get('git_commit'),
@@ -85,7 +85,7 @@ def analyze_experiment01(config, repository):
         speeds = np.asarray([row['throughput_samples_per_second'] for row in rows])
         reference = rows[0]
         performance_summary.append(dict(algorithm=key[0], N=key[1], H=key[2], T=key[3],
-            seed=key[4], benchmark_sha256=key[5], prng=key[6], algorithm_label=reference['algorithm_label'],
+            seed=key[4], benchmark_sha256=key[5], prng=key[6], uniform_mode=key[7], algorithm_label=reference['algorithm_label'],
             repetitions=len(rows), mean_throughput=float(np.mean(speeds)),
             median_throughput=float(np.median(speeds)),
             std_throughput=float(np.std(speeds, ddof=1)) if len(rows)>1 else 0.0,
@@ -113,7 +113,8 @@ def analyze_experiment01(config, repository):
             row.update({field:value for field,value in test.items() if field not in row})
         summary.append(row)
     expected = len(performance_summary)
-    if len(profile_map) != expected or len(validation_map) != expected:
+    if ((config.get('profiling', {}).get('enabled', False) and len(profile_map) != expected)
+            or (config['validation']['enabled'] and len(validation_map) != expected)):
         raise ValueError('Missing profile or validation result for one or more configurations')
     if any(row['repetitions'] != config['performance']['repetitions'] for row in performance_summary):
         raise ValueError('Incomplete performance repetitions')
@@ -124,7 +125,8 @@ def analyze_experiment01(config, repository):
         _write_csv(processed / filename, rows)
     primary = []
     selected_prng = config.get('prng', {}).get('type', 'pcg32')
-    selected_summary = [row for row in summary if row.get('prng', 'pcg32') == selected_prng]
+    selected_summary = [row for row in summary if row.get('prng', 'pcg32') == selected_prng
+                        and row.get('uniform_mode', 'inline') == config.get('uniform_mode', 'inline')]
     for n in config['algorithms']['basic']['layers']:
         row = {'N':n, 'prng':selected_prng}
         for label in ('basic','trapezoid'):
@@ -192,3 +194,45 @@ def analyze_experiment01(config, repository):
     (reports/'experiment_report.md').write_text('\n'.join(report)+'\n')
     return dict(summary=summary, performance=performance, profiles=profiling,
                 validation=validation, tails=tails, primary=primary)
+
+
+def uniform_speedups(executions):
+    """Pair complete performance runs with identical conditions and executable hash.
+
+    Missing pairs are omitted. Repetitions are aggregated by median throughput.
+    """
+    groups = {}
+    for run in executions:
+        result = run.get("benchmark_results", {})
+        if (run.get("status") != "successful" or run.get("mode") != "performance"
+                or result.get("complete", True) is not True or result.get("buffer_exhausted", False)):
+            continue
+        speed = result.get("throughput_samples_per_second")
+        if not isinstance(speed, (int, float)) or not np.isfinite(speed) or speed <= 0:
+            continue
+        key = (run["algorithm"], run["N"], run.get("H"), run.get("T"),
+               run["prng"], run["seed"], run["samples"], run["provenance"]["benchmark_sha256"])
+        mode = run.get("uniform_mode", "inline")
+        groups.setdefault(key, {}).setdefault(mode, []).append(speed)
+    comparisons = []
+    for key, modes in groups.items():
+        if "inline" in modes and "precomputed" in modes:
+            inline = statistics.median(modes["inline"])
+            precomputed = statistics.median(modes["precomputed"])
+            comparisons.append(dict(zip(("algorithm", "N", "H", "T", "prng", "seed", "samples", "benchmark_sha256"), key),
+                inline_throughput=inline, precomputed_throughput=precomputed, speedup=precomputed/inline))
+    return comparisons
+
+
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser(description="Compare complete inline/precomputed runner records")
+    parser.add_argument("--uniform-speedups", nargs="+", type=Path, required=True,
+                        help="Directories containing execution.json records (searched recursively)")
+    args = parser.parse_args()
+    records = []
+    for directory in args.uniform_speedups:
+        for path in directory.rglob("execution.json"):
+            if "_attempts" not in path.parts:
+                records.append(json.loads(path.read_text()))
+    print(json.dumps(uniform_speedups(records), indent=2, allow_nan=False))

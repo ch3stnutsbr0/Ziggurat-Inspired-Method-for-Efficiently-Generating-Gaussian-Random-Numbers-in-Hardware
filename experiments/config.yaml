@@ -1,3 +1,8 @@
+# Omission preserves inline sampling. Production precomputed buffers are exactly 2 GiB.
+uniform_mode: inline  # inline | precomputed
+uniform_buffer_size_gib: 2
+# uniform_buffer_size_bytes: 65536  # small correctness tests only
+
 prng:
   type: pcg32  # Also supports xoshiro256plus; omission defaults to pcg32.
 

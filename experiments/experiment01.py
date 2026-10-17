@@ -11,6 +11,7 @@ import shlex
 import shutil
 import subprocess
 import sys
+import tempfile
 
 import runner
 from utils import sha256_file, validate_config, write_json
@@ -34,6 +35,7 @@ def _run(parameters, kind, repetition, samples, repository, raw, extra=()):
         argv += ['--prng', parameters['prng']]
     if parameters['algorithm'] == 'trapezoid':
         argv += ['--head', str(parameters['H']), '--tail', str(parameters['T'])]
+    argv += runner.uniform_arguments(parameters)
     argv += ['--samples', str(samples), '--seed', str(parameters['seed'])]
     argv += list(extra)
     if kind == 'validation':
@@ -132,7 +134,7 @@ def preflight(config, repository, *, resume=False):
     # allocating validation binaries. This also catches unsupported C settings.
     if not report['errors']:
         for parameters in configurations:
-            argv = _run(parameters, 'performance', 0, 2, repository, raw)['argv']
+            argv = _run(dict(parameters, uniform_mode='inline'), 'performance', 0, 2, repository, raw)['argv']
             result = subprocess.run(argv, capture_output=True, text=True, cwd=repository)
             if result.returncode != 0:
                 report['errors'].append(f"Unsupported {parameters['parameter_id']}: {result.stderr.strip()}")
@@ -215,6 +217,11 @@ def _verify_validation_after_deletion(run, identity):
 
 
 def execute(config, repository, *, resume=False):
+    with tempfile.TemporaryDirectory(prefix="grng-uniform-") as cache_directory:
+        return _execute(config, repository, resume=resume, cache_directory=cache_directory)
+
+
+def _execute(config, repository, *, resume=False, cache_directory=None):
     report = preflight(config, repository, resume=resume)
     if report['status'] != 'valid':
         return report
@@ -258,7 +265,7 @@ def execute(config, repository, *, resume=False):
                 record = json.loads((directory / 'execution.json').read_text())
             else:
                 history = runner.archive_attempt(run, action, identity) if action['action'] in ('retry', 'refresh') else []
-                record = runner.execute_run(run, repository, provenance, history=history)
+                record = runner.execute_run(run, repository, provenance, history=history, cache_directory=cache_directory)
             if record['status'] != 'successful':
                 raise RuntimeError(record.get('error', 'Benchmark failed'))
             if run['kind'] == 'profiling':

@@ -1,0 +1,10 @@
+dimension,Classical,Trapezoidal
+Theoretical exactness,"Exact under ideal inputs, arithmetic, tables and acceptance/tail rules",Approximate fitted sampling geometry; no Gaussian correction
+Approximation error,No inherent layer-count error; practical numerical/PRNG effects remain,"Fitting, finite terminal support, numerical construction and PRNG effects"
+Acceptance/rejection,Gaussian boundary rejection and exact tail rejection,Rectangle/triangle component selection; no Gaussian rejection
+Layers N,Primarily efficiency and table size,"Efficiency, table size and approximation resolution"
+Head/tail refinement,Not applicable in evaluated implementation,"Recursive extreme-region subdivision, bounded configured depth"
+Complexity,Fast lookup path; variable rejection loops,Lookup/component arithmetic plus possible table descent; costly preprocessing
+PRNG requirements,53-bit uniforms; PCG32 or xoshiro256+,Same precision; more measured uniform calls/sample
+CPU throughput,Fastest E05: 211.280 Msamples/s at N256,Fastest E05: 180.896 Msamples/s at N256 H2/T4
+FPGA considerations,Tail math and restarts need hardware design,Bounded descent may help scheduling; memory/arithmetic/accuracy costs unmeasured
