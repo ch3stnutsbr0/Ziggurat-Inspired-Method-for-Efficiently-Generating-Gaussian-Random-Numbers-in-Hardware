@@ -78,7 +78,7 @@ def validate_config(config):
                 good.append(value)
         return good
 
-    if not mapping(config, "config", {"algorithms", "performance", "validation", "output_dir",
+    if not mapping(config, "config", {"algorithms", "performance", "validation", "output_dir", "results_root",
                                       "experiment_id", "profiling", "keep_validation_samples",
                                       "schedule_seed", "tail_thresholds", "normal_distribution", "prng", "uniform_mode", "uniform_buffer_size_gib", "uniform_buffer_size_bytes"}):
         return errors
@@ -179,6 +179,12 @@ def validate_config(config):
             errors.append(str(exc))
     if not enabled_modes:
         errors.append("modes: enable performance and/or validation explicitly")
+    if "results_root" in config:
+        root = config["results_root"]
+        if not isinstance(root, str) or not root.strip() or Path(root).is_absolute() or ".." in Path(root).parts or any(ord(c) < 32 for c in root):
+            errors.append("results_root: require a nonempty portable repository-relative path without parent traversal")
+        if "output_dir" in config or config.get("experiment_id") == "experiment_01":
+            errors.append("results_root: cannot combine with output_dir or Experiment 01 layout")
     output = config.get("output_dir", "experiments/results/raw")
     if not isinstance(output, str) or not output.strip() or any(ord(c) < 32 for c in output):
         errors.append("output_dir: require a nonempty path without control characters")
@@ -280,3 +286,13 @@ def validation_settings(config):
         raise ValueError("validation.chi_square.minimum_expected_count: require a positive finite number")
     return {"significance_level": float(alpha), "chi_square": {
         "bins": chi["bins"], "range": [float(x) for x in interval], "minimum_expected_count": float(minimum)}}
+
+
+def result_paths(config, repository):
+    """Resolve generic runner paths; existing output_dir/default behavior is retained."""
+    repository = Path(repository).resolve()
+    root = (repository / config.get("results_root", "experiments/results")).resolve()
+    raw = (root / "raw" if "results_root" in config else
+           (repository / config.get("output_dir", "experiments/results/raw")).resolve())
+    return {"root": root, "raw": raw, "processed": root / "processed",
+            "figures": root / "figures", "reports": raw / "_reports"}

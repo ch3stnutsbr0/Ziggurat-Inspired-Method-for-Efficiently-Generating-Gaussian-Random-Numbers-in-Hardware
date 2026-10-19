@@ -1,0 +1,46 @@
+# Environment verification profile, not a comprehensive statistical benchmark study.
+# Schedule is for future execution only; use --dry-run during setup.
+results_root: experiments/results/linux_ryzen2700x
+
+# Omission preserves inline sampling. Production precomputed buffers are exactly 2 GiB.
+uniform_mode: inline  # inline | precomputed
+uniform_buffer_size_gib: 2
+# uniform_buffer_size_bytes: 65536  # small correctness tests only
+
+prng:
+  type: pcg32  # Also supports xoshiro256plus; omission defaults to pcg32.
+
+# Smoke-test profile. Full Experiment 01 is in experiment_01.yaml.
+algorithms:
+  basic:
+    enabled: true
+    layers: [8]
+    seeds: [1]
+
+  trapezoid:
+    enabled: true
+    layers: [8]
+    heads: [0]
+    tails: [0]
+    seeds: [1]
+
+  trapezoid_refined:
+    enabled: true
+    layers: [8]
+    heads: [2]
+    tails: [4]
+    seeds: [1]
+
+performance:
+  enabled: true
+  samples: 1000000
+  repetitions: 3
+
+validation:
+  enabled: true
+  samples: 1000000
+  significance_level: 0.05
+  chi_square:
+    bins: 100
+    range: [-5.0, 5.0]
+    minimum_expected_count: 5

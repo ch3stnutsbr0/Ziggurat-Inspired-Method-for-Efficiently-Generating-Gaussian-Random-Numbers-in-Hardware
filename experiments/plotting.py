@@ -159,3 +159,30 @@ def plot_experiment01(root, analyzed=None):
     ax.legend(fontsize=7,ncol=2)
     _save(fig,figures/'figure_7_gaussian_tail_error')
     return sorted(str(path) for path in figures.glob('*.pdf'))
+
+
+def plot_runs(config, repository):
+    """Plot generic-runner timing rows from the configured isolated workspace."""
+    from utils import result_paths, validate_config
+    errors = validate_config(config)
+    if errors:
+        raise ValueError('; '.join(errors))
+    paths = result_paths(config, repository)
+    rows = _rows(paths['processed'] / 'performance_results.csv')
+    if not rows:
+        raise ValueError('No performance rows to plot; run analysis.py first')
+    fig, ax = plt.subplots(figsize=(9, 4))
+    ax.bar(range(len(rows)), [float(row['throughput_samples_per_second']) / 1e6 for row in rows])
+    ax.set_xticks(range(len(rows)), [row['experiment_id'] for row in rows], rotation=90, fontsize=7)
+    ax.set_ylabel('Million samples / second')
+    _save(fig, paths['figures'] / 'performance_repetitions')
+    return paths['figures']
+
+
+if __name__ == '__main__':
+    import argparse
+    from utils import load_config
+    parser = argparse.ArgumentParser(description='Plot generic-runner performance results')
+    parser.add_argument('--config', type=Path, required=True)
+    args = parser.parse_args()
+    print(plot_runs(load_config(args.config), Path(__file__).resolve().parents[1]))

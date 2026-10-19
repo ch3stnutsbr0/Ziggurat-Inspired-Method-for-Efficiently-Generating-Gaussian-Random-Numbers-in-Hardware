@@ -17,7 +17,7 @@ import re
 import shlex
 import shutil
 
-from utils import binary_statistics, sha256_file, validate_config, write_json
+from utils import result_paths, binary_statistics, sha256_file, validate_config, write_json
 
 MAX_PLANNED_RUNS = 100000
 
@@ -67,10 +67,7 @@ def uniform_arguments(parameters):
 def build_runs(config, configurations, repository):
     """Performance output is a Python runner destination, not a C output flag."""
     repository = Path(repository).resolve()
-    output = Path(config.get("output_dir", "experiments/results/raw"))
-    if not output.is_absolute():
-        output = repository / output
-    output = output.resolve()
+    output = result_paths(config, repository)["raw"]
     runs = []
     count = len(configurations) * sum(
         (config[mode].get("repetitions", 1) if mode == "performance" else 1)

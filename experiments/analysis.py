@@ -224,15 +224,50 @@ def uniform_speedups(executions):
     return comparisons
 
 
-if __name__ == "__main__":
+
+def analyze_runs(config, repository):
+    """Summarize generic-runner performance records using their saved schedule IDs.
+
+    Validation results remain in validation_results.csv, produced by --validate.
+    No samples are loaded and no statistical tests or benchmarks are executed.
+    """
+    from utils import result_paths, validate_config
+    from runner import build_runs, expand_configurations, verify_success
+    errors = validate_config(config)
+    if errors:
+        raise ValueError('; '.join(errors))
+    paths = result_paths(config, repository)
+    rows = []
+    for run in build_runs(config, expand_configurations(config), repository):
+        if run['mode'] != 'performance':
+            continue
+        record = json.loads((Path(run['output_directory']) / 'execution.json').read_text())
+        verify_success(run, record)
+        rows.append({**{key: run[key] for key in ('experiment_id', 'algorithm_label', 'N', 'H', 'T', 'seed', 'prng', 'repetition')},
+                     'benchmark_sha256': record['provenance']['benchmark_sha256'],
+                     **record['benchmark_results']})
+    if not rows:
+        raise ValueError('No scheduled performance results')
+    destination = paths['processed'] / 'performance_results.csv'
+    _write_csv(destination, rows)
+    return destination
+
+
+if __name__ == '__main__':
     import argparse
-    parser = argparse.ArgumentParser(description="Compare complete inline/precomputed runner records")
-    parser.add_argument("--uniform-speedups", nargs="+", type=Path, required=True,
-                        help="Directories containing execution.json records (searched recursively)")
+    from utils import load_config
+    parser = argparse.ArgumentParser(description='Summarize performance records without executing benchmarks')
+    mode = parser.add_mutually_exclusive_group(required=True)
+    mode.add_argument('--config', type=Path, help='Generic-runner YAML configuration')
+    mode.add_argument('--uniform-speedups', nargs='+', type=Path,
+                      help='Directories containing execution.json records (searched recursively)')
     args = parser.parse_args()
-    records = []
-    for directory in args.uniform_speedups:
-        for path in directory.rglob("execution.json"):
-            if "_attempts" not in path.parts:
-                records.append(json.loads(path.read_text()))
-    print(json.dumps(uniform_speedups(records), indent=2, allow_nan=False))
+    if args.config:
+        print(analyze_runs(load_config(args.config), Path(__file__).resolve().parents[1]))
+    else:
+        records = []
+        for directory in args.uniform_speedups:
+            for path in directory.rglob('execution.json'):
+                if '_attempts' not in path.parts:
+                    records.append(json.loads(path.read_text()))
+        print(json.dumps(uniform_speedups(records), indent=2, allow_nan=False))

@@ -305,9 +305,9 @@ def validate_existing(config, repository):
         raise ValueError("; ".join(errors))
     settings = validation_settings(config)
     repository = Path(repository).resolve()
-    raw = Path(config.get("output_dir", "experiments/results/raw"))
-    raw = (repository / raw).resolve() if not raw.is_absolute() else raw.resolve()
-    output = (repository / "experiments/results/processed").resolve()
+    from utils import result_paths
+    paths = result_paths(config, repository)
+    raw, output = paths["raw"], paths["processed"]
     if output.is_relative_to(raw) or raw.is_relative_to(output):
         raise ValueError("Processed output must be separate from the raw data tree")
     if not raw.is_dir():
