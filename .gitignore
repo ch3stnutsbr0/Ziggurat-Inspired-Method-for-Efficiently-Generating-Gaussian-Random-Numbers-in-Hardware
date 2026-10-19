@@ -2,3 +2,17 @@
 c/benchmark
 c/*.dSYM/
 c/*.csv
+
+# Python virtual environment
+.venv/
+
+# Generated development artifacts and isolated Linux results
+__pycache__/
+*.py[cod]
+/c/test_basic
+/c/test_basic_counters
+/c/test_prng_profile
+/c/benchmark_test
+/c/test_prng_selection
+/c/test_uniform_buffer
+/experiments/results/linux_ryzen2700x/
