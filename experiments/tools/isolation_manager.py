@@ -112,34 +112,55 @@ class Systemd:
 
 
 
+def task_identity(item, proc=Path('/proc')):
+    """Read lifetime/flags/cgroup for one numeric TID; never infer identity from PID alone."""
+    process=proc/str(item['pid']); thread=process/'task'/str(item['tid'])
+    fields=(thread/'stat').read_text().rsplit(')',1)[1].split()
+    leader=process/'stat'
+    if not leader.exists(): leader=process/'task'/str(item['pid'])/'stat'
+    process_start=leader.read_text().rsplit(')',1)[1].split()[19] if leader.exists() else None
+    group=thread/'cgroup'
+    if not group.exists(): group=process/'cgroup'
+    return {'start':fields[19], 'process_start':process_start,
+            'kernel_thread':bool(int(fields[6])&0x200000),
+            'cgroup':group.read_text().strip().split('::',1)[1]}
+
+
+def same_task(item, current):
+    return (str(item['start'])==current['start'] and
+            (item.get('process_start') is None or item['process_start']==current['process_start']))
+
+
 def affinity_snapshot(proc=Path('/proc'), getter=None):
     getter = os.sched_getaffinity if getter is None else getter
-    values, errors = [], []
+    values, kernels, errors = [], [], []
     for process in proc.glob('[0-9]*'):
-        if int(process.name)==os.getpid(): continue  # Supervisor affinity is managed separately.
+        if int(process.name)==os.getpid(): continue  # Supervisor is managed separately.
         try:
-            group=(process/'cgroup').read_text().strip().split('::',1)[1]
             for thread in (process/'task').iterdir():
                 try:
-                    text=(thread/'stat').read_text().rsplit(')',1)[1].split()
-                    if int(text[6])&0x200000: continue  # Never alter kernel-thread affinities.
-                    values.append({'pid':int(process.name),'tid':int(thread.name),'start':text[19],
-                                   'cgroup':group,'affinity':sorted(getter(int(thread.name)))})
+                    item={'pid':int(process.name),'tid':int(thread.name)}
+                    before=task_identity(item,proc)
+                    if before['kernel_thread']:
+                        kernels.append({**item,**before}); continue
+                    affinity=sorted(getter(item['tid']))
+                    if task_identity(item,proc)!=before:
+                        raise ValueError('Task lifetime/cgroup changed during affinity snapshot')
+                    values.append({**item,**before,'affinity':affinity})
                 except (FileNotFoundError,ProcessLookupError): pass
         except (FileNotFoundError,ProcessLookupError): pass
         except (OSError,ValueError,IndexError) as exc: errors.append(str(exc))
-    return {'tasks':values,'errors':errors[:20]}
+    return {'tasks':values,'kernel_threads':kernels,'errors':errors[:20]}
 
 
 def audit_affinities(snapshot, proc=Path('/proc'), getter=None):
     getter=os.sched_getaffinity if getter is None else getter
     conflicts=[]
     for item in snapshot.get('tasks',[]):
-        thread=proc/str(item['pid'])/'task'/str(item['tid'])
         try:
-            start=(thread/'stat').read_text().rsplit(')',1)[1].split()[19]
-            if start!=item['start']: continue  # PID/TID reuse, not the original thread.
-            group=(proc/str(item['pid'])/'cgroup').read_text().strip().split('::',1)[1]
+            current=task_identity(item,proc)
+            if not same_task(item,current) or current['kernel_thread']: continue
+            group=current['cgroup']
             actual=sorted(getter(item['tid']))
             if group!=item['cgroup'] or actual!=item['affinity']:
                 conflicts.append({'tid':item['tid'],'reason':'Original affinity/cgroup differs; no ambiguous administrator state overwritten',
@@ -255,7 +276,7 @@ def plan(state):
             'changes':changes,'reserved':[7,15],'benchmark_cpu':7,'housekeeping':sorted(housekeeping),
             'scope':'Runtime systemd CPU placement constraints, not exclusive scheduler/IRQ isolation',
             'partition':'No isolated partition created; unsupported/unverified hierarchy is never assumed exclusive',
-            'frequency_writes':[], 'state':state}
+            'frequency_writes':[], 'affinity_restore_version':1, 'state':state}
 
 
 def effective_verify(data, root=CGROUP, proc_root=Path('/proc'), getter=None):
@@ -309,11 +330,13 @@ def apply(data, backend, path, cancelled=None):
         durable(path,data)
 
 
-def restore(data, backend, checkpoint=None):
+def restore(data, backend, checkpoint=None, blocked_units=()):
     errors, restored = [], []
     for change in reversed(data['changes']):
         if change['phase']=='untouched': continue
         try:
+            if change['unit'] in blocked_units:
+                raise ValueError('Task affinity conflict/failure; preserving this unit until manual review')
             if not UNIT.fullmatch(change['unit']): raise ValueError('Invalid recorded unit name')
             live = backend.show(change['unit']).get('AllowedCPUs','')
             if change['phase']=='intent':
@@ -341,6 +364,158 @@ def restore(data, backend, checkpoint=None):
             'semantics':'Original AllowedCPUs values restored through systemd API',
             'runtime_override_residue_possible':True,
             'note':'Generated /run property drop-ins/controller enablement are not erased with broad revert; no persistent /etc changes'}
+
+
+def task_effective_cpus(group, root=CGROUP):
+    relative=Path(group.lstrip('/'))
+    if '..' in relative.parts: raise ValueError('Invalid task cgroup path')
+    node=root/relative
+    if not node.is_dir(): raise ValueError('Task cgroup is unavailable')
+    while True:
+        try:
+            value=cpus((node/'cpuset.cpus.effective').read_text())
+            if not value: raise ValueError('Task effective cpuset is empty')
+            return value
+        except FileNotFoundError:
+            if node==root: raise
+            node=node.parent  # cpuset disabled at this level: inherit the ancestor.
+
+
+def restore_cpu_state(data, backend, checkpoint, proc=Path('/proc'), root=CGROUP,
+                      getter=None, setter=None):
+    """Restore unit constraints, then surviving userspace TIDs; same path for recovery.
+
+    Recognize only original or cpuset-projected masks. Observable admin changes
+    block rollback of their parent unit, avoiding another implicit affinity reset.
+    Numeric sched_setaffinity has no atomic identity/CAS interface on Linux5.15:
+    check lifetime/cgroup/value immediately before and after, and require no
+    concurrent administrator affinity edits during this short restore window.
+    """
+    getter=os.sched_getaffinity if getter is None else getter
+    setter=os.sched_setaffinity if setter is None else setter
+    changes={c['unit']:c for c in data['changes']}
+    snapshot=data['state'].get('task_affinities',{})
+    ledger=data.setdefault('task_affinity_restoration',{'entries':{},'errors':[]})
+    blocked=set()
+    cpuset_modified=bool(data.get('slice_cpu_intent') or
+                         any(c['phase']!='untouched' for c in changes.values()))
+
+    def live(task):
+        identity=task_identity(task,proc)
+        if not same_task(task,identity): return identity,None,'reused_identity'
+        if identity['kernel_thread']: return identity,None,'kernel_thread'
+        affinity=set(getter(task['tid']))
+        if task_identity(task,proc)!=identity:
+            raise ValueError('Task lifetime/cgroup changed during affinity observation')
+        return identity,affinity,None
+
+    def conflict(entry, reason, current_group=None):
+        entry.update(state='conflicting',reason=reason)
+        blocked.add(entry['unit'])
+        if current_group: blocked.add(current_group.strip('/').split('/')[0])
+
+    # Capture before restoring cpusets: a reset could otherwise hide an admin edit.
+    for task in snapshot.get('tasks',[])+snapshot.get('kernel_threads',[]):
+        key=f"{task['pid']}:{task['tid']}:{task['start']}:{task.get('process_start')}"
+        unit=task['cgroup'].strip('/').split('/')[0]
+        entry=ledger['entries'].setdefault(key,{'task':task,'unit':unit,'state':'pending','attempts':[]})
+        try:
+            identity,current,skip=live(task)
+            if skip: entry.update(state='skipped',reason=skip); continue
+            entry['observed_affinity']=sorted(current)
+            entry['observed_cgroup']=identity['cgroup']
+            if identity['cgroup']!=task['cgroup']:
+                conflict(entry,'Task changed cgroup; preserving administrator placement',identity['cgroup']); continue
+            if unit not in changes:
+                entry.update(state='skipped',reason='outside_modified_units'); continue
+            original=set(task['affinity'])
+            if not original: raise ValueError('Original affinity is empty')
+            effective=task_effective_cpus(identity['cgroup'],root)
+            expected=[original,original & effective,effective]
+            if 'before_constraints' in entry: expected.append(set(entry['before_constraints']))
+            if entry['state'] in ('conflicting','restored') and current!=original:
+                conflict(entry,'Affinity changed after conflict/verified restoration; not overwritten'); continue
+            if (not cpuset_modified and current!=original) or current not in expected or (data.get('affinity_restore_version')!=1 and
+                                          'before_constraints' not in entry and current!=original):
+                conflict(entry,'Affinity does not match original or a journaled cpuset projection'); continue
+            entry.setdefault('before_constraints',sorted(current))
+            entry.update(state='pending',reason='awaiting_constraint_restoration')
+        except (FileNotFoundError,ProcessLookupError):
+            entry.update(state='skipped',reason='exited')
+            if entry['attempts'] and entry['attempts'][-1]['outcome']=='intent':
+                entry['attempts'][-1]['outcome']='exited'
+        except (OSError,ValueError,IndexError,KeyError) as exc:
+            entry.update(state='failed',reason=str(exc)); blocked.add(unit)
+    if snapshot.get('errors'):
+        ledger['errors']=list(snapshot['errors']); blocked.update(changes)
+    checkpoint()  # Durable baseline, conflicts and intent BEFORE property restoration.
+    result=restore(data,backend,checkpoint,blocked_units=blocked)
+    restored_units=set(result['restored_units'])
+
+    for entry in ledger['entries'].values():
+        if entry['state']!='pending': continue
+        task=entry['task']; unit=entry['unit']; original=set(task['affinity'])
+        try:
+            identity,current,skip=live(task)
+            if skip: entry.update(state='skipped',reason=skip); continue
+            entry['observed_affinity']=sorted(current)
+            entry['observed_cgroup']=identity['cgroup']
+            if identity['cgroup']!=task['cgroup']:
+                conflict(entry,'Task cgroup changed during constraint restoration',identity['cgroup']); continue
+            if unit not in restored_units:
+                change=changes[unit]
+                # Untouched properties can still have had cpuset-enable side effects.
+                if (change['phase']!='untouched' or
+                    backend.show(unit).get('AllowedCPUs','')!=change['original'] or
+                    backend.provenance(unit)!=change['original_provenance']):
+                    entry.update(state='blocked',reason='Unit constraints not verified restored'); continue
+            if current==original:
+                entry.update(state='restored' if entry['attempts'] else 'skipped',reason='original_affinity_verified')
+                if entry['attempts']: entry['attempts'][-1]['outcome']='verified'
+                continue
+            effective=task_effective_cpus(identity['cgroup'],root)
+            expected=[set(entry['before_constraints']),effective,original & effective]
+            if current not in expected or not original<=effective:
+                conflict(entry,'Unexpected affinity/effective cpuset after restoring constraints'); continue
+            attempt={'before':sorted(current),'target':sorted(original),'outcome':'intent',
+                     'monotonic_ns':time.monotonic_ns()}
+            entry['attempts'].append(attempt); entry['state']='intent'
+            checkpoint()  # Write-ahead per-TID intent also survives an interrupted recovery.
+            latest,compare,skip=live(task)
+            if skip: entry.update(state='skipped',reason=skip); attempt['outcome']=skip; continue
+            entry['observed_before_write']=sorted(compare)
+            if latest!=identity or compare!=current:
+                conflict(entry,'Identity/cgroup/affinity changed before task write'); attempt['outcome']='conflicting'; continue
+            setter(task['tid'],original)  # Per-thread API, never process-wide taskset.
+            after,observed,skip=live(task)
+            if skip: entry.update(state='skipped',reason=skip); attempt['outcome']=skip; continue
+            attempt['after']=sorted(observed)
+            if after!=identity or observed!=original:
+                raise ValueError('Task identity/cgroup or affinity readback mismatch')
+            entry.update(state='restored',reason='original_affinity_verified')
+            attempt['outcome']='verified'
+        except (FileNotFoundError,ProcessLookupError):
+            entry.update(state='skipped',reason='exited')
+            if entry['attempts'] and entry['attempts'][-1]['outcome']=='intent':
+                entry['attempts'][-1]['outcome']='exited'
+        except (OSError,ValueError,IndexError,KeyError) as exc:
+            entry.update(state='failed',reason=str(exc))
+            if entry['attempts']: entry['attempts'][-1]['outcome']='failed'
+        finally:
+            checkpoint()
+    entries=list(ledger['entries'].values())
+    affinity={'attempted':[e for e in entries if e['attempts']],
+              'successful':[e for e in entries if e['state']=='restored'],
+              'skipped':[e for e in entries if e['state']=='skipped'],
+              'conflicting':[e for e in entries if e['state']=='conflicting'],
+              'failed':[e for e in entries if e['state'] in ('failed','blocked','intent')],
+              'errors':ledger['errors']}
+    affinity['verified']=not (affinity['conflicting'] or affinity['failed'] or affinity['errors'])
+    result['affinity_restoration']=affinity
+    result['affinity_audit']=audit_affinities(snapshot,proc,getter)
+    result['verified']=result['verified'] and affinity['verified'] and result['affinity_audit']['verified']
+    checkpoint()
+    return result
 
 
 def recv_request(sock):
@@ -512,6 +687,30 @@ def signal_group(pid, signum):
     try: os.killpg(pid,signum)
     except ProcessLookupError: pass
 
+def open_session_coordination_lock(session_root, account):
+    """Open the user-owned lock, creating it safely when no controller has yet run."""
+    path=Path(session_root)/'.controller.lock'
+    flags=os.O_RDWR|os.O_NOFOLLOW|os.O_NONBLOCK
+    created=False
+    try:
+        fd=os.open(path,flags|os.O_CREAT|os.O_EXCL,0o600)
+        created=True
+    except FileExistsError:
+        fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK)
+    try:
+        if created:
+            # O_EXCL gives us this new inode. Assign it to the controller user
+            # before exposing its descriptor or accepting it as the lock.
+            os.fchown(fd,account.pw_uid,account.pw_gid)
+        info=os.fstat(fd)
+        if not stat.S_ISREG(info.st_mode) or info.st_uid!=account.pw_uid:
+            raise ValueError('Invalid user coordination lock')
+        fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        return fd
+    except BaseException:
+        os.close(fd)
+        raise
+
 def activate(args, backend):
     account = pwd.getpwnam(args.user)
     if account.pw_uid==0: raise ValueError('Benchmark user must not be root')
@@ -529,10 +728,7 @@ def activate(args, backend):
                 controller_start=None,trace_instance=None, trace_requested=args.monitor_mode=='diagnostic',
                 session_timeout_seconds=getattr(args,'session_timeout',None),controller_startup_timeout_seconds=60)
     journal = STATE/(ident+'.json')
-    lockfd = os.open(args.session_root/'.controller.lock',os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK)
-    info = os.fstat(lockfd)
-    if not stat.S_ISREG(info.st_mode) or info.st_uid!=account.pw_uid: raise ValueError('Invalid user coordination lock')
-    fcntl.flock(lockfd,fcntl.LOCK_EX|fcntl.LOCK_NB)
+    lockfd = open_session_coordination_lock(args.session_root,account)
     original_affinity = sorted(os.sched_getaffinity(0))
     data['supervisor_original_affinity']=original_affinity
     durable(journal,data)
@@ -553,6 +749,7 @@ def activate(args, backend):
         data['slice_start_intent']=True; durable(journal,data)
         if signals: raise ValueError('Isolation activation cancelled before slice creation')
         backend.run(['start',prefix+'.slice'])
+        data['slice_cpu_intent']=True; durable(journal,data)
         backend.set(prefix+'.slice','7')
         data['slice_provenance']=backend.provenance(prefix+'.slice')
         durable(journal,data)
@@ -683,10 +880,7 @@ def activate(args, backend):
                     if trace_fd is not None: os.close(trace_fd); trace_fd=None
                     instance.rmdir()
                 except (OSError,ValueError) as exc: cleanup_errors.append('Trace cleanup: '+str(exc))
-            restoration=restore(data,backend,lambda:durable(journal,data)) if not cleanup_errors else {'verified':False,'errors':cleanup_errors,'blocked':'Owned workload/trace teardown must be verified before restoring constraints'}
-            affinity=audit_affinities(data['state'].get('task_affinities',{}))
-            restoration['affinity_audit']=affinity
-            restoration['verified']=restoration['verified'] and affinity['verified']
+            restoration=restore_cpu_state(data,backend,lambda:durable(journal,data)) if not cleanup_errors else {'verified':False,'errors':cleanup_errors,'blocked':'Owned workload/trace teardown must be verified before restoring constraints'}
             data.update(restoration=restoration,status='restored' if restoration['verified'] else 'restore_failed',exit_status=rc)
             durable(journal,data)
             try:
@@ -820,10 +1014,7 @@ def main():
                         (instance/'tracing_on').write_text('0\n'); instance.rmdir()
                 if args.acknowledge_unchanged_original:
                     acknowledge_original_intents(data,backend); durable(path,data)
-                restoration=restore(data,backend,lambda:durable(path,data))
-                affinity=audit_affinities(data['state'].get('task_affinities',{}))
-                restoration['affinity_audit']=affinity
-                restoration['verified']=restoration['verified'] and affinity['verified']
+                restoration=restore_cpu_state(data,backend,lambda:durable(path,data))
             finally: os.close(coordination)
             data.update(restoration=restoration,status='restored' if restoration['verified'] else 'restore_failed')
             durable(path,data); print(json.dumps(restoration,indent=2)); return 0 if restoration['verified'] else 1

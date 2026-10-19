@@ -189,6 +189,227 @@ class IsolationTests(unittest.TestCase):
             for fd in fds: os.close(fd)
 
 
+class AffinityRestorationTests(unittest.TestCase):
+    def setUp(self):
+        IsolationTests.setUp(self)
+        self.affinities={}; self.setter_calls=[]
+        original_set=self.backend.set
+        def set_property(unit,value):
+            original_set(unit,value)
+            for tid in self.affinities:
+                path=self.proc/'99000'/'task'/str(tid)/'stat'
+                if path.exists() and unit=='user.slice' and not int(path.read_text().rsplit(')',1)[1].split()[6])&0x200000:
+                    self.affinities[tid]=iso.cpus(value or '0-15')
+        self.backend.set=set_property
+
+    def task(self,tid=99001,original=(0,),kernel=False):
+        process=self.proc/'99000'; thread=process/'task'/str(tid)
+        thread.mkdir(parents=True,exist_ok=True)
+        fields=['S']+['0']*45; fields[19]='100'; fields[6]='0'
+        (process/'stat').write_text('99000 (leader) '+' '.join(fields))
+        (process/'cgroup').write_text('0::/user.slice')
+        fields[19]=str(tid); fields[6]=str(0x200000 if kernel else 0)
+        (thread/'stat').write_text(f'{tid} (worker) '+' '.join(fields))
+        self.affinities[tid]=set(original)
+        return thread/'stat'
+
+    def getter(self,tid): return set(self.affinities[tid])
+
+    def setter(self,tid,value):
+        self.assertEqual(self.backend.values['user.slice']['AllowedCPUs'],'')
+        saved=json.loads(self.path.read_text())['task_affinity_restoration']['entries'].values()
+        self.assertTrue(any(e['task']['tid']==tid and e['state']=='intent' for e in saved))
+        self.setter_calls.append((tid,set(value))); self.affinities[tid]=set(value)
+
+    def prepare(self):
+        data=iso.plan(iso.inspect(self.backend,self.cg,self.cpu,self.proc))
+        data['state']['task_affinities']=iso.affinity_snapshot(self.proc,self.getter)
+        iso.apply(data,self.backend,self.path)
+        return data
+
+    def restore(self,data,**kwargs):
+        return iso.restore_cpu_state(data,self.backend,lambda:iso.durable(self.path,data),
+                                     self.proc,self.cg,kwargs.get('getter',self.getter),kwargs.get('setter',self.setter))
+
+    def test_narrow_thread_affinity_is_restored_after_constraints(self):
+        self.task(); data=self.prepare()
+        self.assertEqual(self.affinities[99001],set(range(16))-{7,15})
+        result=self.restore(data)
+        self.assertTrue(result['verified'],result)
+        self.assertEqual(self.setter_calls,[(99001,{0})])
+        self.assertEqual(self.affinities[99001],{0})
+        self.assertEqual(len(result['affinity_restoration']['successful']),1)
+        self.assertTrue(result['affinity_audit']['verified'])
+        self.assertTrue(all(v['AllowedCPUs']=='' for v in self.backend.values.values()))
+        self.assertTrue(self.restore(data)['verified'])
+        self.assertEqual(len(self.setter_calls),1)
+
+    def test_exited_thread_is_skipped(self):
+        path=self.task(); data=self.prepare(); path.unlink()
+        result=self.restore(data)
+        self.assertTrue(result['verified'],result)
+        self.assertFalse(self.setter_calls)
+        self.assertEqual(result['affinity_restoration']['skipped'][0]['reason'],'exited')
+
+    def test_reused_tid_is_not_modified(self):
+        path=self.task(); data=self.prepare()
+        fields=path.read_text().rsplit(')',1)[1].split(); fields[19]='200'
+        path.write_text('99001 (reused) '+' '.join(fields))
+        result=self.restore(data)
+        self.assertTrue(result['verified'],result)
+        self.assertFalse(self.setter_calls)
+        self.assertEqual(result['affinity_restoration']['skipped'][0]['reason'],'reused_identity')
+
+    def test_reused_process_identity_is_not_modified(self):
+        self.task(); data=self.prepare(); path=self.proc/'99000/stat'
+        path.write_text(path.read_text().replace('100','101'))
+        result=self.restore(data)
+        self.assertTrue(result['verified'],result)
+        self.assertFalse(self.setter_calls)
+
+    def test_kernel_thread_is_never_modified(self):
+        self.task(original=(7,),kernel=True); data=self.prepare()
+        self.assertFalse(data['state']['task_affinities']['tasks'])
+        result=self.restore(data)
+        self.assertTrue(result['verified'],result)
+        self.assertFalse(self.setter_calls)
+        self.assertEqual(self.affinities[99001],{7})
+        self.assertEqual(result['affinity_restoration']['skipped'][0]['reason'],'kernel_thread')
+
+    def test_admin_affinity_conflict_preserves_mask_and_parent_constraint(self):
+        self.task(); data=self.prepare(); self.affinities[99001]={2}
+        result=self.restore(data)
+        self.assertFalse(result['verified'])
+        self.assertFalse(self.setter_calls)
+        self.assertEqual(self.affinities[99001],{2})
+        self.assertNotEqual(self.backend.values['user.slice']['AllowedCPUs'],'')
+        self.assertEqual(len(result['affinity_restoration']['conflicting']),1)
+        self.assertEqual(self.backend.values['system.slice']['AllowedCPUs'],'')
+
+    def test_no_cpuset_mutation_does_not_justify_overwriting_admin_mask(self):
+        self.task()
+        data=iso.plan(iso.inspect(self.backend,self.cg,self.cpu,self.proc))
+        data['state']['task_affinities']=iso.affinity_snapshot(self.proc,self.getter)
+        self.affinities[99001]=set(range(16))
+        result=self.restore(data)
+        self.assertFalse(result['verified'])
+        self.assertFalse(self.setter_calls)
+        self.assertFalse(self.backend.calls)
+        self.assertEqual(self.affinities[99001],set(range(16)))
+
+    def test_partial_task_failure_does_not_prevent_other_task_restoration(self):
+        self.task(); self.task(99002,(1,)); data=self.prepare()
+        def setter(tid,mask):
+            if tid==99001: raise PermissionError('fixture affinity permission denied')
+            self.setter(tid,mask)
+        result=self.restore(data,setter=setter)
+        self.assertFalse(result['verified'])
+        self.assertEqual(self.affinities[99002],{1})
+        self.assertEqual(len(result['affinity_restoration']['failed']),1)
+        self.assertEqual(len(result['affinity_restoration']['successful']),1)
+        self.assertEqual(len(result['affinity_restoration']['attempted']),2)
+
+    def test_wrong_final_affinity_fails_readback_verification(self):
+        self.task(); data=self.prepare()
+        result=self.restore(data,setter=lambda tid,mask:None)
+        self.assertFalse(result['verified'])
+        self.assertIn('readback mismatch',result['affinity_restoration']['failed'][0]['reason'])
+
+    def test_inaccessible_task_is_failed_and_not_modified(self):
+        self.task(); data=self.prepare()
+        def denied(tid): raise PermissionError('inaccessible fixture task')
+        result=self.restore(data,getter=denied)
+        self.assertFalse(result['verified'])
+        self.assertFalse(self.setter_calls)
+        self.assertIn('inaccessible',result['affinity_restoration']['failed'][0]['reason'])
+
+    def test_admin_change_between_intent_and_task_write_is_not_overwritten(self):
+        self.task(); data=self.prepare()
+        def checkpoint():
+            iso.durable(self.path,data)
+            if any(e['state']=='intent' for e in data.get('task_affinity_restoration',{}).get('entries',{}).values()):
+                self.affinities[99001]={3}
+        result=iso.restore_cpu_state(data,self.backend,checkpoint,self.proc,self.cg,self.getter,self.setter)
+        self.assertFalse(result['verified'])
+        self.assertFalse(self.setter_calls)
+        self.assertEqual(self.affinities[99001],{3})
+
+    def test_crash_after_affinity_write_is_idempotently_recovered(self):
+        self.task(); data=self.prepare()
+        def crash(tid,mask):
+            self.setter(tid,mask)
+            raise RuntimeError('fixture crash after setter')
+        with self.assertRaisesRegex(RuntimeError,'crash after setter'):
+            self.restore(data,setter=crash)
+        self.assertEqual(self.affinities[99001],{0})
+        recovered=json.loads(self.path.read_text())
+        self.assertTrue(self.restore(recovered)['verified'])
+        self.assertEqual(len(self.setter_calls),1)
+
+    def test_exit_during_affinity_attempt_is_recorded(self):
+        path=self.task(); data=self.prepare()
+        def exited(tid,mask):
+            path.unlink(); raise ProcessLookupError('fixture exit')
+        result=self.restore(data,setter=exited)
+        self.assertTrue(result['verified'],result)
+        entry=result['affinity_restoration']['skipped'][0]
+        self.assertEqual(entry['attempts'][-1]['outcome'],'exited')
+
+    def test_snapshot_identity_race_reports_incomplete_capture(self):
+        path=self.task()
+        def reused(tid):
+            fields=path.read_text().rsplit(')',1)[1].split(); fields[19]='200'
+            path.write_text('99001 (reused) '+' '.join(fields))
+            return {0}
+        snapshot=iso.affinity_snapshot(self.proc,reused)
+        self.assertFalse(snapshot['tasks'])
+        self.assertTrue(snapshot['errors'])
+
+    def test_legacy_journal_does_not_guess_nonoriginal_affinity(self):
+        self.task(); data=self.prepare(); data.pop('affinity_restore_version')
+        result=self.restore(data)
+        self.assertFalse(result['verified'])
+        self.assertFalse(self.setter_calls)
+        self.assertTrue(result['affinity_restoration']['conflicting'])
+
+    def test_parent_configuration_conflict_blocks_task_write(self):
+        self.task(); data=self.prepare()
+        self.backend.files['user.slice']['admin.conf']='changed'
+        result=self.restore(data)
+        self.assertFalse(result['verified'])
+        self.assertFalse(self.setter_calls)
+        self.assertEqual(result['affinity_restoration']['failed'][0]['state'],'blocked')
+
+    def test_interrupted_task_intent_is_resumed_by_orphan_recovery_cli(self):
+        import argparse,pwd
+        from types import SimpleNamespace
+        self.task(); data=self.prepare()
+        ident='12345678-1234-5678-1234-567812345678'
+        state=self.base/'state'; state.mkdir()
+        sessions=self.base/'sessions'; sessions.mkdir(); (sessions/'.controller.lock').touch()
+        data.update(id=ident,owned_units=[],boot_id=iso.read(Path('/proc/sys/kernel/random/boot_id')),
+                    user=pwd.getpwuid(os.getuid()).pw_name,session_root=str(sessions),controller_pid=None)
+        self.path=state/(ident+'.json')
+        crashed=[False]
+        def checkpoint():
+            iso.durable(self.path,data)
+            if not crashed[0] and any(e['state']=='intent' for e in data.get('task_affinity_restoration',{}).get('entries',{}).values()):
+                crashed[0]=True; raise RuntimeError('fixture supervisor crash before affinity write')
+        with self.assertRaisesRegex(RuntimeError,'fixture supervisor crash'):
+            iso.restore_cpu_state(data,self.backend,checkpoint,self.proc,self.cg,self.getter,self.setter)
+        self.assertEqual(self.affinities[99001],set(range(16)))
+        restore=iso.restore_cpu_state
+        def recover(saved,backend,save):
+            return restore(saved,backend,save,self.proc,self.cg,self.getter,self.setter)
+        with patch.object(iso,'STATE',state),patch.object(iso,'Systemd',return_value=self.backend),patch.object(iso,'trusted'),patch.object(iso.os,'geteuid',return_value=0),patch.object(iso.sys,'flags',SimpleNamespace(isolated=1)),patch.object(iso.sys,'argv',['isolation_manager.py','recover','--approve-isolation','--journal',ident]),patch.object(iso,'restore_cpu_state',side_effect=recover) as call,contextlib.redirect_stdout(io.StringIO()):
+            self.assertEqual(iso.main(),0)
+            call.assert_called_once()
+        saved=json.loads(self.path.read_text())
+        self.assertEqual(saved['status'],'restored')
+        self.assertTrue(saved['restoration']['verified'])
+        self.assertEqual(self.affinities[99001],{0})
+
+
 class MonitoringTests(unittest.TestCase):
     def test_proc_stat_serialization_and_deltas(self):
         fields=['S']+['0']*49
@@ -289,7 +510,9 @@ class ActivationFixtureTests(unittest.TestCase):
     def test_approved_supervisor_mock_cycle(self):
         import argparse,pwd
         state_dir=self.base/'state'; state_dir.mkdir()
-        sessions=self.base/'sessions'; sessions.mkdir(); (sessions/'.controller.lock').touch()
+        # Regression: on the first activation the root supervisor runs before
+        # benchmark_session, so no process has created this coordination file.
+        sessions=self.base/'sessions'; sessions.mkdir()
         backend=self.backend
         def run(args,check=True):
             if args[0]=='start':
@@ -314,6 +537,9 @@ class ActivationFixtureTests(unittest.TestCase):
             self.assertEqual(iso.activate(args,backend),5)
         self.assertIn('--mode',launch.call_args.args[0])
         self.assertIn('bios',launch.call_args.args[0])
+        lock=sessions/'.controller.lock'
+        self.assertTrue(lock.is_file())
+        self.assertEqual(lock.stat().st_uid,os.getuid())
         journal=json.loads(next(state_dir.glob('*.json')).read_text())
         self.assertTrue(journal['restoration']['verified'],journal['restoration'])
         self.assertTrue(all(info['AllowedCPUs']=='' for info in backend.values.values()))

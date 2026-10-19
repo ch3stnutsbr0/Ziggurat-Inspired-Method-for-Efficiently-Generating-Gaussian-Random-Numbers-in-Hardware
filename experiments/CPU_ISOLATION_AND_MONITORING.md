@@ -159,11 +159,13 @@ Priority is FAIL, then WARNING, then UNVERIFIED, then PASS; warning reports reta
 
 The root supervisor takes both a private global flock and the existing user workspace coordination lock before mutations. Its child inherits the locked descriptor, preventing overlapping cooperating sessions even if the supervisor unexpectedly disappears while the controller remains alive. Existing legacy frequency sessions use the same workspace lock but are not part of this workflow. Other administrators/services can still make changes independently; these cannot be globally prevented by an advisory lock.
 
-Before modifying any resource property, the durable journal records all original AllowedCPUs/effective masks, configuration-file hashes/provenance, known userspace thread affinities/cgroup paths/start identities, root-task information and the supervisor's own original affinity. Userspace threads explicitly pinned exclusively to reserved CPUs cause refusal instead of silent widening. Kernel-thread affinities are never written. The supervisor changes only its own affinity to housekeeping and restores it on exit.
+Before modifying any resource property, the durable journal records all original AllowedCPUs/effective masks, configuration-file hashes/provenance, known userspace thread affinities/cgroup paths/start identities, root-task information and the supervisor's own original affinity. Userspace threads explicitly pinned exclusively to reserved CPUs cause refusal instead of silent widening. Kernel-thread affinities are never written. The supervisor moves its own affinity to housekeeping and restores it on exit; userspace task rollback is described below.
 
 Each property has intent/applied/restoration phases fsynced around API operations. Restoration compares the current value and configuration provenance against the session's verified expected state. If another administrator changes a property or adds/edits related drop-ins, that unit is not overwritten. Restoration can proceed for unaffected units but reports a conflict. An interrupted API call without verified resulting provenance requires manual review rather than a guessed rollback. PID/TID start identities prevent treating reused IDs as original tasks.
 
-Original resource-control values are restored via the supported systemd API and checked. Known surviving userspace affinities/cgroup paths are audited afterward. If a kernel update of the cpuset or an external administrator leaves a thread affinity different from its original value, the tool does **not** blindly write an ambiguous per-thread affinity: restoration is marked unverified/conflicted for review. New tasks have no original snapshot; their requested affinity is not invented. This conservative audit is intentionally stricter than merely resetting top-level masks and must be tested on the real kernel after approval.
+Normal teardown and orphan recovery share `restore_cpu_state()`. It durably captures observed task affinities before resetting cpusets, restores unit constraints first, then restores surviving userspace threads with `os.sched_setaffinity(TID, original_mask)`. Process/thread start times, kernel flags, cgroup, expected cpuset projections and immediate pre-write/readback checks guard every attempt. Observable administrator changes block rollback of their parent unit instead of being erased by a cpuset reset. The journal and restoration report record attempted, successful, skipped, conflicting and failed task operations; a mismatch never counts as success. New tasks have no original affinity snapshot; exited/reused identities and kernel threads are skipped. The first live smoke-test result is documented in `CPU_ISOLATION_MILESTONE.md`.
+
+Do not make concurrent administrator affinity edits during the test or recovery. An intentional edit to exactly the expected projected mask cannot be distinguished from a kernel-induced change. Linux5.15 has no atomic start-time/affinity compare-and-set syscall for numeric TIDs; immediate checks reduce but cannot eliminate the exit/reuse/edit race around the syscall. SIGKILL, power loss and inaccessible tasks can still require manual review. Conflicted parent restrictions may intentionally remain active until resolved; recovery never blindly overwrites that state.
 
 Generated runtime property drop-ins/controller enablement may remain in `/run` after semantic restoration. This is explicitly reported by runtime_override_residue_possible; the tool does not erase broad administrator-owned runtime configuration with systemctl revert. No /etc configuration or boot-persistent state is installed by activation. If exact runtime-file cleanup is required, review the journal/provenance and plan a separate selective administrative cleanup; do not delete unrelated overrides. This implementation certifies original resource-property semantics when verified, not byte-for-byte absence of all runtime bookkeeping.
 
@@ -458,9 +460,11 @@ timeout 60s .venv/bin/python -B -m unittest discover -s experiments/tests -p tes
 
 All tests remain fixture/mock/harmless-subprocess checks with bounded subprocess waits;
 the 25-second probe is **not** run by the tests (only its help/parser is exercised).
-The read-only diagnostic interval is not an isolation test. Current recommendation:
-**NO-GO now; conditional first-test review after unrestricted evidence and explicit
-administrative authorization. Formal RNG benchmarking remains out of scope.**
+The read-only diagnostic interval is not an isolation test. A subsequent harmless
+live smoke test verified workload placement on CPU 7 and restoration of all ten
+modified systemd units; see `CPU_ISOLATION_MILESTONE.md`. Its environmental quality
+was WARNING and scheduler interference remained UNVERIFIED. Formal RNG benchmarking
+and fixed-frequency verification remain separate work.
 
 Files added in this readiness extension: `tools/isolation_readiness.py`,
 `tools/isolation_probe.py`, `tests/test_isolation_readiness.py`, and the captured
@@ -468,6 +472,7 @@ Files added in this readiness extension: `tools/isolation_readiness.py`,
 shared CPU helper, two prior test modules and the two protocol documents were
 updated. `frequency_control.py`, RNG/PRNG sources, YAML schedules and historical
 results were preserved. SHA256 verification found all 5,444 previously recorded
-result files unchanged. The final focused suite contains 66 tests: 29 existing
-isolation/monitor tests, 21 readiness regressions and 16 session-controller tests.
-These results do not establish live privileged activation or restoration success.
+result files unchanged. The focused suite now contains 83 passing tests: 46 isolation/affinity/monitor
+tests, 21 readiness regressions and 16 session-controller tests. These fixture tests
+are supplemented by the single live smoke test described in `CPU_ISOLATION_MILESTONE.md`;
+they do not establish complete scheduler or interrupt isolation.
