@@ -1,0 +1,73 @@
+{
+  "algorithm": "trapezoid",
+  "N": 64,
+  "H": 0,
+  "T": 0,
+  "prng": "xoshiro256plus",
+  "seed": 1,
+  "samples": 33554432,
+  "stream_bytes": 268435456,
+  "stream_sha256": "da721a95a118de460ed4e946704619348a2f13de090801788f6ebf8eebae4b3a",
+  "raw_samples_saved": false,
+  "validation_code_sha256": "d6a666572773b9222d12341a38366ec5279a896f75a6953fb63416cfa8e5158c",
+  "mean": -7.108697665838091e-05,
+  "variance": 0.9993340767479993,
+  "absolute_mean_error": 7.108697665838091e-05,
+  "absolute_variance_error": 0.0006659232520006553,
+  "tests": {
+    "chi_square": {
+      "statistic": 5333.589223031484,
+      "p_value": 0.0,
+      "critical_value": 125.45841940848238,
+      "significance_level": 0.05,
+      "reject": true,
+      "decision": "reject",
+      "p_value_rounded_to_zero": true,
+      "numerical_note": "Computed p-value rounded to zero; it is not mathematically zero",
+      "degrees_of_freedom": 101,
+      "configured_interior_bins": 100,
+      "initial_bins": 102,
+      "final_bins": 102,
+      "observed_total": 33554432,
+      "expected_total": 33554432.0,
+      "outside_range_count": 0,
+      "method": "Pearson Chi-square; fixed N(0,1), two unbounded tails and expected-count bin merging"
+    },
+    "kolmogorov_smirnov": {
+      "statistic": 0.00020357045410535068,
+      "p_value": 0.12390003459984922,
+      "critical_value": null,
+      "significance_level": 0.05,
+      "reject": false,
+      "decision": "fail-to-reject",
+      "p_value_rounded_to_zero": false,
+      "numerical_note": null,
+      "method": "Full-data two-sided KS; fixed N(0,1); scipy.stats.kstwo.sf calibration"
+    },
+    "anderson_darling": {
+      "statistic": 1.3752951964524982,
+      "p_value": 0.2092704269968514,
+      "critical_value": 2.492232513389367,
+      "significance_level": 0.05,
+      "reject": false,
+      "decision": "fail-to-reject",
+      "p_value_rounded_to_zero": false,
+      "numerical_note": null,
+      "p_value_below_resolution": false,
+      "p_value_resolution": 0.0001,
+      "method": "Full-data AD; fixed N(0,1); Marsaglia-Marsaglia finite-n approximation"
+    },
+    "cramer_von_mises": {
+      "statistic": 0.19097796756614924,
+      "p_value": 0.28565110581390396,
+      "critical_value": null,
+      "significance_level": 0.05,
+      "reject": false,
+      "decision": "fail-to-reject",
+      "p_value_rounded_to_zero": false,
+      "numerical_note": null,
+      "method": "Full-data CvM; fixed N(0,1); SciPy finite-sample calibration"
+    }
+  },
+  "tails": []
+}

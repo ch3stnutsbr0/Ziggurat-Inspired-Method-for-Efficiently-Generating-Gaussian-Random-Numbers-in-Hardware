@@ -1,0 +1,211 @@
+{
+  "status": "successful",
+  "verified_at": "2026-10-22T18:23:40.067668+00:00",
+  "raw_sample_files": 0,
+  "statistical_tests_completed": 72,
+  "validation_rejections": [
+    {
+      "config": "trap_H0T0",
+      "N": 8,
+      "test": "chi_square",
+      "statistic": 64058.789860156554,
+      "p_value": 0.0
+    },
+    {
+      "config": "trap_H0T0",
+      "N": 8,
+      "test": "kolmogorov_smirnov",
+      "statistic": 0.000955436318500924,
+      "p_value": 4.960005573631379e-27
+    },
+    {
+      "config": "trap_H0T0",
+      "N": 8,
+      "test": "anderson_darling",
+      "statistic": 67.21983653378265,
+      "p_value": null
+    },
+    {
+      "config": "trap_H0T0",
+      "N": 8,
+      "test": "cramer_von_mises",
+      "statistic": 5.055233763081781,
+      "p_value": 5.968747718299028e-11
+    },
+    {
+      "config": "trap_H2T4",
+      "N": 8,
+      "test": "chi_square",
+      "statistic": 387.2789506043285,
+      "p_value": 4.021001779915053e-35
+    },
+    {
+      "config": "trap_H2T4",
+      "N": 8,
+      "test": "kolmogorov_smirnov",
+      "statistic": 0.00023449258035546094,
+      "p_value": 0.04993044134899938
+    },
+    {
+      "config": "trap_H0T0",
+      "N": 16,
+      "test": "chi_square",
+      "statistic": 27636.55214710656,
+      "p_value": 0.0
+    },
+    {
+      "config": "trap_H0T0",
+      "N": 16,
+      "test": "kolmogorov_smirnov",
+      "statistic": 0.0005397485886668996,
+      "p_value": 6.4580401056347165e-09
+    },
+    {
+      "config": "trap_H0T0",
+      "N": 16,
+      "test": "anderson_darling",
+      "statistic": 13.773980918322195,
+      "p_value": null
+    },
+    {
+      "config": "trap_H0T0",
+      "N": 16,
+      "test": "cramer_von_mises",
+      "statistic": 1.2614936026509789,
+      "p_value": 0.0006077208465217199
+    },
+    {
+      "config": "trap_H2T4",
+      "N": 16,
+      "test": "chi_square",
+      "statistic": 153.10983299928412,
+      "p_value": 0.0006371579540468076
+    },
+    {
+      "config": "trap_H0T0",
+      "N": 32,
+      "test": "chi_square",
+      "statistic": 11931.87962675817,
+      "p_value": 0.0
+    },
+    {
+      "config": "trap_H0T0",
+      "N": 32,
+      "test": "kolmogorov_smirnov",
+      "statistic": 0.00039987008129171997,
+      "p_value": 4.372616837943507e-05
+    },
+    {
+      "config": "trap_H0T0",
+      "N": 32,
+      "test": "anderson_darling",
+      "statistic": 4.298255043740937,
+      "p_value": 0.0062406988083971715
+    },
+    {
+      "config": "trap_H0T0",
+      "N": 32,
+      "test": "cramer_von_mises",
+      "statistic": 0.5986157279832873,
+      "p_value": 0.022559428644687518
+    },
+    {
+      "config": "trap_H2T4",
+      "N": 32,
+      "test": "chi_square",
+      "statistic": 152.97259591079836,
+      "p_value": 0.0006536966385347475
+    },
+    {
+      "config": "trap_H0T0",
+      "N": 64,
+      "test": "chi_square",
+      "statistic": 5333.589223031484,
+      "p_value": 0.0
+    },
+    {
+      "config": "trap_H2T4",
+      "N": 64,
+      "test": "chi_square",
+      "statistic": 136.91473646238592,
+      "p_value": 0.01008663111474386
+    },
+    {
+      "config": "trap_H0T0",
+      "N": 128,
+      "test": "chi_square",
+      "statistic": 2441.909265678145,
+      "p_value": 0.0
+    },
+    {
+      "config": "trap_H0T0",
+      "N": 256,
+      "test": "chi_square",
+      "statistic": 1164.5797445812234,
+      "p_value": 2.4838050830796796e-180
+    }
+  ],
+  "previous_results_and_existing_sources_unchanged": true,
+  "output_sha256": {
+    "execution_order.json": "6bf3198afbb18a2f6acf972e61d2470939ca3fbf605d519cbe589e1c3ecbefc8",
+    "reports/experiment_report.md": "63e650078641200b009c282a47a9484b67f43d472b8443551c5f0c7b325f3ec8",
+    "tables/performance_vs_samples.csv": "5e13d2708cea76ec4d856385c62ac77f9fe89be9948087eab6890beba1da966b",
+    "tables/validation_results.csv": "f024105216d2170ef644c48d080cea681ec9b6036e7ce528f19a6aab1dd7aac9",
+    "processed/performance_vs_samples.csv": "5e13d2708cea76ec4d856385c62ac77f9fe89be9948087eab6890beba1da966b",
+    "processed/validation_results.json": "1aaba642a355bb8ad615060cfd36b4d963ad01eb166f0d9a090af5d735249141",
+    "processed/validation_results.csv": "f024105216d2170ef644c48d080cea681ec9b6036e7ce528f19a6aab1dd7aac9",
+    "raw/performance/performance_runs.json": "c33dee0f999f57ea0c7aaf678ba6e4cc7d8fcdb8b7a3779e56856376f3f14829",
+    "raw/validation/trap_H2T4_N64_validation.json": "01ca977019153e73807498c56eef57d71ede586db46a712303e2dbb24edd5fd2",
+    "raw/validation/trap_H2T4_N16_validation.json": "c2c607004405e53acc26cccdb1d4148ced9b37bf9802b30bb391c2445ad8bb5e",
+    "raw/validation/trap_H2T4_N8_validation.json": "5797f5f85156ca3b8d71eeb7a27ac226844f8230c68c2af602c738c3b1c76c1e",
+    "raw/validation/basic_N16_validation.json": "163246611b28142580b547904ab3194c9b1847d767045c09af9e1fe244c75b5a",
+    "raw/validation/basic_N8_validation.json": "294a70941683dd1b4403e3265fca662fb6a18a59823ccdc54730f61d051307b0",
+    "raw/validation/trap_H2T4_N128_validation.json": "9108e51be965963a30191842a1ce77ac9078d02f964219b38480843ade7ba5ba",
+    "raw/validation/basic_N32_validation.json": "4c75143664eebcff40aa04dc869904a85b25a248c3d5ca1a4f929b71c68dc52a",
+    "raw/validation/trap_H0T0_N32_validation.json": "ac6da8ca93c66dc337c969f80ca316aa4f160ff72c3881f564ee5e662b518758",
+    "raw/validation/basic_N256_validation.json": "c65e55807f4fc60d7621a65260458ea20e885b03c5e262def6358b8b4b96199c",
+    "raw/validation/basic_N64_validation.json": "5e5ef9e3404652eef807e742b08c77d4c9d8d23ebfae522c656fdce8608f5b09",
+    "raw/validation/basic_N128_validation.json": "fb89b0b852a5b1d6d23ac1674255059281c93ff4dd0c3e4247134e8e1f316e31",
+    "raw/validation/trap_H0T0_N128_validation.json": "d5e82686bf46426acf6a1d0a861e1242b25ee083dc8268674ece1e8321247f8a",
+    "raw/validation/trap_H0T0_N64_validation.json": "f43605d777e7c57eefc707d38d157506b29e3b79f50185b7580fcf6ac7c91ef5",
+    "raw/validation/trap_H0T0_N8_validation.json": "6ae820ad5811f2558d0f5ab40fe3f1fe92b36ded2499460e8b508e6929aa0b36",
+    "raw/validation/trap_H2T4_N256_validation.json": "ca11922fed7fb559b4504676ab899146dbb83e4d2b3971b3b3ae84c41f9332c7",
+    "raw/validation/trap_H0T0_N16_validation.json": "ce05510a74ec7dd37310a3bd5b1e7ba7857d6b2df26b5771f0ccbb9cb159d240",
+    "raw/validation/trap_H0T0_N256_validation.json": "a8031785ce5baa72e40a4686b69fbb37f2a14a663b8db8b2132b47d39463df3c",
+    "raw/validation/trap_H2T4_N32_validation.json": "8a77bf89881fa869c087d449af80f913263c230b7b08a12301f2f0f0755d7887",
+    "artifacts/validation.py": "d6a666572773b9222d12341a38366ec5279a896f75a6953fb63416cfa8e5158c",
+    "artifacts/experiment10_benchmark.c": "b7ab142be3cdd7f93498970132d0e5b3eace4bdc9ad8c19494f0dedd70daa21f",
+    "artifacts/experiment10.py": "c8082a2f1421ca1fe99b4528692eca2bcbcd7513509f66a40a804bf8b45c1bf5",
+    "artifacts/experiment10.yaml": "740f003c91d5af5b39ef5b39050fad18ca2c9f08fb5fd2a928ec02963f5a13bb",
+    "artifacts/experiment05.py": "11f1e8747495daaa091ac213fc7f5f4087d960264591f26343c9e6bda968c588",
+    "artifacts/c/prng.c": "9e48f9f6f32d3b14f312f3d3f315734c5fe594d9053ffd361f1066f3efcb3ed1",
+    "artifacts/c/pcg_rng.h": "276119c54a6c56631ad2c01b8d3e0f555ce5a169eaefac180356e06feb1b9e72",
+    "artifacts/c/ziggurat_basic.h": "40ddd35ff065864176b79e8c8734d041444e51f668198e3c95a5e9bec8870890",
+    "artifacts/c/prng.h": "c359f2112de67b7a4620e2f3e357b610c1491a23a8aed31eb32662093ca5365c",
+    "artifacts/c/uniform_count.c": "3d8270e5ef57151863387f51c717eb33d6e13f1361f16d40d8cdd0266b65cd65",
+    "artifacts/c/ziggurat_basic.c": "4fa91dcafc59f646b3570b8415541117131d37c4c1133f596384f8d2103d9eb1",
+    "artifacts/c/ziggurat_trapezoid_buffered.c": "e21d52974f7156d567c84d4559cf05d8d726be27bab9e2c3c84089b4400ee178",
+    "artifacts/c/ziggurat_trapezoid.h": "02ffb2e587f48c415d59c253af07eb40cb9485cb5b961ee48bd6fd193373fe55",
+    "artifacts/c/ziggurat_basic_xoshiro256plus.c": "c07ae52d9eca966b8cb4d52ffcd6d547b30c0564d8938869d94ed7434ff06dd7",
+    "artifacts/c/uniform_buffer.h": "4b27b4243d41b48204b6a41f632a929e921cdb6254d472f263cdf801fbaa3f40",
+    "artifacts/c/ziggurat_trapezoid_counted.c": "eaa4e8fb5cea0af9faa5c43b024d484825e185fd944681459e190a25250e1b0f",
+    "artifacts/c/xoshiro256plus.c": "6ec0f8dd4426ccc3ebee794d26bb8125ab62f2967e99cb4e5519dc5441b20ccb",
+    "artifacts/c/uniform_buffer.c": "5c86d7f052b1fd1683d66badb8a1a6cd2182982172c9efc6cbf36d16adae64e5",
+    "artifacts/c/gaussian_prng.h": "1278aba2ec15c8a0e191bc1321e16b694a7291b445f95393ac872cfe7483ac1c",
+    "artifacts/c/ziggurat_trapezoid_xoshiro256plus.c": "1f6829bdb9811c25551c717640421d242fff140934c3a0973e1203aba85e0db2",
+    "artifacts/c/ziggurat_trapezoid_profiled.c": "6ba76b1cea675a248dfa37d3452e46d4c461942d9adf2261071489414f743e9e",
+    "artifacts/c/ziggurat_trapezoid.c": "a8f3aa0ff2b4fe23984c4a37c4ce68f66f7d36faccb7ec8fe58072d98e8cff74",
+    "artifacts/c/gaussian_constants.h": "6d5f5b69925279c9d8af46a21bc09712844ad8380ed716b5bc5826b79f56091a",
+    "artifacts/c/ziggurat_basic_buffered.c": "5c4f21e149aa0c952234d7d11d4e22eb026f951f738c29b59dc9cf6eea0ba0d7",
+    "artifacts/c/ziggurat_basic_profiled.c": "fb0ce081f1f45f53fe0a7ad42a7b08e834c8507ecdaa1bbfa440f26e1558c3ed",
+    "artifacts/c/ziggurat_basic_counted_xoshiro.c": "43bb50400d98fdacf08b4d4303073a5898dc477b7ec67a642347f444c1c88a89",
+    "artifacts/c/ziggurat_trapezoid_counted_xoshiro.c": "7269dbfe423fe412653a01336626339dc54f244fe201b2bd8649cef407a40738",
+    "artifacts/c/ziggurat_basic_counted.c": "8e7e448dbc5c0d0a62ec6f3ee62bf5d7992e5b1e035cf151ff6506fea53e3c01",
+    "artifacts/c/benchmark.c": "76e3f2d68f952e7d610748c10fbaf9a0dbb23df2179f5436ed2360807388f7b0",
+    "artifacts/c/xoshiro256plus.h": "b32a973b5054ba164a2e47769c04f257c960bc9dc64ab3a0efb55e6cd644cd30",
+    "figures/speed_vs_samples.svg": "9f1d1ff36c28f1539bee6cda94b6026787c28a4cc873a8ee886e392ef54dee98",
+    "figures/speed_vs_samples.png": "b12e57866da24699a3ce41baac936954f022c852163a6176ed27b65d99e0b628",
+    "figures/throughput_vs_layers.svg": "912010f86c5a77ce5bce3920414f3a17bf7c99312b106c1db43112ec72017260",
+    "figures/throughput_vs_layers.png": "cde6292bdf8bbe6118c951376686a3a17721de2bbaf9349907109e2ed997b364"
+  }
+}

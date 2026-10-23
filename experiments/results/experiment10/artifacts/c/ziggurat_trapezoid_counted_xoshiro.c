@@ -1,0 +1,12 @@
+#define ZT_COUNTED_BUILD 1
+#define ZT_XOSHIRO_BUILD 1
+#define zt_init zt_init_counted_xoshiro
+#define zt_gaussian zt_gaussian_counted_xoshiro
+#define zt_get_counters zt_get_counters_counted_xoshiro
+#define zt_get_prng_profile zt_get_prng_profile_counted_xoshiro
+#define zt_reset_counters zt_reset_counters_counted_xoshiro
+#define zt_layers zt_layers_counted_xoshiro
+#define zt_table_x zt_table_x_counted_xoshiro
+#define zt_table_y zt_table_y_counted_xoshiro
+#include "ziggurat_trapezoid.c"
+uint64_t zt_uniform_calls_counted_xoshiro(void){uint64_t result=uniform_calls;uniform_calls=0;return result;}
