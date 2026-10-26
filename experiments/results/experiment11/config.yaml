@@ -1,0 +1,32 @@
+experiment_id: experiment11
+output_dir: experiments/results/experiment11   # relative to the repository root
+binary: c/benchmark                            # build with: make -C c CC=gcc O2
+
+prng: xoshiro256plus
+uniform_buffer_bytes: 2147483648   # 2 GiB precomputed buffer = 268,435,456 uniforms
+cache_dir: null                    # where the 2 GiB uniform cache lives; null = system temp dir
+
+layers: [8, 16, 32, 64, 128, 256]
+heads: [0, 1, 2, 3, 4]
+tails: [0, 1, 2, 3, 4]
+include_classical: true            # Classical Ziggurat reference at every N
+seeds: [1]
+samples: 33554432                  # 2^25 Gaussian samples per run
+warmup: 100000                     # outside timing; buffer position resets before measurement
+
+performance:
+  enabled: true
+  repetitions: 5
+  cpu: 7                           # every timed run is wrapped in taskset -c <cpu>
+  require_isolation: true          # abort unless <cpu> is listed in /sys/devices/system/cpu/isolated
+  shuffle_seed: 2026               # run order is shuffled per repetition, deterministically
+
+validation:
+  enabled: true
+  include_classical: false         # Trapezoid configurations are always validated
+  workers: 4                       # parallel validations; run after all timing is finished
+  significance_level: 0.05
+  chi_square:
+    bins: 100                      # interior bins; two unbounded tail bins are added
+    range: [-5.0, 5.0]
+    minimum_expected_count: 5
