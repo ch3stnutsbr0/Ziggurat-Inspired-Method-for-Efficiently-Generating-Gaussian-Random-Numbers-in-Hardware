@@ -1,0 +1,4 @@
+group,count,mean_consistency_sd,sd_consistency_sd,beyond_2sd,beyond_3sd,max_rel_diff
+"Trapezoid, all 150",150,-0.049878995311466216,1.1935688023074826,15,0,
+"Trapezoid, λ > 1000 (43)",43,-0.146099119022623,0.6764660833269166,0,0,0.0758837415416036
+"Classical, 6 N",6,-0.9116193649175175,0.9193493574121389,1,0,

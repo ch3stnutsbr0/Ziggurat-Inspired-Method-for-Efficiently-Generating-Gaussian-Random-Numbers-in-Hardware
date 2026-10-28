@@ -1,0 +1,16 @@
+experiment_id: experiment12
+output_dir: experiments/results/experiment12   # relative to the repository root
+
+# Exact (analytical) output distribution of the Trapezoid sampler; no random numbers are generated.
+source_experiment: experiments/results/experiment11   # configurations, seed-1 observations, throughput
+classical_reference: experiments/results/experiment10 # seed-1 Classical validation (same streams and bins)
+
+samples: 33554432          # n used for predictions (2^25, as in Experiments 10 and 11)
+significance_level: 0.05
+chi_square:                # identical binning to Experiments 10 and 11
+  bins: 100
+  range: [-5.0, 5.0]
+ks_grid:                   # |x| grid for the exact KS distance (plus every trapezoid breakpoint)
+  max_x: 8.0
+  points: 400001
+tail_points: [3, 4, 5, 6]

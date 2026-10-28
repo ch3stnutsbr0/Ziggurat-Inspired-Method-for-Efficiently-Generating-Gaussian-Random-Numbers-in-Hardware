@@ -1,0 +1,56 @@
+{
+  "experiment_id": "experiment12",
+  "created_utc": "2026-10-28T18:06:30.884112+00:00",
+  "config": {
+    "experiment_id": "experiment12",
+    "output_dir": "experiments/results/experiment12",
+    "source_experiment": "experiments/results/experiment11",
+    "classical_reference": "experiments/results/experiment10",
+    "samples": 33554432,
+    "significance_level": 0.05,
+    "chi_square": {
+      "bins": 100,
+      "range": [
+        -5.0,
+        5.0
+      ]
+    },
+    "ks_grid": {
+      "max_x": 8.0,
+      "points": 400001
+    },
+    "tail_points": [
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  "method": "exact mixture of trapezoid densities; tables exported from c/ziggurat_trapezoid.c",
+  "random_numbers_generated": 0,
+  "exporter_build_command": [
+    "gcc",
+    "-std=c11",
+    "-Wall",
+    "-Wextra",
+    "-pedantic",
+    "-O2",
+    "-I",
+    "/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c",
+    "/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/experiments/experiment12_dump_tables.c",
+    "-o",
+    "/tmp/experiment12-ad4f091_/dump_tables",
+    "-lm"
+  ],
+  "sampler_source_sha256": "a8f3aa0ff2b4fe23984c4a37c4ce68f66f7d36faccb7ec8fe58072d98e8cff74",
+  "exporter_source_sha256": "909c9e6724ef141bb6c5bd9c9bfb32a936f43904d87ae543c26c0c207247ef02",
+  "experiment11_validation_sha256": "cd361bdc9e62bc335d63cad4961873284019ee7d1b5da97cefd6a3ab58f83928",
+  "git_commit": "620bbc128bffbf7de939a79545a281f0b8217e07",
+  "git_dirty_files": 5,
+  "gcc": "gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0",
+  "python": "3.10.12",
+  "numpy": "2.2.6",
+  "scipy": "1.15.3",
+  "configurations_total": 150,
+  "configurations_passing": 40
+}
