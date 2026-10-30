@@ -1,0 +1,201 @@
+session,event,utc,key,value
+20261030T150130Z,session_start,2026-10-30T15:01:30.705630+00:00,kernel,5.15.0-198-generic
+20261030T150130Z,session_start,2026-10-30T15:01:30.705630+00:00,kernel_cmdline,"BOOT_IMAGE=/boot/vmlinuz-5.15.0-198-generic root=UUID=44c9819c-255e-4b5b-8723-c622290b92d2 ro quiet splash isolcpus=domain,managed_irq,7 irqaffinity=0-6"
+20261030T150130Z,session_start,2026-10-30T15:01:30.705630+00:00,isolated_cpus,7
+20261030T150130Z,session_start,2026-10-30T15:01:30.705630+00:00,nohz_full_cpus,unavailable: No such file or directory
+20261030T150130Z,session_start,2026-10-30T15:01:30.705630+00:00,smt_control,notsupported
+20261030T150130Z,session_start,2026-10-30T15:01:30.705630+00:00,online_cpus,0-7
+20261030T150130Z,session_start,2026-10-30T15:01:30.705630+00:00,benchmark_cpu,7
+20261030T150130Z,session_start,2026-10-30T15:01:30.705630+00:00,irqs_effective_on_cpu7,1
+20261030T150130Z,session_start,2026-10-30T15:01:30.705630+00:00,irqbalance,active
+20261030T150130Z,session_start,2026-10-30T15:01:30.705630+00:00,governor,schedutil
+20261030T150130Z,session_start,2026-10-30T15:01:30.705630+00:00,scaling_driver,acpi-cpufreq
+20261030T150130Z,session_start,2026-10-30T15:01:30.705630+00:00,scaling_min_khz,2200000
+20261030T150130Z,session_start,2026-10-30T15:01:30.705630+00:00,scaling_max_khz,3200000
+20261030T150130Z,session_start,2026-10-30T15:01:30.705630+00:00,scaling_cur_khz,1890292
+20261030T150130Z,session_start,2026-10-30T15:01:30.705630+00:00,boost,0
+20261030T150130Z,session_start,2026-10-30T15:01:30.705630+00:00,loadavg,1.40 0.59 0.53 1/1308 10374
+20261030T150130Z,session_start,2026-10-30T15:01:30.705630+00:00,python,3.10.12
+20261030T150130Z,session_start,2026-10-30T15:01:30.705630+00:00,git_commit,62f15ee3fb12e594bbc2dcc5ae841d99321a01e4
+20261030T150130Z,session_start,2026-10-30T15:01:30.705630+00:00,git_dirty_files,6
+20261030T150130Z,session_start,2026-10-30T15:01:30.705630+00:00,binary,/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/benchmark
+20261030T150130Z,session_start,2026-10-30T15:01:30.705630+00:00,binary_sha256,80f115bef39327737ae0216fea3725bf3680735608ddde7af3c65901883d17a0
+20261030T150130Z,session_start,2026-10-30T15:01:30.705630+00:00,config_sha256,2e657a69e19114b568a0d665500115986f01f754cd93e8ea9a2d031dd4bae7b8
+20261030T150130Z,performance_seed1_end,2026-10-30T15:21:30.993144+00:00,kernel,5.15.0-198-generic
+20261030T150130Z,performance_seed1_end,2026-10-30T15:21:30.993144+00:00,kernel_cmdline,"BOOT_IMAGE=/boot/vmlinuz-5.15.0-198-generic root=UUID=44c9819c-255e-4b5b-8723-c622290b92d2 ro quiet splash isolcpus=domain,managed_irq,7 irqaffinity=0-6"
+20261030T150130Z,performance_seed1_end,2026-10-30T15:21:30.993144+00:00,isolated_cpus,7
+20261030T150130Z,performance_seed1_end,2026-10-30T15:21:30.993144+00:00,nohz_full_cpus,unavailable: No such file or directory
+20261030T150130Z,performance_seed1_end,2026-10-30T15:21:30.993144+00:00,smt_control,notsupported
+20261030T150130Z,performance_seed1_end,2026-10-30T15:21:30.993144+00:00,online_cpus,0-7
+20261030T150130Z,performance_seed1_end,2026-10-30T15:21:30.993144+00:00,benchmark_cpu,7
+20261030T150130Z,performance_seed1_end,2026-10-30T15:21:30.993144+00:00,irqs_effective_on_cpu7,1
+20261030T150130Z,performance_seed1_end,2026-10-30T15:21:30.993144+00:00,irqbalance,active
+20261030T150130Z,performance_seed1_end,2026-10-30T15:21:30.993144+00:00,governor,schedutil
+20261030T150130Z,performance_seed1_end,2026-10-30T15:21:30.993144+00:00,scaling_driver,acpi-cpufreq
+20261030T150130Z,performance_seed1_end,2026-10-30T15:21:30.993144+00:00,scaling_min_khz,2200000
+20261030T150130Z,performance_seed1_end,2026-10-30T15:21:30.993144+00:00,scaling_max_khz,3200000
+20261030T150130Z,performance_seed1_end,2026-10-30T15:21:30.993144+00:00,scaling_cur_khz,2195182
+20261030T150130Z,performance_seed1_end,2026-10-30T15:21:30.993144+00:00,boost,0
+20261030T150130Z,performance_seed1_end,2026-10-30T15:21:30.993144+00:00,loadavg,1.11 1.15 1.02 1/1306 11634
+20261030T150130Z,performance_seed1_end,2026-10-30T15:21:30.993144+00:00,python,3.10.12
+20261030T150130Z,performance_seed1_end,2026-10-30T15:21:30.993144+00:00,git_commit,62f15ee3fb12e594bbc2dcc5ae841d99321a01e4
+20261030T150130Z,performance_seed1_end,2026-10-30T15:21:30.993144+00:00,git_dirty_files,6
+20261030T150130Z,performance_seed1_end,2026-10-30T15:21:30.993144+00:00,binary,/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/benchmark
+20261030T150130Z,performance_seed1_end,2026-10-30T15:21:30.993144+00:00,binary_sha256,80f115bef39327737ae0216fea3725bf3680735608ddde7af3c65901883d17a0
+20261030T150130Z,performance_seed1_end,2026-10-30T15:21:30.993144+00:00,config_sha256,2e657a69e19114b568a0d665500115986f01f754cd93e8ea9a2d031dd4bae7b8
+20261030T150130Z,performance_seed2_end,2026-10-30T15:41:32.195284+00:00,kernel,5.15.0-198-generic
+20261030T150130Z,performance_seed2_end,2026-10-30T15:41:32.195284+00:00,kernel_cmdline,"BOOT_IMAGE=/boot/vmlinuz-5.15.0-198-generic root=UUID=44c9819c-255e-4b5b-8723-c622290b92d2 ro quiet splash isolcpus=domain,managed_irq,7 irqaffinity=0-6"
+20261030T150130Z,performance_seed2_end,2026-10-30T15:41:32.195284+00:00,isolated_cpus,7
+20261030T150130Z,performance_seed2_end,2026-10-30T15:41:32.195284+00:00,nohz_full_cpus,unavailable: No such file or directory
+20261030T150130Z,performance_seed2_end,2026-10-30T15:41:32.195284+00:00,smt_control,notsupported
+20261030T150130Z,performance_seed2_end,2026-10-30T15:41:32.195284+00:00,online_cpus,0-7
+20261030T150130Z,performance_seed2_end,2026-10-30T15:41:32.195284+00:00,benchmark_cpu,7
+20261030T150130Z,performance_seed2_end,2026-10-30T15:41:32.195284+00:00,irqs_effective_on_cpu7,1
+20261030T150130Z,performance_seed2_end,2026-10-30T15:41:32.195284+00:00,irqbalance,active
+20261030T150130Z,performance_seed2_end,2026-10-30T15:41:32.195284+00:00,governor,schedutil
+20261030T150130Z,performance_seed2_end,2026-10-30T15:41:32.195284+00:00,scaling_driver,acpi-cpufreq
+20261030T150130Z,performance_seed2_end,2026-10-30T15:41:32.195284+00:00,scaling_min_khz,2200000
+20261030T150130Z,performance_seed2_end,2026-10-30T15:41:32.195284+00:00,scaling_max_khz,3200000
+20261030T150130Z,performance_seed2_end,2026-10-30T15:41:32.195284+00:00,scaling_cur_khz,3198638
+20261030T150130Z,performance_seed2_end,2026-10-30T15:41:32.195284+00:00,boost,0
+20261030T150130Z,performance_seed2_end,2026-10-30T15:41:32.195284+00:00,loadavg,1.10 1.14 1.09 1/1299 12844
+20261030T150130Z,performance_seed2_end,2026-10-30T15:41:32.195284+00:00,python,3.10.12
+20261030T150130Z,performance_seed2_end,2026-10-30T15:41:32.195284+00:00,git_commit,62f15ee3fb12e594bbc2dcc5ae841d99321a01e4
+20261030T150130Z,performance_seed2_end,2026-10-30T15:41:32.195284+00:00,git_dirty_files,6
+20261030T150130Z,performance_seed2_end,2026-10-30T15:41:32.195284+00:00,binary,/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/benchmark
+20261030T150130Z,performance_seed2_end,2026-10-30T15:41:32.195284+00:00,binary_sha256,80f115bef39327737ae0216fea3725bf3680735608ddde7af3c65901883d17a0
+20261030T150130Z,performance_seed2_end,2026-10-30T15:41:32.195284+00:00,config_sha256,2e657a69e19114b568a0d665500115986f01f754cd93e8ea9a2d031dd4bae7b8
+20261030T150130Z,performance_seed3_end,2026-10-30T16:01:34.834165+00:00,kernel,5.15.0-198-generic
+20261030T150130Z,performance_seed3_end,2026-10-30T16:01:34.834165+00:00,kernel_cmdline,"BOOT_IMAGE=/boot/vmlinuz-5.15.0-198-generic root=UUID=44c9819c-255e-4b5b-8723-c622290b92d2 ro quiet splash isolcpus=domain,managed_irq,7 irqaffinity=0-6"
+20261030T150130Z,performance_seed3_end,2026-10-30T16:01:34.834165+00:00,isolated_cpus,7
+20261030T150130Z,performance_seed3_end,2026-10-30T16:01:34.834165+00:00,nohz_full_cpus,unavailable: No such file or directory
+20261030T150130Z,performance_seed3_end,2026-10-30T16:01:34.834165+00:00,smt_control,notsupported
+20261030T150130Z,performance_seed3_end,2026-10-30T16:01:34.834165+00:00,online_cpus,0-7
+20261030T150130Z,performance_seed3_end,2026-10-30T16:01:34.834165+00:00,benchmark_cpu,7
+20261030T150130Z,performance_seed3_end,2026-10-30T16:01:34.834165+00:00,irqs_effective_on_cpu7,1
+20261030T150130Z,performance_seed3_end,2026-10-30T16:01:34.834165+00:00,irqbalance,active
+20261030T150130Z,performance_seed3_end,2026-10-30T16:01:34.834165+00:00,governor,schedutil
+20261030T150130Z,performance_seed3_end,2026-10-30T16:01:34.834165+00:00,scaling_driver,acpi-cpufreq
+20261030T150130Z,performance_seed3_end,2026-10-30T16:01:34.834165+00:00,scaling_min_khz,2200000
+20261030T150130Z,performance_seed3_end,2026-10-30T16:01:34.834165+00:00,scaling_max_khz,3200000
+20261030T150130Z,performance_seed3_end,2026-10-30T16:01:34.834165+00:00,scaling_cur_khz,3196717
+20261030T150130Z,performance_seed3_end,2026-10-30T16:01:34.834165+00:00,boost,0
+20261030T150130Z,performance_seed3_end,2026-10-30T16:01:34.834165+00:00,loadavg,1.19 1.36 1.29 2/1588 15424
+20261030T150130Z,performance_seed3_end,2026-10-30T16:01:34.834165+00:00,python,3.10.12
+20261030T150130Z,performance_seed3_end,2026-10-30T16:01:34.834165+00:00,git_commit,62f15ee3fb12e594bbc2dcc5ae841d99321a01e4
+20261030T150130Z,performance_seed3_end,2026-10-30T16:01:34.834165+00:00,git_dirty_files,6
+20261030T150130Z,performance_seed3_end,2026-10-30T16:01:34.834165+00:00,binary,/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/benchmark
+20261030T150130Z,performance_seed3_end,2026-10-30T16:01:34.834165+00:00,binary_sha256,80f115bef39327737ae0216fea3725bf3680735608ddde7af3c65901883d17a0
+20261030T150130Z,performance_seed3_end,2026-10-30T16:01:34.834165+00:00,config_sha256,2e657a69e19114b568a0d665500115986f01f754cd93e8ea9a2d031dd4bae7b8
+20261030T150130Z,performance_seed4_end,2026-10-30T16:21:42.225012+00:00,kernel,5.15.0-198-generic
+20261030T150130Z,performance_seed4_end,2026-10-30T16:21:42.225012+00:00,kernel_cmdline,"BOOT_IMAGE=/boot/vmlinuz-5.15.0-198-generic root=UUID=44c9819c-255e-4b5b-8723-c622290b92d2 ro quiet splash isolcpus=domain,managed_irq,7 irqaffinity=0-6"
+20261030T150130Z,performance_seed4_end,2026-10-30T16:21:42.225012+00:00,isolated_cpus,7
+20261030T150130Z,performance_seed4_end,2026-10-30T16:21:42.225012+00:00,nohz_full_cpus,unavailable: No such file or directory
+20261030T150130Z,performance_seed4_end,2026-10-30T16:21:42.225012+00:00,smt_control,notsupported
+20261030T150130Z,performance_seed4_end,2026-10-30T16:21:42.225012+00:00,online_cpus,0-7
+20261030T150130Z,performance_seed4_end,2026-10-30T16:21:42.225012+00:00,benchmark_cpu,7
+20261030T150130Z,performance_seed4_end,2026-10-30T16:21:42.225012+00:00,irqs_effective_on_cpu7,1
+20261030T150130Z,performance_seed4_end,2026-10-30T16:21:42.225012+00:00,irqbalance,active
+20261030T150130Z,performance_seed4_end,2026-10-30T16:21:42.225012+00:00,governor,schedutil
+20261030T150130Z,performance_seed4_end,2026-10-30T16:21:42.225012+00:00,scaling_driver,acpi-cpufreq
+20261030T150130Z,performance_seed4_end,2026-10-30T16:21:42.225012+00:00,scaling_min_khz,2200000
+20261030T150130Z,performance_seed4_end,2026-10-30T16:21:42.225012+00:00,scaling_max_khz,3200000
+20261030T150130Z,performance_seed4_end,2026-10-30T16:21:42.225012+00:00,scaling_cur_khz,3200001
+20261030T150130Z,performance_seed4_end,2026-10-30T16:21:42.225012+00:00,boost,0
+20261030T150130Z,performance_seed4_end,2026-10-30T16:21:42.225012+00:00,loadavg,1.03 1.10 1.15 1/1307 16922
+20261030T150130Z,performance_seed4_end,2026-10-30T16:21:42.225012+00:00,python,3.10.12
+20261030T150130Z,performance_seed4_end,2026-10-30T16:21:42.225012+00:00,git_commit,62f15ee3fb12e594bbc2dcc5ae841d99321a01e4
+20261030T150130Z,performance_seed4_end,2026-10-30T16:21:42.225012+00:00,git_dirty_files,6
+20261030T150130Z,performance_seed4_end,2026-10-30T16:21:42.225012+00:00,binary,/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/benchmark
+20261030T150130Z,performance_seed4_end,2026-10-30T16:21:42.225012+00:00,binary_sha256,80f115bef39327737ae0216fea3725bf3680735608ddde7af3c65901883d17a0
+20261030T150130Z,performance_seed4_end,2026-10-30T16:21:42.225012+00:00,config_sha256,2e657a69e19114b568a0d665500115986f01f754cd93e8ea9a2d031dd4bae7b8
+20261030T150130Z,performance_seed5_end,2026-10-30T16:41:50.449007+00:00,kernel,5.15.0-198-generic
+20261030T150130Z,performance_seed5_end,2026-10-30T16:41:50.449007+00:00,kernel_cmdline,"BOOT_IMAGE=/boot/vmlinuz-5.15.0-198-generic root=UUID=44c9819c-255e-4b5b-8723-c622290b92d2 ro quiet splash isolcpus=domain,managed_irq,7 irqaffinity=0-6"
+20261030T150130Z,performance_seed5_end,2026-10-30T16:41:50.449007+00:00,isolated_cpus,7
+20261030T150130Z,performance_seed5_end,2026-10-30T16:41:50.449007+00:00,nohz_full_cpus,unavailable: No such file or directory
+20261030T150130Z,performance_seed5_end,2026-10-30T16:41:50.449007+00:00,smt_control,notsupported
+20261030T150130Z,performance_seed5_end,2026-10-30T16:41:50.449007+00:00,online_cpus,0-7
+20261030T150130Z,performance_seed5_end,2026-10-30T16:41:50.449007+00:00,benchmark_cpu,7
+20261030T150130Z,performance_seed5_end,2026-10-30T16:41:50.449007+00:00,irqs_effective_on_cpu7,1
+20261030T150130Z,performance_seed5_end,2026-10-30T16:41:50.449007+00:00,irqbalance,active
+20261030T150130Z,performance_seed5_end,2026-10-30T16:41:50.449007+00:00,governor,schedutil
+20261030T150130Z,performance_seed5_end,2026-10-30T16:41:50.449007+00:00,scaling_driver,acpi-cpufreq
+20261030T150130Z,performance_seed5_end,2026-10-30T16:41:50.449007+00:00,scaling_min_khz,2200000
+20261030T150130Z,performance_seed5_end,2026-10-30T16:41:50.449007+00:00,scaling_max_khz,3200000
+20261030T150130Z,performance_seed5_end,2026-10-30T16:41:50.449007+00:00,scaling_cur_khz,2088101
+20261030T150130Z,performance_seed5_end,2026-10-30T16:41:50.449007+00:00,boost,0
+20261030T150130Z,performance_seed5_end,2026-10-30T16:41:50.449007+00:00,loadavg,1.04 1.12 1.10 1/1305 18611
+20261030T150130Z,performance_seed5_end,2026-10-30T16:41:50.449007+00:00,python,3.10.12
+20261030T150130Z,performance_seed5_end,2026-10-30T16:41:50.449007+00:00,git_commit,62f15ee3fb12e594bbc2dcc5ae841d99321a01e4
+20261030T150130Z,performance_seed5_end,2026-10-30T16:41:50.449007+00:00,git_dirty_files,6
+20261030T150130Z,performance_seed5_end,2026-10-30T16:41:50.449007+00:00,binary,/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/benchmark
+20261030T150130Z,performance_seed5_end,2026-10-30T16:41:50.449007+00:00,binary_sha256,80f115bef39327737ae0216fea3725bf3680735608ddde7af3c65901883d17a0
+20261030T150130Z,performance_seed5_end,2026-10-30T16:41:50.449007+00:00,config_sha256,2e657a69e19114b568a0d665500115986f01f754cd93e8ea9a2d031dd4bae7b8
+20261030T150130Z,session_end,2026-10-30T16:41:51.747973+00:00,kernel,5.15.0-198-generic
+20261030T150130Z,session_end,2026-10-30T16:41:51.747973+00:00,kernel_cmdline,"BOOT_IMAGE=/boot/vmlinuz-5.15.0-198-generic root=UUID=44c9819c-255e-4b5b-8723-c622290b92d2 ro quiet splash isolcpus=domain,managed_irq,7 irqaffinity=0-6"
+20261030T150130Z,session_end,2026-10-30T16:41:51.747973+00:00,isolated_cpus,7
+20261030T150130Z,session_end,2026-10-30T16:41:51.747973+00:00,nohz_full_cpus,unavailable: No such file or directory
+20261030T150130Z,session_end,2026-10-30T16:41:51.747973+00:00,smt_control,notsupported
+20261030T150130Z,session_end,2026-10-30T16:41:51.747973+00:00,online_cpus,0-7
+20261030T150130Z,session_end,2026-10-30T16:41:51.747973+00:00,benchmark_cpu,7
+20261030T150130Z,session_end,2026-10-30T16:41:51.747973+00:00,irqs_effective_on_cpu7,1
+20261030T150130Z,session_end,2026-10-30T16:41:51.747973+00:00,irqbalance,active
+20261030T150130Z,session_end,2026-10-30T16:41:51.747973+00:00,governor,schedutil
+20261030T150130Z,session_end,2026-10-30T16:41:51.747973+00:00,scaling_driver,acpi-cpufreq
+20261030T150130Z,session_end,2026-10-30T16:41:51.747973+00:00,scaling_min_khz,2200000
+20261030T150130Z,session_end,2026-10-30T16:41:51.747973+00:00,scaling_max_khz,3200000
+20261030T150130Z,session_end,2026-10-30T16:41:51.747973+00:00,scaling_cur_khz,1892887
+20261030T150130Z,session_end,2026-10-30T16:41:51.747973+00:00,boost,0
+20261030T150130Z,session_end,2026-10-30T16:41:51.747973+00:00,loadavg,1.04 1.12 1.10 1/1305 18625
+20261030T150130Z,session_end,2026-10-30T16:41:51.747973+00:00,python,3.10.12
+20261030T150130Z,session_end,2026-10-30T16:41:51.747973+00:00,git_commit,62f15ee3fb12e594bbc2dcc5ae841d99321a01e4
+20261030T150130Z,session_end,2026-10-30T16:41:51.747973+00:00,git_dirty_files,6
+20261030T150130Z,session_end,2026-10-30T16:41:51.747973+00:00,binary,/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/benchmark
+20261030T150130Z,session_end,2026-10-30T16:41:51.747973+00:00,binary_sha256,80f115bef39327737ae0216fea3725bf3680735608ddde7af3c65901883d17a0
+20261030T150130Z,session_end,2026-10-30T16:41:51.747973+00:00,config_sha256,2e657a69e19114b568a0d665500115986f01f754cd93e8ea9a2d031dd4bae7b8
+20261030T150130Z,session_end,2026-10-30T16:41:52.562561+00:00,session_elapsed_s,6021.8569617220055
+20261030T164216Z,session_start,2026-10-30T16:42:16.464928+00:00,kernel,5.15.0-198-generic
+20261030T164216Z,session_start,2026-10-30T16:42:16.464928+00:00,kernel_cmdline,"BOOT_IMAGE=/boot/vmlinuz-5.15.0-198-generic root=UUID=44c9819c-255e-4b5b-8723-c622290b92d2 ro quiet splash isolcpus=domain,managed_irq,7 irqaffinity=0-6"
+20261030T164216Z,session_start,2026-10-30T16:42:16.464928+00:00,isolated_cpus,7
+20261030T164216Z,session_start,2026-10-30T16:42:16.464928+00:00,nohz_full_cpus,unavailable: No such file or directory
+20261030T164216Z,session_start,2026-10-30T16:42:16.464928+00:00,smt_control,notsupported
+20261030T164216Z,session_start,2026-10-30T16:42:16.464928+00:00,online_cpus,0-7
+20261030T164216Z,session_start,2026-10-30T16:42:16.464928+00:00,benchmark_cpu,7
+20261030T164216Z,session_start,2026-10-30T16:42:16.464928+00:00,irqs_effective_on_cpu7,1
+20261030T164216Z,session_start,2026-10-30T16:42:16.464928+00:00,irqbalance,active
+20261030T164216Z,session_start,2026-10-30T16:42:16.464928+00:00,governor,schedutil
+20261030T164216Z,session_start,2026-10-30T16:42:16.464928+00:00,scaling_driver,acpi-cpufreq
+20261030T164216Z,session_start,2026-10-30T16:42:16.464928+00:00,scaling_min_khz,2200000
+20261030T164216Z,session_start,2026-10-30T16:42:16.464928+00:00,scaling_max_khz,3200000
+20261030T164216Z,session_start,2026-10-30T16:42:16.464928+00:00,scaling_cur_khz,1790361
+20261030T164216Z,session_start,2026-10-30T16:42:16.464928+00:00,boost,0
+20261030T164216Z,session_start,2026-10-30T16:42:16.464928+00:00,loadavg,0.83 1.06 1.08 1/1313 18712
+20261030T164216Z,session_start,2026-10-30T16:42:16.464928+00:00,python,3.10.12
+20261030T164216Z,session_start,2026-10-30T16:42:16.464928+00:00,git_commit,62f15ee3fb12e594bbc2dcc5ae841d99321a01e4
+20261030T164216Z,session_start,2026-10-30T16:42:16.464928+00:00,git_dirty_files,7
+20261030T164216Z,session_start,2026-10-30T16:42:16.464928+00:00,binary,/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/benchmark
+20261030T164216Z,session_start,2026-10-30T16:42:16.464928+00:00,binary_sha256,80f115bef39327737ae0216fea3725bf3680735608ddde7af3c65901883d17a0
+20261030T164216Z,session_start,2026-10-30T16:42:16.464928+00:00,config_sha256,2e657a69e19114b568a0d665500115986f01f754cd93e8ea9a2d031dd4bae7b8
+20261030T164216Z,session_end,2026-10-30T19:06:48.349888+00:00,kernel,5.15.0-198-generic
+20261030T164216Z,session_end,2026-10-30T19:06:48.349888+00:00,kernel_cmdline,"BOOT_IMAGE=/boot/vmlinuz-5.15.0-198-generic root=UUID=44c9819c-255e-4b5b-8723-c622290b92d2 ro quiet splash isolcpus=domain,managed_irq,7 irqaffinity=0-6"
+20261030T164216Z,session_end,2026-10-30T19:06:48.349888+00:00,isolated_cpus,7
+20261030T164216Z,session_end,2026-10-30T19:06:48.349888+00:00,nohz_full_cpus,unavailable: No such file or directory
+20261030T164216Z,session_end,2026-10-30T19:06:48.349888+00:00,smt_control,notsupported
+20261030T164216Z,session_end,2026-10-30T19:06:48.349888+00:00,online_cpus,0-7
+20261030T164216Z,session_end,2026-10-30T19:06:48.349888+00:00,benchmark_cpu,7
+20261030T164216Z,session_end,2026-10-30T19:06:48.349888+00:00,irqs_effective_on_cpu7,1
+20261030T164216Z,session_end,2026-10-30T19:06:48.349888+00:00,irqbalance,active
+20261030T164216Z,session_end,2026-10-30T19:06:48.349888+00:00,governor,schedutil
+20261030T164216Z,session_end,2026-10-30T19:06:48.349888+00:00,scaling_driver,acpi-cpufreq
+20261030T164216Z,session_end,2026-10-30T19:06:48.349888+00:00,scaling_min_khz,2200000
+20261030T164216Z,session_end,2026-10-30T19:06:48.349888+00:00,scaling_max_khz,3200000
+20261030T164216Z,session_end,2026-10-30T19:06:48.349888+00:00,scaling_cur_khz,1834304
+20261030T164216Z,session_end,2026-10-30T19:06:48.349888+00:00,boost,0
+20261030T164216Z,session_end,2026-10-30T19:06:48.349888+00:00,loadavg,4.02 4.16 4.15 1/1307 27987
+20261030T164216Z,session_end,2026-10-30T19:06:48.349888+00:00,python,3.10.12
+20261030T164216Z,session_end,2026-10-30T19:06:48.349888+00:00,git_commit,62f15ee3fb12e594bbc2dcc5ae841d99321a01e4
+20261030T164216Z,session_end,2026-10-30T19:06:48.349888+00:00,git_dirty_files,8
+20261030T164216Z,session_end,2026-10-30T19:06:48.349888+00:00,binary,/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/benchmark
+20261030T164216Z,session_end,2026-10-30T19:06:48.349888+00:00,binary_sha256,80f115bef39327737ae0216fea3725bf3680735608ddde7af3c65901883d17a0
+20261030T164216Z,session_end,2026-10-30T19:06:48.349888+00:00,config_sha256,2e657a69e19114b568a0d665500115986f01f754cd93e8ea9a2d031dd4bae7b8
+20261030T164216Z,session_end,2026-10-30T19:06:49.396258+00:00,session_elapsed_s,8672.931359601003

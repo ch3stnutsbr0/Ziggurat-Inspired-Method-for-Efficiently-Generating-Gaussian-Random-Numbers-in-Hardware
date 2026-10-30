@@ -1,0 +1,38 @@
+experiment_id: experiment13
+output_dir: experiments/results/experiment13   # relative to the repository root
+binary: c/benchmark                            # build with: make -C c CC=gcc O2
+
+# Multi-seed repeat of the Experiment 11 grid. Same grid, PRNG, samples, bins and tests as Experiment 11.
+prng: xoshiro256plus
+uniform_buffer_bytes: 2147483648   # 2 GiB precomputed buffer per seed (performance phase only)
+cache_dir: null                    # where the per-seed uniform cache lives; null = system temp dir
+
+layers: [8, 16, 32, 64, 128, 256]
+heads: [0, 1, 2, 3, 4]
+tails: [0, 1, 2, 3, 4]
+include_classical: true            # Classical Ziggurat at every N
+samples: 33554432                  # 2^25 Gaussian samples per run
+warmup: 100000                     # timed runs only; outside timing, stream resets to the seed afterward
+
+performance:
+  enabled: true
+  seeds: [1, 2, 3, 4, 5]
+  repetitions: 5                   # timed runs per configuration per seed
+  cpu: 7                           # every timed run is wrapped in taskset -c <cpu>
+  require_isolation: true          # abort unless <cpu> is listed in /sys/devices/system/cpu/isolated
+  require_boost: 0                 # abort unless /sys/devices/system/cpu/cpufreq/boost equals this; null = no check
+  require_governor: null           # e.g. performance; null = no check (the governor is recorded either way)
+  shuffle_seed: 2026               # run order is shuffled per seed and repetition, deterministically
+
+validation:
+  enabled: true
+  seeds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+          21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+  include_classical: true          # Classical as the control (should reject at about the 5% rate)
+  uniform_mode: inline             # inline xoshiro256+: bit-identical stream to the precomputed buffer, no 2 GiB cache
+  workers: 4                       # parallel validations; run after all timing is finished
+  significance_level: 0.05
+  chi_square:
+    bins: 100                      # interior bins; two unbounded tail bins are added
+    range: [-5.0, 5.0]
+    minimum_expected_count: 5

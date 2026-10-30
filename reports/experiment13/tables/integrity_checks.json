@@ -1,0 +1,63 @@
+{
+  "timed_runs_total": 3900,
+  "timed_runs_ok": 3900,
+  "timed_config_seed_pairs": 780,
+  "timed_pairs_with_identical_checksums_across_repetitions": 780,
+  "validation_rows_ok": 4680,
+  "validation_rows_compared_with_timed_stream": 780,
+  "validation_rows_matching_timed_stream": 780,
+  "seed1_rows_compared_with_experiment11": 150,
+  "seed1_rows_identical_to_experiment11": 150,
+  "chi2_degrees_of_freedom_values": [
+    101
+  ],
+  "environment_boost": {
+    "20261030T150130Z/session_start": "0",
+    "20261030T150130Z/performance_seed1_end": "0",
+    "20261030T150130Z/performance_seed2_end": "0",
+    "20261030T150130Z/performance_seed3_end": "0",
+    "20261030T150130Z/performance_seed4_end": "0",
+    "20261030T150130Z/performance_seed5_end": "0",
+    "20261030T150130Z/session_end": "0",
+    "20261030T164216Z/session_start": "0",
+    "20261030T164216Z/session_end": "0"
+  },
+  "environment_governor": {
+    "20261030T150130Z/session_start": "schedutil",
+    "20261030T150130Z/performance_seed1_end": "schedutil",
+    "20261030T150130Z/performance_seed2_end": "schedutil",
+    "20261030T150130Z/performance_seed3_end": "schedutil",
+    "20261030T150130Z/performance_seed4_end": "schedutil",
+    "20261030T150130Z/performance_seed5_end": "schedutil",
+    "20261030T150130Z/session_end": "schedutil",
+    "20261030T164216Z/session_start": "schedutil",
+    "20261030T164216Z/session_end": "schedutil"
+  },
+  "environment_scaling_max_khz": {
+    "20261030T150130Z/session_start": "3200000",
+    "20261030T150130Z/performance_seed1_end": "3200000",
+    "20261030T150130Z/performance_seed2_end": "3200000",
+    "20261030T150130Z/performance_seed3_end": "3200000",
+    "20261030T150130Z/performance_seed4_end": "3200000",
+    "20261030T150130Z/performance_seed5_end": "3200000",
+    "20261030T150130Z/session_end": "3200000",
+    "20261030T164216Z/session_start": "3200000",
+    "20261030T164216Z/session_end": "3200000"
+  },
+  "environment_isolated_cpus": {
+    "20261030T150130Z/session_start": "7",
+    "20261030T150130Z/performance_seed1_end": "7",
+    "20261030T150130Z/performance_seed2_end": "7",
+    "20261030T150130Z/performance_seed3_end": "7",
+    "20261030T150130Z/performance_seed4_end": "7",
+    "20261030T150130Z/performance_seed5_end": "7",
+    "20261030T150130Z/session_end": "7",
+    "20261030T164216Z/session_start": "7",
+    "20261030T164216Z/session_end": "7"
+  },
+  "timed_cpu_khz_before_run_min_median_max": [
+    1716724.0,
+    3199883.0,
+    3325609.0
+  ]
+}
