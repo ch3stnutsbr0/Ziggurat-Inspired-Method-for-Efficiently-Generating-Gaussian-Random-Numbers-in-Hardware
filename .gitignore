@@ -13,6 +13,7 @@ __pycache__/
 /c/test_basic_counters
 /c/test_prng_profile
 /c/benchmark_test
+/c/experiment14_timing
 /c/test_prng_selection
 /c/test_uniform_buffer
 /experiments/results/linux_ryzen2700x/

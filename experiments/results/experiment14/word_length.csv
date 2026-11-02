@@ -1,0 +1,157 @@
+config_id,algorithm,N,H,T,rule,reference_config,delta_double,ks_double,b_star_delta,b_star_ks,b_match,b_star,bits_at_b_star
+trap_N8_H0_T0,trapezoid,8,0,0,rounding changes delta by < 1%,,0.0019190533155181914,nan,8,,,8,240
+trap_N8_H0_T1,trapezoid,8,0,1,rounding changes delta by < 1%,,0.00023020844561241887,nan,8,,,8,480
+trap_N8_H0_T2,trapezoid,8,0,2,rounding changes delta by < 1%,,8.823359062186587e-05,nan,11,,,11,936
+trap_N8_H0_T3,trapezoid,8,0,3,rounding changes delta by < 1%,,7.476437365120923e-05,nan,13,,,13,1440
+trap_N8_H0_T4,trapezoid,8,0,4,rounding changes delta by < 1%,,7.327383296240466e-05,nan,13,,,13,1800
+trap_N8_H1_T0,trapezoid,8,1,0,rounding changes delta by < 1%,,0.0018557751676780922,nan,8,,,8,480
+trap_N8_H1_T1,trapezoid,8,1,1,rounding changes delta by < 1%,,0.00016693029778523855,nan,9,,,9,792
+trap_N8_H1_T2,trapezoid,8,1,2,rounding changes delta and KS by < 1%,,2.4955442795614056e-05,0.00011684989165745147,10,14,,14,1536
+trap_N8_H1_T3,trapezoid,8,1,3,rounding changes delta by < 1%,,1.148622582505398e-05,nan,11,,,11,1560
+trap_N8_H1_T4,trapezoid,8,1,4,rounding changes delta by < 1%,,9.995685136245955e-06,nan,11,,,11,1872
+trap_N8_H2_T0,trapezoid,8,2,0,rounding changes delta by < 1%,,0.001854270931546253,nan,8,,,8,720
+trap_N8_H2_T1,trapezoid,8,2,1,rounding changes delta by < 1%,,0.0001654260616535452,nan,9,,,9,1056
+trap_N8_H2_T2,trapezoid,8,2,2,rounding changes delta by < 1%,,2.3451206663945003e-05,nan,10,,,10,1440
+trap_N8_H2_T3,trapezoid,8,2,3,rounding changes delta by < 1%,,9.98198969338498e-06,nan,11,,,11,1872
+trap_N8_H2_T4,trapezoid,8,2,4,rounding changes delta by < 1%,,8.491449004586806e-06,nan,11,,,11,2184
+trap_N8_H3_T0,trapezoid,8,3,0,rounding changes delta by < 1%,,0.0018542589738800848,nan,8,,,8,960
+trap_N8_H3_T1,trapezoid,8,3,1,rounding changes delta by < 1%,,0.00016541410398736306,nan,9,,,9,1320
+trap_N8_H3_T2,trapezoid,8,3,2,rounding changes delta by < 1%,,2.3439248997766782e-05,nan,10,,,10,1728
+trap_N8_H3_T3,trapezoid,8,3,3,rounding changes delta by < 1%,,9.970032027197175e-06,nan,11,,,11,2184
+trap_N8_H3_T4,trapezoid,8,3,4,rounding changes delta by < 1%,,8.479491338386123e-06,nan,11,,,11,2496
+trap_N8_H4_T0,trapezoid,8,4,0,rounding changes delta by < 1%,,0.0018542589675884667,nan,8,,,8,1200
+trap_N8_H4_T1,trapezoid,8,4,1,rounding changes delta by < 1%,,0.00016541409769574877,nan,9,,,9,1584
+trap_N8_H4_T2,trapezoid,8,4,2,rounding changes delta by < 1%,,2.3439242706145763e-05,nan,10,,,10,2016
+trap_N8_H4_T3,trapezoid,8,4,3,rounding changes delta by < 1%,,9.970025735577802e-06,nan,11,,,11,2496
+trap_N8_H4_T4,trapezoid,8,4,4,rounding changes delta by < 1%,,8.479485046674812e-06,nan,11,,,11,2808
+trap_N16_H0_T0,trapezoid,16,0,0,rounding changes delta by < 1%,,0.000821142354722506,nan,8,,,8,480
+trap_N16_H0_T1,trapezoid,16,0,1,rounding changes delta by < 1%,,5.674393627328301e-05,nan,10,,,10,1152
+trap_N16_H0_T2,trapezoid,16,0,2,rounding changes delta by < 1%,,2.5974655753353056e-05,nan,10,,,10,1728
+trap_N16_H0_T3,trapezoid,16,0,3,rounding changes delta by < 1%,,2.447291078254581e-05,nan,10,,,10,2304
+trap_N16_H0_T4,trapezoid,16,0,4,rounding changes delta by < 1%,,2.4471295054502583e-05,nan,10,,,10,2880
+trap_N16_H1_T0,trapezoid,16,1,0,rounding changes delta by < 1%,,0.0007987450443396498,nan,8,,,8,960
+trap_N16_H1_T1,trapezoid,16,1,1,rounding changes delta by < 1%,,3.4346625891781165e-05,nan,10,,,10,1728
+trap_N16_H1_T2,trapezoid,16,1,2,rounding changes delta and KS by < 1%,,3.5773453719291964e-06,2.9750279692569714e-05,13,15,,15,3264
+trap_N16_H1_T3,trapezoid,16,1,3,rounding changes delta by < 1%,,2.0756004010757363e-06,nan,13,,,13,3600
+trap_N16_H1_T4,trapezoid,16,1,4,rounding changes delta by < 1%,,2.0739846730589566e-06,nan,13,,,13,4320
+trap_N16_H2_T0,trapezoid,16,2,0,rounding changes delta by < 1%,,0.0007985478048098053,nan,8,,,8,1440
+trap_N16_H2_T1,trapezoid,16,2,1,rounding changes delta by < 1%,,3.4149386361953133e-05,nan,10,,,10,2304
+trap_N16_H2_T2,trapezoid,16,2,2,rounding changes delta by < 1%,,3.380105842076416e-06,nan,13,,,13,3600
+trap_N16_H2_T3,trapezoid,16,2,3,rounding changes delta by < 1%,,1.8783608712664358e-06,nan,13,,,13,4320
+trap_N16_H2_T4,trapezoid,16,2,4,rounding changes delta by < 1%,,1.8767451432279962e-06,nan,13,,,13,5040
+trap_N16_H3_T0,trapezoid,16,3,0,rounding changes delta by < 1%,,0.0007985478032145119,nan,8,,,8,1920
+trap_N16_H3_T1,trapezoid,16,3,1,rounding changes delta by < 1%,,3.4149384766649234e-05,nan,10,,,10,2880
+trap_N16_H3_T2,trapezoid,16,3,2,rounding changes delta by < 1%,,3.3801042467771794e-06,nan,13,,,13,4320
+trap_N16_H3_T3,trapezoid,16,3,3,rounding changes delta by < 1%,,1.878359275970306e-06,nan,13,,,13,5040
+trap_N16_H3_T4,trapezoid,16,3,4,rounding changes delta by < 1%,,1.8767435479415536e-06,nan,13,,,13,5760
+trap_N16_H4_T0,trapezoid,16,4,0,rounding changes delta by < 1%,,0.0007985478032145119,nan,8,,,8,2400
+trap_N16_H4_T1,trapezoid,16,4,1,rounding changes delta by < 1%,,3.4149384766649905e-05,nan,10,,,10,3456
+trap_N16_H4_T2,trapezoid,16,4,2,rounding changes delta by < 1%,,3.380104246784608e-06,nan,13,,,13,5040
+trap_N16_H4_T3,trapezoid,16,4,3,rounding changes delta by < 1%,,1.8783592759642463e-06,nan,13,,,13,5760
+trap_N16_H4_T4,trapezoid,16,4,4,rounding changes delta by < 1%,,1.8767435479421654e-06,nan,13,,,13,6480
+trap_N32_H0_T0,trapezoid,32,0,0,rounding changes delta by < 1%,,0.00035956832036838796,nan,8,,,8,960
+trap_N32_H0_T1,trapezoid,32,0,1,rounding changes delta by < 1%,,1.3878204671637926e-05,nan,12,,,12,2688
+trap_N32_H0_T2,trapezoid,32,0,2,rounding changes delta by < 1%,,6.944934229560091e-06,nan,13,,,13,4320
+trap_N32_H0_T3,trapezoid,32,0,3,rounding changes delta by < 1%,,6.932148840243777e-06,nan,13,,,13,5760
+trap_N32_H0_T4,trapezoid,32,0,4,rounding changes delta by < 1%,,6.932148840257889e-06,nan,13,,,13,7200
+trap_N32_H1_T0,trapezoid,32,1,0,rounding changes delta by < 1%,,0.00035336578197927654,nan,8,,,8,1920
+trap_N32_H1_T1,trapezoid,32,1,1,rounding changes delta by < 1%,,7.675666282674033e-06,nan,12,,,12,4032
+trap_N32_H1_T2,trapezoid,32,1,2,rounding changes delta and KS by < 1%,,7.423958405943556e-07,8.196392973280897e-06,13,12,,13,5760
+trap_N32_H1_T3,trapezoid,32,1,3,rounding changes delta by < 1%,,7.296104513147087e-07,nan,13,,,13,7200
+trap_N32_H1_T4,trapezoid,32,1,4,rounding changes delta by < 1%,,7.296104512901607e-07,nan,13,,,13,8640
+trap_N32_H2_T0,trapezoid,32,2,0,rounding changes delta by < 1%,,0.00035336577960015425,nan,8,,,8,2880
+trap_N32_H2_T1,trapezoid,32,2,1,rounding changes delta by < 1%,,7.675663903554736e-06,nan,12,,,12,5376
+trap_N32_H2_T2,trapezoid,32,2,2,rounding changes delta by < 1%,,7.423934614528952e-07,nan,13,,,13,7200
+trap_N32_H2_T3,trapezoid,32,2,3,rounding changes delta by < 1%,,7.296080721875402e-07,nan,13,,,13,8640
+trap_N32_H2_T4,trapezoid,32,2,4,rounding changes delta by < 1%,,7.296080721875804e-07,nan,13,,,13,10080
+trap_N32_H3_T0,trapezoid,32,3,0,rounding changes delta by < 1%,,0.00035336577960015425,nan,8,,,8,3840
+trap_N32_H3_T1,trapezoid,32,3,1,rounding changes delta by < 1%,,7.675663903545785e-06,nan,12,,,12,6720
+trap_N32_H3_T2,trapezoid,32,3,2,rounding changes delta by < 1%,,7.423934614592064e-07,nan,13,,,13,8640
+trap_N32_H3_T3,trapezoid,32,3,3,rounding changes delta by < 1%,,7.296080721875421e-07,nan,13,,,13,10080
+trap_N32_H3_T4,trapezoid,32,3,4,rounding changes delta by < 1%,,7.296080721674089e-07,nan,13,,,13,11520
+trap_N32_H4_T0,trapezoid,32,4,0,rounding changes delta by < 1%,,0.00035336577960015425,nan,8,,,8,4800
+trap_N32_H4_T1,trapezoid,32,4,1,rounding changes delta by < 1%,,7.675663903548133e-06,nan,12,,,12,8064
+trap_N32_H4_T2,trapezoid,32,4,2,rounding changes delta by < 1%,,7.423934614564041e-07,nan,13,,,13,10080
+trap_N32_H4_T3,trapezoid,32,4,3,rounding changes delta by < 1%,,7.296080721922183e-07,nan,13,,,13,11520
+trap_N32_H4_T4,trapezoid,32,4,4,rounding changes delta by < 1%,,7.296080721674398e-07,nan,13,,,13,12960
+trap_N64_H0_T0,trapezoid,64,0,0,rounding changes delta by < 1%,,0.0001586213437298893,nan,8,,,8,1920
+trap_N64_H0_T1,trapezoid,64,0,1,rounding changes delta by < 1%,,3.1514163479158198e-06,nan,13,,,13,5760
+trap_N64_H0_T2,trapezoid,64,0,2,rounding changes delta by < 1%,,1.6480449063573081e-06,nan,13,,,13,8640
+trap_N64_H0_T3,trapezoid,64,0,3,rounding changes delta by < 1%,,1.6480449063555615e-06,nan,13,,,13,11520
+trap_N64_H0_T4,trapezoid,64,0,4,rounding changes delta by < 1%,,1.6480449063549146e-06,nan,13,,,13,14400
+trap_N64_H1_T0,trapezoid,64,1,0,rounding changes delta by < 1%,,0.00015710513404191574,nan,8,,,8,3840
+trap_N64_H1_T1,trapezoid,64,1,1,rounding changes delta by < 1%,,1.6352066599445852e-06,nan,11,,,11,7488
+trap_N64_H1_T2,trapezoid,64,1,2,rounding changes delta and KS by < 1%,,1.3183521839419464e-07,3.415459713385083e-06,16,15,,16,13824
+trap_N64_H1_T3,trapezoid,64,1,3,rounding changes delta by < 1%,,1.3183521839356882e-07,nan,16,,,16,17280
+trap_N64_H1_T4,trapezoid,64,1,4,rounding changes delta by < 1%,,1.318352183936046e-07,nan,16,,,16,20736
+trap_N64_H2_T0,trapezoid,64,2,0,rounding changes delta by < 1%,,0.00015710513244662246,nan,8,,,8,5760
+trap_N64_H2_T1,trapezoid,64,2,1,rounding changes delta by < 1%,,1.635205064651313e-06,nan,11,,,11,9984
+trap_N64_H2_T2,trapezoid,64,2,2,rounding changes delta by < 1%,,1.318336231008967e-07,nan,16,,,16,17280
+trap_N64_H2_T3,trapezoid,64,2,3,rounding changes delta by < 1%,,1.3183362309954524e-07,nan,16,,,16,20736
+trap_N64_H2_T4,trapezoid,64,2,4,rounding changes delta by < 1%,,1.3183362309938348e-07,nan,16,,,16,24192
+trap_N64_H3_T0,trapezoid,64,3,0,rounding changes delta by < 1%,,0.00015710513244662246,nan,8,,,8,7680
+trap_N64_H3_T1,trapezoid,64,3,1,rounding changes delta by < 1%,,1.635205064651244e-06,nan,11,,,11,12480
+trap_N64_H3_T2,trapezoid,64,3,2,rounding changes delta by < 1%,,1.3183362310092434e-07,nan,16,,,16,20736
+trap_N64_H3_T3,trapezoid,64,3,3,rounding changes delta by < 1%,,1.3183362309954545e-07,nan,16,,,16,24192
+trap_N64_H3_T4,trapezoid,64,3,4,rounding changes delta by < 1%,,1.3183362309979488e-07,nan,16,,,16,27648
+trap_N64_H4_T0,trapezoid,64,4,0,rounding changes delta by < 1%,,0.0001571051324466224,nan,8,,,8,9600
+trap_N64_H4_T1,trapezoid,64,4,1,rounding changes delta by < 1%,,1.6352050646513158e-06,nan,11,,,11,14976
+trap_N64_H4_T2,trapezoid,64,4,2,rounding changes delta by < 1%,,1.3183362310093093e-07,nan,16,,,16,24192
+trap_N64_H4_T3,trapezoid,64,4,3,rounding changes delta by < 1%,,1.3183362309954588e-07,nan,16,,,16,27648
+trap_N64_H4_T4,trapezoid,64,4,4,rounding changes delta by < 1%,,1.3183362309958865e-07,nan,16,,,16,31104
+trap_N128_H0_T0,trapezoid,128,0,0,rounding changes delta and KS by < 1%,,7.165501469134609e-05,5.909131420232111e-05,9,14,,14,6144
+trap_N128_H0_T1,trapezoid,128,0,1,rounding changes delta by < 1%,,6.220200148264097e-07,nan,13,,,13,11520
+trap_N128_H0_T2,trapezoid,128,0,2,rounding changes delta by < 1%,,5.077957626275774e-07,nan,13,,,13,17280
+trap_N128_H0_T3,trapezoid,128,0,3,rounding changes delta by < 1%,,5.077957626263532e-07,nan,13,,,13,23040
+trap_N128_H0_T4,trapezoid,128,0,4,rounding changes delta by < 1%,,5.07795762633667e-07,nan,13,,,13,28800
+trap_N128_H1_T0,trapezoid,128,1,0,rounding changes delta by < 1%,,7.126592918513486e-05,nan,9,,,9,8448
+trap_N128_H1_T1,trapezoid,128,1,1,rounding changes delta by < 1%,,2.32934509047735e-07,nan,13,,,13,17280
+trap_N128_H1_T2,trapezoid,128,1,2,rounding changes delta and KS by < 1%,,1.187102568500845e-07,1.541088852002881e-06,14,17,,17,29184
+trap_N128_H1_T3,trapezoid,128,1,3,rounding changes delta by < 1%,,1.1871025684663582e-07,nan,14,,,14,30720
+trap_N128_H1_T4,trapezoid,128,1,4,rounding changes delta by < 1%,,1.1871025683744635e-07,nan,14,,,14,36864
+trap_N128_H2_T0,trapezoid,128,2,0,rounding changes delta by < 1%,,7.126592918536953e-05,nan,9,,,9,12672
+trap_N128_H2_T1,trapezoid,128,2,1,rounding changes delta by < 1%,,2.3293450904774257e-07,nan,13,,,13,23040
+trap_N128_H2_T2,trapezoid,128,2,2,rounding changes delta by < 1%,,1.1871025685008469e-07,nan,14,,,14,30720
+trap_N128_H2_T3,trapezoid,128,2,3,rounding changes delta by < 1%,,1.187102568466561e-07,nan,14,,,14,36864
+trap_N128_H2_T4,trapezoid,128,2,4,rounding changes delta by < 1%,,1.1871025684655636e-07,nan,14,,,14,43008
+trap_N128_H3_T0,trapezoid,128,3,0,rounding changes delta by < 1%,,7.126592918513494e-05,nan,9,,,9,16896
+trap_N128_H3_T1,trapezoid,128,3,1,rounding changes delta by < 1%,,2.329345090477394e-07,nan,13,,,13,28800
+trap_N128_H3_T2,trapezoid,128,3,2,rounding changes delta by < 1%,,1.1871025685008612e-07,nan,14,,,14,36864
+trap_N128_H3_T3,trapezoid,128,3,3,rounding changes delta by < 1%,,1.1871025684668153e-07,nan,14,,,14,43008
+trap_N128_H3_T4,trapezoid,128,3,4,rounding changes delta by < 1%,,1.187102568466773e-07,nan,14,,,14,49152
+trap_N128_H4_T0,trapezoid,128,4,0,rounding changes delta by < 1%,,7.126592918536953e-05,nan,9,,,9,21120
+trap_N128_H4_T1,trapezoid,128,4,1,rounding changes delta by < 1%,,2.32934509047735e-07,nan,13,,,13,34560
+trap_N128_H4_T2,trapezoid,128,4,2,rounding changes delta by < 1%,,1.1871025685009244e-07,nan,14,,,14,43008
+trap_N128_H4_T3,trapezoid,128,4,3,rounding changes delta by < 1%,,1.1871025684665793e-07,nan,14,,,14,49152
+trap_N128_H4_T4,trapezoid,128,4,4,rounding changes delta and KS by < 1%,,1.1871025684667761e-07,1.5410888520306365e-06,14,17,,17,65664
+trap_N256_H0_T0,trapezoid,256,0,0,rounding changes delta by < 1%,,3.253253244026115e-05,nan,10,,,10,9216
+trap_N256_H0_T1,trapezoid,256,0,1,rounding changes delta by < 1%,,2.6144565536778347e-07,nan,14,,,14,24576
+trap_N256_H0_T2,trapezoid,256,0,2,rounding changes delta by < 1%,,2.5982992736965007e-07,nan,14,,,14,36864
+trap_N256_H0_T3,trapezoid,256,0,3,rounding changes delta by < 1%,,2.5982992736968903e-07,nan,14,,,14,49152
+trap_N256_H0_T4,trapezoid,256,0,4,rounding changes delta by < 1%,,2.598299273683578e-07,nan,14,,,14,61440
+trap_N256_H1_T0,trapezoid,256,1,0,rounding changes delta by < 1%,,3.233529123329603e-05,nan,10,,,10,18432
+trap_N256_H1_T1,trapezoid,256,1,1,rounding changes delta by < 1%,,6.420444836232578e-08,nan,14,,,14,36864
+trap_N256_H1_T2,trapezoid,256,1,2,rounding changes delta and KS by < 1%,,6.258872035685254e-08,7.963844244895935e-07,14,17,,17,58368
+trap_N256_H1_T3,trapezoid,256,1,3,rounding changes delta by < 1%,,6.258872035765418e-08,nan,14,,,14,61440
+trap_N256_H1_T4,trapezoid,256,1,4,rounding changes delta by < 1%,,6.258872036335832e-08,nan,14,,,14,73728
+trap_N256_H2_T0,trapezoid,256,2,0,rounding changes delta by < 1%,,3.233529123325524e-05,nan,10,,,10,27648
+trap_N256_H2_T1,trapezoid,256,2,1,rounding changes delta by < 1%,,6.420444836232267e-08,nan,14,,,14,49152
+trap_N256_H2_T2,trapezoid,256,2,2,rounding changes delta by < 1%,,6.25887203568542e-08,nan,14,,,14,61440
+trap_N256_H2_T3,trapezoid,256,2,3,rounding changes delta by < 1%,,6.258872036008185e-08,nan,14,,,14,73728
+trap_N256_H2_T4,trapezoid,256,2,4,rounding changes delta by < 1%,,6.2588720359047e-08,nan,14,,,14,86016
+trap_N256_H3_T0,trapezoid,256,3,0,rounding changes delta by < 1%,,3.233529123329603e-05,nan,10,,,10,36864
+trap_N256_H3_T1,trapezoid,256,3,1,rounding changes delta by < 1%,,6.420444836233112e-08,nan,14,,,14,61440
+trap_N256_H3_T2,trapezoid,256,3,2,rounding changes delta by < 1%,,6.258872035685226e-08,nan,14,,,14,73728
+trap_N256_H3_T3,trapezoid,256,3,3,rounding changes delta by < 1%,,6.258872036008136e-08,nan,14,,,14,86016
+trap_N256_H3_T4,trapezoid,256,3,4,rounding changes delta by < 1%,,6.258872036008147e-08,nan,14,,,14,98304
+trap_N256_H4_T0,trapezoid,256,4,0,rounding changes delta by < 1%,,3.2335291233255226e-05,nan,10,,,10,46080
+trap_N256_H4_T1,trapezoid,256,4,1,rounding changes delta by < 1%,,6.420444836232578e-08,nan,14,,,14,73728
+trap_N256_H4_T2,trapezoid,256,4,2,rounding changes delta by < 1%,,6.258872035685245e-08,nan,14,,,14,86016
+trap_N256_H4_T3,trapezoid,256,4,3,rounding changes delta by < 1%,,6.258872036008147e-08,nan,14,,,14,98304
+trap_N256_H4_T4,trapezoid,256,4,4,rounding changes delta and KS by < 1%,,6.25887203600815e-08,7.963844244895935e-07,14,17,,17,131328
+classical_N8,basic,8,0,0,rounding error < 1% of trap_N8_H1_T2 (b_match: equal to it),trap_N8_H1_T2,2.1242378408526355e-25,2.7755575615628914e-16,,,9,16,304
+classical_N16,basic,16,0,0,rounding error < 1% of trap_N16_H1_T2 (b_match: equal to it),trap_N16_H1_T2,1.7187954304907443e-25,2.220446049250313e-16,,,12,18,658
+classical_N32,basic,32,0,0,rounding error < 1% of trap_N32_H1_T2 (b_match: equal to it),trap_N32_H1_T2,1.3643026178321181e-25,5.273559366969494e-16,,,13,19,1363
+classical_N64,basic,64,0,0,rounding error < 1% of trap_N64_H1_T2 (b_match: equal to it),trap_N64_H1_T2,1.7613114704207831e-25,3.3306690738754696e-16,,,14,21,2965
+classical_N128,basic,128,0,0,rounding error < 1% of trap_N128_H1_T2 (b_match: equal to it),trap_N128_H1_T2,7.55078721183074e-26,5.551115123125783e-16,,,15,23,6423
+classical_N256,basic,256,0,0,rounding error < 1% of trap_N256_H1_T2 (b_match: equal to it),trap_N256_H1_T2,3.349017419649964e-25,4.996003610813204e-16,,,16,24,13336

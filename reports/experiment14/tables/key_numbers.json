@@ -1,0 +1,44 @@
+{
+  "b_star_trapezoid_by_N": {
+    "8": {
+      "min": 8,
+      "median": 10.0,
+      "max": 14
+    },
+    "16": {
+      "min": 8,
+      "median": 10.0,
+      "max": 15
+    },
+    "32": {
+      "min": 8,
+      "median": 13.0,
+      "max": 13
+    },
+    "64": {
+      "min": 8,
+      "median": 13.0,
+      "max": 16
+    },
+    "128": {
+      "min": 9,
+      "median": 14.0,
+      "max": 17
+    },
+    "256": {
+      "min": 10,
+      "median": 14.0,
+      "max": 17
+    }
+  },
+  "timing_runs_ok": 90,
+  "counters_multiplexed": 0,
+  "checksums_match_exp13": 90,
+  "cpus": [
+    7
+  ],
+  "tsc_hz": 3199982080.277783,
+  "overhead_ticks": [
+    96.0
+  ]
+}
