@@ -1,0 +1,14 @@
+experiment_id: experiment16
+output_dir: experiments/results/experiment16   # relative to the repository root
+
+# Casual inline-PRNG throughput: Classical vs Trapezoid, xoshiro256+ (one 64-bit call per uniform)
+# vs bit-packed Philox2x64-10 (one 128-bit call per sample on the common path). No validation.
+layers: [8, 16, 32, 64, 128, 256]
+head: 2
+tail: 1
+variants: [classical_xoshiro, trapezoid_xoshiro, classical_philox, trapezoid_philox, trapezoid_philox_2call]   # _2call: wedge draws a 2nd block
+samples: 16777216        # per timed repeat (2^24)
+repeats: 7               # repeats are interleaved across variants (round robin) to spread drift
+count_samples: 4194304   # untimed pass for PRNG calls per sample and moments
+seed: 1
+cpu: 3                   # taskset core; null to skip pinning
