@@ -1,0 +1,27 @@
+experiment_id: experiment15
+output_dir: experiments/results/experiment15   # relative to the repository root
+
+# Exact (analytical) theory of the Trapezoid sampler over the full grid; no random numbers are generated.
+# Tables come from c/ziggurat_trapezoid.c through experiment12_dump_tables.c (same exporter as Experiment 12).
+layers: [8, 16, 32, 64, 128, 256]
+heads: [0, 1, 2, 3, 4]
+tails: [0, 1, 2, 3, 4]
+
+significance_level: 0.05
+chi_square:                  # Experiments 10/11 binning, for the binned divergence and its detection size
+  bins: 100
+  range: [-5.0, 5.0]
+ks_grid:                     # |x| grid for the exact KS distance (every breakpoint is added)
+  max_x: 8.0
+  points: 400001
+quadrature:                  # Gauss-Legendre on every linear piece of the density, split to this width
+  order: 12
+  max_width: 0.02
+regions: [0, 1, 2, 3, 4, 5]  # |x| edges for the divergence decomposition (last region runs to infinity)
+tail_curve:                  # t grid for the reach analysis and the saved curves
+  max_t: 10.0
+  step: 0.001
+  save_every: 50             # every 50th grid point (0.05) goes to tail_curves.csv
+  tail_start: 2.0            # tail-count tests P(|X| > t) only for t >= tail_start
+reach_tolerances: [0.01, 0.05, 0.10]   # epsilon for |ratio - 1| <= epsilon
+sample_budgets_log2: [20, 24, 28, 32, 36, 40, 44]   # n for the sample-size-dependent reach R(n)

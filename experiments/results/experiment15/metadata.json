@@ -1,0 +1,99 @@
+{
+  "experiment_id": "experiment15",
+  "created_utc": "2026-11-05T20:49:09.919943+00:00",
+  "config": {
+    "experiment_id": "experiment15",
+    "output_dir": "experiments/results/experiment15",
+    "layers": [
+      8,
+      16,
+      32,
+      64,
+      128,
+      256
+    ],
+    "heads": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "tails": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "significance_level": 0.05,
+    "chi_square": {
+      "bins": 100,
+      "range": [
+        -5.0,
+        5.0
+      ]
+    },
+    "ks_grid": {
+      "max_x": 8.0,
+      "points": 400001
+    },
+    "quadrature": {
+      "order": 12,
+      "max_width": 0.02
+    },
+    "regions": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "tail_curve": {
+      "max_t": 10.0,
+      "step": 0.001,
+      "save_every": 50,
+      "tail_start": 2.0
+    },
+    "reach_tolerances": [
+      0.01,
+      0.05,
+      0.1
+    ],
+    "sample_budgets_log2": [
+      20,
+      24,
+      28,
+      32,
+      36,
+      40,
+      44
+    ]
+  },
+  "method": "exact piecewise-linear |X| density from c/ziggurat_trapezoid.c tables; no sampling",
+  "random_numbers_generated": 0,
+  "exporter_build_command": [
+    "gcc",
+    "-std=c11",
+    "-Wall",
+    "-Wextra",
+    "-pedantic",
+    "-O2",
+    "-I",
+    "/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c",
+    "/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/experiments/experiment12_dump_tables.c",
+    "-o",
+    "/tmp/experiment15-a9ow_v99/dump_tables",
+    "-lm"
+  ],
+  "sampler_source_sha256": "a8f3aa0ff2b4fe23984c4a37c4ce68f66f7d36faccb7ec8fe58072d98e8cff74",
+  "exporter_source_sha256": "909c9e6724ef141bb6c5bd9c9bfb32a936f43904d87ae543c26c0c207247ef02",
+  "git_commit": "fdd3b939e2e80a6e895641e3160108b44e611d43",
+  "git_dirty_files": 9,
+  "gcc": "gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0",
+  "python": "3.10.12",
+  "numpy": "2.2.6",
+  "scipy": "1.15.3",
+  "configurations": 150
+}
