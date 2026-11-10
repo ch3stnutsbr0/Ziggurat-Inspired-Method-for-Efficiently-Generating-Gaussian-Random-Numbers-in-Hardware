@@ -71,3 +71,56 @@ double zb_gaussian_philox(void) {
     memcpy(&mag, &bits, sizeof mag);
     return mag;
 }
+
+/* Fast path + out-of-line slow path (the Marsaglia-Tsang code layout). Inline: one block, an
+ * upper layer (layer >= 1) and a candidate inside the strip's inner rectangle
+ * (cand <= x[layer]), the common case. Everything else (the base strip, i.e. the base rectangle
+ * and the exponential tail, and the boundary-strip exp() test with its retries) is in an
+ * out-of-line cold function that continues the attempt it is given and then loops exactly like
+ * zb_gaussian_philox(). Blocks are consumed in the same order, so the output is bit-identical
+ * to zb_gaussian_philox(). */
+static inline double zb_sign(double mag, uint64_t A) {
+    uint64_t bits;
+    memcpy(&bits, &mag, sizeof bits);
+    bits |= ((A >> p_sign) & 1) << 63;
+    memcpy(&mag, &bits, sizeof mag);
+    return mag;
+}
+
+__attribute__((noinline, cold)) static double zb_slow(uint64_t A, uint64_t B) {
+    for (;;) {
+        const uint64_t m = A & MASK53;
+        const unsigned layer = (unsigned)(A >> p_shift);
+        if (layer == 0) {
+            double mag;
+            if ((B >> 11) < rect_thr) {
+                mag = (double)m * cutoff_s;
+            } else {
+                for (;;) {
+                    philox2x64_block c = philox2x64_next(&prng);
+                    double xt = -log(1.0 - (double)(c.v[0] >> 11) * 0x1p-53) / cutoff;
+                    double yt = -log(1.0 - (double)(c.v[1] >> 11) * 0x1p-53);
+                    if (2 * yt > xt * xt) { mag = cutoff + xt; break; }
+                }
+            }
+            return zb_sign(mag, A);
+        }
+        const double cand = (double)m * xs[layer - 1];
+        if (cand <= x[layer]) return zb_sign(cand, A);
+        const double height = y[layer - 1] + (y[layer] - y[layer - 1]) * ((double)(B >> 11) * 0x1p-53);
+        if (height <= exp(-cand * cand / 2.0)) return zb_sign(cand, A);
+        philox2x64_block b = philox2x64_next(&prng);            /* rejected: next attempt */
+        A = b.v[0]; B = b.v[1];
+    }
+}
+
+double zb_gaussian_philox_fast(void) {
+    const philox2x64_block b = philox2x64_next(&prng);
+    const uint64_t A = b.v[0];
+    const unsigned layer = (unsigned)(A >> p_shift);
+    if (__builtin_expect(layer != 0, 1)) {
+        const double cand = (double)(A & MASK53) * xs[layer - 1];
+        if (__builtin_expect(cand <= x[layer], 1)) return zb_sign(cand, A);
+    }
+    return zb_slow(A, b.v[1]);
+}

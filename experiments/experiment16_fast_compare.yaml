@@ -1,0 +1,16 @@
+experiment_id: experiment16
+output_dir: experiments/results/experiment16_fast_compare   # relative to the repository root
+
+# Fast path vs fast path: both samplers rewritten with the common case inline and the rare cases
+# in an out-of-line cold function (bit-identical output to their general versions).
+# Classical: inner-rectangle accept inline; base strip, tail and exp() test out of line.
+# Trapezoid: base case inline; head/tail refinement out of line. Casual timing, no validation.
+layers: [8, 16, 32, 64, 128, 256]
+head: 1
+tail: 2
+variants: [classical_xoshiro, classical_philox, classical_philox_fast, trapezoid_philox, trapezoid_philox_fast]
+samples: 16777216        # per timed repeat (2^24)
+repeats: 7               # interleaved across variants (round robin)
+count_samples: 4194304   # untimed pass for PRNG calls per sample and moments
+seed: 1
+cpu: 3                   # taskset core; null to skip pinning

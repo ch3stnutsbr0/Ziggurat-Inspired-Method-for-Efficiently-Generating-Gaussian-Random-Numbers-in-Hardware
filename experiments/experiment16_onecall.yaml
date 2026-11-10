@@ -1,0 +1,14 @@
+experiment_id: experiment16
+output_dir: experiments/results/experiment16_onecall   # relative to the repository root
+
+# One block per sample (trapezoid_philox_1call: descent indices read from word A) against the
+# fast paths and the H0/T0 base-case ceiling (trapezoid_philox_base ignores H and T).
+layers: [8, 16, 32, 64, 128, 256]
+head: 1
+tail: 2
+variants: [classical_philox, classical_philox_fast, trapezoid_philox_fast, trapezoid_philox_1call, trapezoid_philox_base]
+samples: 16777216        # per timed repeat (2^24)
+repeats: 7               # interleaved across variants (round robin)
+count_samples: 4194304   # untimed pass for PRNG calls per sample and moments
+seed: 1
+cpu: 3                   # taskset core; null to skip pinning

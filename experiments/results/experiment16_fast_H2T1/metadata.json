@@ -1,0 +1,87 @@
+{
+  "experiment_id": "experiment16",
+  "created_utc": "2026-11-09T20:28:08.136035+00:00",
+  "config": {
+    "experiment_id": "experiment16",
+    "output_dir": "experiments/results/experiment16_fast_H2T1",
+    "layers": [
+      8,
+      16,
+      32,
+      64,
+      128,
+      256
+    ],
+    "head": 2,
+    "tail": 1,
+    "variants": [
+      "classical_xoshiro",
+      "classical_philox",
+      "trapezoid_philox",
+      "trapezoid_philox_fast",
+      "trapezoid_philox_base"
+    ],
+    "samples": 16777216,
+    "repeats": 7,
+    "count_samples": 4194304,
+    "seed": 1,
+    "cpu": 3
+  },
+  "build_commands": {
+    "time": [
+      "gcc",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-O2",
+      "-I",
+      "/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c",
+      "/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/experiments/experiment16_bench.c",
+      "/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/ziggurat_basic_xoshiro256plus.c",
+      "/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/ziggurat_trapezoid_xoshiro256plus.c",
+      "/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/xoshiro256plus.c",
+      "/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/ziggurat_basic_philox.c",
+      "/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/ziggurat_trapezoid_philox.c",
+      "/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/ziggurat_trapezoid_philox_2call.c",
+      "-o",
+      "/tmp/experiment16-8t2ogtb6/bench_time",
+      "-lm"
+    ],
+    "count": [
+      "gcc",
+      "-std=c11",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-O2",
+      "-I",
+      "/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c",
+      "-DZT_TEST_PRNG_STEPS",
+      "-DPHILOX_COUNT_BLOCKS",
+      "/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/experiments/experiment16_bench.c",
+      "/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/ziggurat_basic_xoshiro256plus.c",
+      "/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/ziggurat_trapezoid_xoshiro256plus.c",
+      "/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/xoshiro256plus.c",
+      "/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/ziggurat_basic_philox.c",
+      "/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/ziggurat_trapezoid_philox.c",
+      "/home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/ziggurat_trapezoid_philox_2call.c",
+      "-o",
+      "/tmp/experiment16-8t2ogtb6/bench_count",
+      "-lm"
+    ]
+  },
+  "pinning": [
+    "taskset",
+    "-c",
+    "3"
+  ],
+  "cpu_boost": "0",
+  "governor": "schedutil",
+  "cpu": "AMD Ryzen 7 2700X Eight-Core Processor",
+  "git_commit": "2ca13254bdcd7de30fe8357caeeb9c9c57ee21d9",
+  "git_dirty_files": 17,
+  "gcc": "gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0",
+  "python": "3.10.12",
+  "isolation": "none (casual run)"
+}

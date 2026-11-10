@@ -32,6 +32,22 @@ come out near 0, 1 and 3.
   bit-identical to `zt_gaussian()`; the wedge lies on a d·2⁻³² grid (exact effect:
   `reports/experiment16/analysis/wedge_precision.py`). `-DZT_PHILOX_WEDGE_SECOND_CALL` (built as
   `c/ziggurat_trapezoid_philox_2call.c`) gives the earlier variant with a second call and 2 × 53 bits.
+- `zt_gaussian_philox_base()` (same file): base case only (H = T = 0), straight-line code with exactly
+  one Philox call per sample; bit-identical output to `zt_gaussian_philox()` at H = T = 0. Timed with
+  `--config experiments/experiment16_base.yaml` (variant `trapezoid_philox_base`).
+- `zt_gaussian_philox_fast()` (same file): base case inline, refinement in an out-of-line cold function;
+  bit-identical output to `zt_gaussian_philox()` for every H and T. Timed with
+  `--config experiments/experiment16_fast_H1T2.yaml` (and `_H2T1.yaml`), variant `trapezoid_philox_fast`.
+  Pseudocode of both samplers: `reports/experiment16/pseudocode.md`.
+- `zb_gaussian_philox_fast()` (`c/ziggurat_basic_philox.c`): Classical with the same layout (inner-rectangle
+  accept inline; base strip, tail, `exp()` test and retries out of line); bit-identical to `zb_gaussian_philox()`.
+  Fast against fast: `--config experiments/experiment16_fast_compare.yaml`.
+- `zt_gaussian_philox_1call()` (`c/ziggurat_trapezoid_philox.c`): exactly one block per sample for every H
+  and T. The descent indices are read from word A ([idx0..idx_L-1][sign][decision: D bits]), with
+  D = min(53, 63 − k(1 + max(H, T))). The test is `c/tests/test_trapezoid_philox_1call.c` (against a
+  plain reference); the exact effect of D is computed by `reports/experiment16/analysis/onecall_precision.py`.
+  Timed with `--config experiments/experiment16_onecall.yaml`.
+- Random-bit usage per step (Classical, Trapezoid base case, Trapezoid refinement): `reports/experiment16/bit_usage.md`.
 - `c/ziggurat_basic_philox.c`: Classical with the same packing (one call per attempt: layer, sign and
   position in A; the strip or base test in B; one call per exponential-tail candidate), so the comparison
   isolates the algorithm rather than the PRNG.

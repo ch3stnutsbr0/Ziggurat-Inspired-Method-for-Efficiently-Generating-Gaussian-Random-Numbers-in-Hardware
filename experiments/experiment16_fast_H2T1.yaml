@@ -1,0 +1,14 @@
+experiment_id: experiment16
+output_dir: experiments/results/experiment16_fast_H2T1   # relative to the repository root
+
+# Fast path (base case inline, refinement out of line) at H2/T1, against the general packed sampler,
+# Classical, and the base case (H = T = 0, speed ceiling). Casual timing, no validation.
+layers: [8, 16, 32, 64, 128, 256]
+head: 2
+tail: 1
+variants: [classical_xoshiro, classical_philox, trapezoid_philox, trapezoid_philox_fast, trapezoid_philox_base]
+samples: 16777216        # per timed repeat (2^24)
+repeats: 7               # interleaved across variants (round robin)
+count_samples: 4194304   # untimed pass for PRNG calls per sample and moments
+seed: 1
+cpu: 3                   # taskset core; null to skip pinning

@@ -5,6 +5,10 @@
  *   bench time  VARIANT N H T SAMPLES REPEATS SEED  -> one CSV line per repeat
  *   bench count VARIANT N H T SAMPLES SEED          -> PRNG calls per sample + moments
  * VARIANT: classical_xoshiro | trapezoid_xoshiro | classical_philox | trapezoid_philox | trapezoid_philox_2call
+ *          | trapezoid_philox_base (H, T ignored: no refinement, one call per sample)
+ *          | trapezoid_philox_fast (base case inline, refinement out of line)
+ *          | classical_philox_fast (inner-rectangle case inline, the rest out of line)
+ *          | trapezoid_philox_1call (one block per sample for every H and T)
  * The count mode needs a build with -DZT_TEST_PRNG_STEPS -DPHILOX_COUNT_BLOCKS. */
 #define _POSIX_C_SOURCE 199309L
 #include "gaussian_prng.h"
@@ -42,16 +46,22 @@ static double run(int v, uint64_t n) {
     case 2: LOOP(zb_gaussian_philox); break;
     case 3: LOOP(zt_gaussian_philox); break;
     case 4: LOOP(zt_gaussian_philox_2call); break;
+    case 5: LOOP(zt_gaussian_philox_base); break;
+    case 6: LOOP(zt_gaussian_philox_fast); break;
+    case 7: LOOP(zb_gaussian_philox_fast); break;
+    case 8: LOOP(zt_gaussian_philox_1call); break;
     }
     return s;
 }
 
 int main(int argc, char **argv) {
     static const char *names[] = {"classical_xoshiro", "trapezoid_xoshiro", "classical_philox", "trapezoid_philox",
-                                  "trapezoid_philox_2call"};
+                                  "trapezoid_philox_2call", "trapezoid_philox_base",
+                                  "trapezoid_philox_fast", "classical_philox_fast",
+                                  "trapezoid_philox_1call"};
     if (argc < 8) { fprintf(stderr, "usage: see source header\n"); return 2; }
     int timing = !strcmp(argv[1], "time"), v = -1;
-    for (int i = 0; i < 5; i++) if (!strcmp(argv[2], names[i])) v = i;
+    for (int i = 0; i < 9; i++) if (!strcmp(argv[2], names[i])) v = i;
     unsigned N = (unsigned)atoi(argv[3]), H = (unsigned)atoi(argv[4]), T = (unsigned)atoi(argv[5]);
     uint64_t n = strtoull(argv[6], NULL, 10);
     unsigned reps = timing ? (unsigned)atoi(argv[7]) : 1;
@@ -59,7 +69,9 @@ int main(int argc, char **argv) {
     if (v < 0 || (timing && argc < 9)) { fprintf(stderr, "bad arguments\n"); return 2; }
     int ok = v == 0 ? zb_init_xoshiro256plus(seed, N) : v == 1 ? zt_init_xoshiro256plus(seed, N, H, T)
            : v == 2 ? zb_init_philox(seed, N) : v == 3 ? zt_init_philox(seed, N, H, T)
-           : zt_init_philox_2call(seed, N, H, T);
+           : v == 4 ? zt_init_philox_2call(seed, N, H, T) : v == 5 ? zt_init_philox_base(seed, N)
+           : v == 6 ? zt_init_philox(seed, N, H, T) : v == 7 ? zb_init_philox(seed, N)
+           : zt_init_philox_1call(seed, N, H, T);
     if (!ok) { fprintf(stderr, "init failed\n"); return 2; }
 
     if (timing) {
@@ -77,7 +89,10 @@ int main(int argc, char **argv) {
     double s1 = 0, s2 = 0, s4 = 0;
     uint64_t c0 = philox_blocks, x0 = zt_test_prng_steps;
     double (*fn)(void) = v == 0 ? zb_gaussian_xoshiro256plus : v == 1 ? zt_gaussian_xoshiro256plus
-                       : v == 2 ? zb_gaussian_philox : v == 3 ? zt_gaussian_philox : zt_gaussian_philox_2call;
+                       : v == 2 ? zb_gaussian_philox : v == 3 ? zt_gaussian_philox
+                       : v == 4 ? zt_gaussian_philox_2call : v == 5 ? zt_gaussian_philox_base
+                       : v == 6 ? zt_gaussian_philox_fast : v == 7 ? zb_gaussian_philox_fast
+                       : zt_gaussian_philox_1call;
     for (uint64_t k = 0; k < n; k++) { double g = fn(); s1 += g; s2 += g * g; s4 += g * g * g * g; }
     double calls = v < 2 ? (double)(zt_test_prng_steps - x0) : (double)(philox_blocks - c0);
     printf("%s,%u,%u,%u,%llu,%.6f,%.6f,%.6f,%.6f,%.6f\n", names[v], N, H, T, (unsigned long long)n,

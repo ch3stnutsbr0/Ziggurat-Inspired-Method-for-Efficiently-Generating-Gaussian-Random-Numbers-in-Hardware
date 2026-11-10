@@ -102,8 +102,10 @@ def main():
                                 prng_bits_per_sample=float(c['prng_bits_per_sample'])))
         for s in summary[-len(cfg['variants']):]:
             prng = s['variant'].split('_')[1]          # trapezoid_philox_2call -> philox
-            s['speedup_vs_classical_same_prng'] = s['median_msamples_per_s'] / med[f'classical_{prng}']
-            s['speedup_vs_classical_xoshiro'] = s['median_msamples_per_s'] / med['classical_xoshiro']
+            ref = {'speedup_vs_classical_same_prng': f'classical_{prng}', 'speedup_vs_classical_xoshiro': 'classical_xoshiro',
+                   'speedup_vs_classical_philox_fast': 'classical_philox_fast'}
+            for key, r in ref.items():                 # empty when the reference variant was not run
+                s[key] = s['median_msamples_per_s'] / med[r] if r in med else ''
 
     def write(name, data):
         with (out / name).open('x', newline='') as f:
