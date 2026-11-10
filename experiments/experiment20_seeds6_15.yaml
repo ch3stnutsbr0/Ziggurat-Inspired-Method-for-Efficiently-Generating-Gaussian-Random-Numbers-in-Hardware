@@ -1,0 +1,30 @@
+experiment_id: experiment20
+output_dir: experiments/results/experiment20_seeds6_15   # 10 extra validation seeds
+
+# Trapezoid one-block sampler (zt_gaussian_philox_1call, inline Philox2x64-10) over the full
+# H/T grid. Phase 1 (validation): goodness of fit, 5 seeds, all cores.
+# Classical is not validated: its rejection step makes it exact, whatever the PRNG quality.
+layers: [8, 16, 32, 64, 128, 256]
+heads: [0, 1, 2, 3, 4]
+tails: [0, 1, 2, 3, 4]
+samples: 33554432                  # 2^25 per run, as in Experiments 11 and 13
+
+validation:
+  seeds: [6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+  workers: 8                       # one per core; worker i is pinned to cpus[i]
+  cpus: [0, 1, 2, 3, 4, 5, 6, 7]   # CPU 7 is isolated but idle during this phase
+  significance_level: 0.05
+  chi_square:                      # same bins as Experiments 10-13
+    bins: 100                      # interior bins; two unbounded tail bins are added
+    range: [-5.0, 5.0]
+    minimum_expected_count: 5
+  # Pipeline check: rerun one Experiment 13 row (c/benchmark, inline xoshiro256+) through the same
+  # test code and require the identical stream digest and p-values.
+  pipeline_check:
+    binary: c/benchmark
+    reference: experiments/results/experiment13/validation_results.csv
+    config_id: trap_N128_H2_T4
+    N: 128
+    H: 2
+    T: 4
+    seed: 1

@@ -1,0 +1,117 @@
+{
+  "experiment_id": "experiment20",
+  "phase": "validation",
+  "started_utc": "2026-11-10T19:42:16.164765+00:00",
+  "machine": {
+    "boost": "1",
+    "isolated": "7",
+    "governor_cpu0": "schedutil",
+    "scaling_max_khz": "3200000",
+    "loadavg": "0.29 2.60 3.65 1/885 429724",
+    "kernel_cmdline": "BOOT_IMAGE=/boot/vmlinuz-5.15.0-198-generic root=UUID=44c9819c-255e-4b5b-8723-c622290b92d2 ro quiet splash isolcpus=domain,managed_irq,7 irqaffinity=0-6"
+  },
+  "git_commit": "4d74bdf36c119d6f32eb4d68efa4862e4a37a04e",
+  "git_dirty_files": 16,
+  "build_commands": {
+    "stream": "gcc -std=c11 -Wall -Wextra -pedantic -O2 -I /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c -DPHILOX_COUNT_BLOCKS -DZT_TEST_PRNG_STEPS /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/experiments/experiment20_bench.c /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/ziggurat_basic_xoshiro256plus.c /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/xoshiro256plus.c /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/ziggurat_basic_philox.c /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/ziggurat_trapezoid_philox.c -o /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/experiments/results/experiment20_seeds6_15/validation/bin/experiment20_stream -lm",
+    "test_philox2x64": "gcc -std=c11 -Wall -Wextra -pedantic -O2 -I /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/tests/test_philox2x64.c -o /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/experiments/results/experiment20_seeds6_15/validation/bin/test_philox2x64 -lm",
+    "test_trapezoid_philox_1call": "gcc -std=c11 -Wall -Wextra -pedantic -O2 -I /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/tests/test_trapezoid_philox_1call.c /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/ziggurat_trapezoid_philox.c -o /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/experiments/results/experiment20_seeds6_15/validation/bin/test_trapezoid_philox_1call -lm"
+  },
+  "c_tests": {
+    "test_philox2x64": {
+      "returncode": 0,
+      "tail": [
+        "stream: ok (1000 blocks)"
+      ]
+    },
+    "test_trapezoid_philox_1call": {
+      "returncode": 0,
+      "tail": [
+        "all ok"
+      ]
+    }
+  },
+  "pipeline_check": {
+    "config_id": "trap_N128_H2_T4",
+    "seed": 1,
+    "stream_sha256": "08773dfd426e3faca0b866f1b58cd11117dbf2bf32f926a09cee7890eda9e55c",
+    "identical": true
+  },
+  "stream_binary_sha256": "69d57a753258397a82d7aa0e05d3eac55743bebdc59728d9656d35955f4f49c3",
+  "config": {
+    "experiment_id": "experiment20",
+    "output_dir": "experiments/results/experiment20_seeds6_15",
+    "layers": [
+      8,
+      16,
+      32,
+      64,
+      128,
+      256
+    ],
+    "heads": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "tails": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "samples": 33554432,
+    "validation": {
+      "seeds": [
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "workers": 8,
+      "cpus": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "significance_level": 0.05,
+      "chi_square": {
+        "bins": 100,
+        "range": [
+          -5.0,
+          5.0
+        ],
+        "minimum_expected_count": 5
+      },
+      "pipeline_check": {
+        "binary": "c/benchmark",
+        "reference": "experiments/results/experiment13/validation_results.csv",
+        "config_id": "trap_N128_H2_T4",
+        "N": 128,
+        "H": 2,
+        "T": 4,
+        "seed": 1
+      }
+    }
+  },
+  "finished_utc": "2026-11-10T20:08:07.412595+00:00",
+  "elapsed_s": 1559.5796614070423,
+  "machine_end": {
+    "boost": "1",
+    "loadavg": "8.34 8.56 7.67 1/873 434258"
+  }
+}
