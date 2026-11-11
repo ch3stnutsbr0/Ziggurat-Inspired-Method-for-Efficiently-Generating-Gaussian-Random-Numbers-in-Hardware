@@ -1,0 +1,27 @@
+experiment_id: experiment22
+output_dir: experiments/results/experiment22   # relative to the repository root
+
+# Timing consistency: distribution of the time per sample (core cycles, rdpmc), Trapezoid
+# one-block sampler against Classical Philox fast path. See experiments/EXPERIMENT_22_README.md.
+# window 1: each sample timed alone (fenced) -> latency per sample
+# window 16 / 256: consecutive samples timed together -> throughput over short windows
+layers: [8, 16, 32, 64, 128, 256]
+variants:
+  - {name: trap1_H1_T2, variant: trapezoid_1call, head: 1, tail: 2}   # recommended configuration
+  - {name: trap1_H0_T0, variant: trapezoid_1call, head: 0, tail: 0}   # no refinement, for reference
+  - {name: classical_philox_fast, variant: classical_philox_fast}
+uniform_modes: [inline, precomputed]
+windows: [1, 16, 256]
+samples: {1: 4194304, 16: 16777216, 256: 16777216}   # timed samples per run, by window
+warmup: 100000
+
+performance:
+  seeds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+  cpu: 7
+  require_isolation: true
+  require_governor: performance
+  # boost is recorded, not required: rdpmc counts core cycles at whatever the clock frequency,
+  # and every buffer read is from L2 (precomputed mode), in the core clock domain.
+  require_boost: null
+  shuffle_seed: 2026
+  estimated_process_s: 0.35

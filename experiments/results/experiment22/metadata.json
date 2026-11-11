@@ -1,0 +1,104 @@
+{
+  "experiment_id": "experiment22",
+  "start": {
+    "utc": "2026-11-11T18:42:05.308801+00:00",
+    "boost": "1",
+    "isolated": "7",
+    "loadavg": "0.07 0.34 0.37 1/852 499312",
+    "governor": "performance",
+    "temperatures": [
+      "Tctl:         +63.0\u00b0C",
+      "Tdie:         +53.0\u00b0C"
+    ]
+  },
+  "git_commit": "8432ff61cef4c904d09afb8d85e766c137a99d5b",
+  "git_dirty_files": 18,
+  "builds": {
+    "inline": {
+      "command": "gcc -std=c11 -Wall -Wextra -pedantic -O2 -I /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/experiments/experiment22_bench.c /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/ziggurat_basic_philox.c /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/ziggurat_trapezoid_philox.c -o /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/experiments/results/experiment22/bin/experiment22_bench_inline -lm",
+      "sha256": "53909d9c010d9e5be09b479be578a09f50ce259935af47192857b4f03e052ee0"
+    },
+    "precomputed": {
+      "command": "gcc -std=c11 -Wall -Wextra -pedantic -O2 -I /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c -DPHILOX_PRECOMPUTED /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/experiments/experiment22_bench.c /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/ziggurat_basic_philox.c /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/ziggurat_trapezoid_philox.c -o /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/experiments/results/experiment22/bin/experiment22_bench_precomputed -lm",
+      "sha256": "e703bce56db8587181b31199ec28156031c4303ed43c9ba3c9539abc055cf709"
+    }
+  },
+  "config": {
+    "experiment_id": "experiment22",
+    "output_dir": "experiments/results/experiment22",
+    "layers": [
+      8,
+      16,
+      32,
+      64,
+      128,
+      256
+    ],
+    "variants": [
+      {
+        "name": "trap1_H1_T2",
+        "variant": "trapezoid_1call",
+        "head": 1,
+        "tail": 2
+      },
+      {
+        "name": "trap1_H0_T0",
+        "variant": "trapezoid_1call",
+        "head": 0,
+        "tail": 0
+      },
+      {
+        "name": "classical_philox_fast",
+        "variant": "classical_philox_fast"
+      }
+    ],
+    "uniform_modes": [
+      "inline",
+      "precomputed"
+    ],
+    "windows": [
+      1,
+      16,
+      256
+    ],
+    "samples": {
+      "1": 4194304,
+      "16": 16777216,
+      "256": 16777216
+    },
+    "warmup": 100000,
+    "performance": {
+      "seeds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "cpu": 7,
+      "require_isolation": true,
+      "require_governor": "performance",
+      "require_boost": null,
+      "shuffle_seed": 2026,
+      "estimated_process_s": 0.35
+    }
+  },
+  "end": {
+    "utc": "2026-11-11T18:46:48.353314+00:00",
+    "boost": "1",
+    "isolated": "7",
+    "loadavg": "1.12 0.86 0.59 1/853 500495",
+    "governor": "performance",
+    "temperatures": [
+      "Tctl:         +83.8\u00b0C",
+      "Tdie:         +73.8\u00b0C"
+    ]
+  },
+  "elapsed_s": 283.0305027778959,
+  "failed": 0
+}
