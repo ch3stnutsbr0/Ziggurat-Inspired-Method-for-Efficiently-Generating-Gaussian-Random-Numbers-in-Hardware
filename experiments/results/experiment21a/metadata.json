@@ -1,0 +1,115 @@
+{
+  "sessions": [
+    {
+      "start": {
+        "utc": "2026-11-10T20:22:09.272775+00:00",
+        "boost": "0",
+        "governor": "performance",
+        "scaling_max_khz": "3200000",
+        "isolated": "7",
+        "loadavg": "0.15 0.91 3.36 1/602 436975",
+        "kernel_cmdline": "BOOT_IMAGE=/boot/vmlinuz-5.15.0-198-generic root=UUID=44c9819c-255e-4b5b-8723-c622290b92d2 ro quiet splash isolcpus=domain,managed_irq,7 irqaffinity=0-6",
+        "temperatures": {
+          "Tctl": "+49.8\u00b0C",
+          "Tdie": "+39.8\u00b0C"
+        }
+      },
+      "git_commit": "7171301918881425ab735b540555863fc7615c56",
+      "git_dirty_files": 19,
+      "end": {
+        "utc": "2026-11-11T00:22:47.671821+00:00",
+        "boost": "0",
+        "governor": "performance",
+        "scaling_max_khz": "3200000",
+        "isolated": "7",
+        "loadavg": "1.22 1.13 1.08 1/592 469455",
+        "kernel_cmdline": "BOOT_IMAGE=/boot/vmlinuz-5.15.0-198-generic root=UUID=44c9819c-255e-4b5b-8723-c622290b92d2 ro quiet splash isolcpus=domain,managed_irq,7 irqaffinity=0-6",
+        "temperatures": {
+          "Tctl": "+53.0\u00b0C",
+          "Tdie": "+43.0\u00b0C"
+        }
+      },
+      "elapsed_s": 14438.302786044078,
+      "failed": 0
+    }
+  ],
+  "experiment_id": "experiment21a",
+  "uniform_mode": "inline",
+  "build_command": "gcc -std=c11 -Wall -Wextra -pedantic -O2 -I /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/experiments/experiment21_bench.c /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/ziggurat_basic_xoshiro256plus.c /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/xoshiro256plus.c /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/ziggurat_basic_philox.c /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/ziggurat_trapezoid_philox.c -o /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/experiments/results/experiment21a/bin/experiment21_bench -lm",
+  "binary_sha256": "e4f9292441d0774d93a41a8bd7dd481d48cfffe60e5459b55a21f2e62891b13b",
+  "config": {
+    "experiment_id": "experiment21a",
+    "output_dir": "experiments/results/experiment21a",
+    "uniform_mode": "inline",
+    "layers": [
+      8,
+      16,
+      32,
+      64,
+      128,
+      256
+    ],
+    "heads": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "tails": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "classical_variants": [
+      "classical_philox_fast",
+      "classical_xoshiro"
+    ],
+    "samples": 33554432,
+    "warmup": 100000,
+    "performance": {
+      "seeds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30
+      ],
+      "repetitions": 5,
+      "repetitions_per_process": 1,
+      "cpu": 7,
+      "require_isolation": true,
+      "require_boost": 0,
+      "require_governor": "performance",
+      "shuffle_seed": 2026,
+      "estimated_process_s": 0.95
+    }
+  }
+}

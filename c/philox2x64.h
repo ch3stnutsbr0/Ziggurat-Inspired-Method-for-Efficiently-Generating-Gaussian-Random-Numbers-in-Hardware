@@ -37,14 +37,33 @@ static inline philox2x64_block philox2x64_bijection(uint64_t c0, uint64_t c1, ui
     return b;
 }
 
-/* Next 128-bit block; the 128-bit counter steps by one. */
+/* Next 128-bit block from the generator; the 128-bit counter steps by one. */
+static inline philox2x64_block philox2x64_step(philox2x64_rng *r) {
+    philox2x64_block b = philox2x64_bijection(r->ctr0, r->ctr1, r->key);
+    if (++r->ctr0 == 0) ++r->ctr1;
+    return b;
+}
+
+/* -DPHILOX_PRECOMPUTED: the samplers read blocks from a buffer filled beforehand with
+ * philox2x64_step (same stream, no Philox work in the timed loop). The caller fills
+ * philox_buf and resets philox_pos; no bounds check here (guard the buffer's end). */
+#ifdef PHILOX_PRECOMPUTED
+#include <stddef.h>
+extern const philox2x64_block *philox_buf;
+extern size_t philox_pos;
+#endif
+
+/* Next block used by the samplers. */
 static inline philox2x64_block philox2x64_next(philox2x64_rng *r) {
 #ifdef PHILOX_COUNT_BLOCKS
     ++philox_blocks;
 #endif
-    philox2x64_block b = philox2x64_bijection(r->ctr0, r->ctr1, r->key);
-    if (++r->ctr0 == 0) ++r->ctr1;
-    return b;
+#ifdef PHILOX_PRECOMPUTED
+    (void)r;
+    return philox_buf[philox_pos++];
+#else
+    return philox2x64_step(r);
+#endif
 }
 
 /* Key from SplitMix64(seed); counter starts at zero. */

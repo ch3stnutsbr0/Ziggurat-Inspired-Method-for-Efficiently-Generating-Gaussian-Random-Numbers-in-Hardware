@@ -1,0 +1,26 @@
+experiment_id: experiment21b
+output_dir: experiments/results/experiment21b   # relative to the repository root
+
+# Timing: Trapezoid one-block sampler (zt_gaussian_philox_1call) against Classical Ziggurat.
+# uniform_mode inline: the PRNG runs inside the timed loop (21a).
+# uniform_mode precomputed: PRNG outputs generated before timing, same stream (21b).
+uniform_mode: precomputed
+layers: [8, 16, 32, 64, 128, 256]
+heads: [0, 1, 2, 3, 4]
+tails: [0, 1, 2, 3, 4]
+classical_variants: [classical_philox_fast, classical_xoshiro]
+samples: 33554432                  # 2^25 timed samples per repetition
+warmup: 100000                     # per repetition, outside timing; the stream is reset afterwards
+
+performance:
+  seeds: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+          21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+  repetitions: 5                   # timings per configuration and seed
+  repetitions_per_process: 5    # one process per (configuration, seed): the buffer fill (~0.7-1.2 s) is paid once
+                                   # instead of 5 times; repetitions inside a process reset the stream
+  cpu: 7
+  require_isolation: true
+  require_boost: 0
+  require_governor: performance
+  shuffle_seed: 2026               # process order is shuffled (deterministically)
+  estimated_process_s: 3.0        # for the runtime estimate only
