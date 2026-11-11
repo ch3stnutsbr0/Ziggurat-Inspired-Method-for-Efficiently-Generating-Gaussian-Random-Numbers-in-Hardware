@@ -1,0 +1,40 @@
+experiment_id: experiment23
+output_dir: experiments/results/experiment23   # relative to the repository root
+
+# Part 1: exact operation counts per sample (no timing). See experiments/EXPERIMENT_23_README.md.
+layers: [8, 16, 32, 64, 128, 256]
+heads: [0, 1, 2, 3, 4]
+tails: [0, 1, 2, 3, 4]
+samples: 268435456          # 2^28 per run
+seeds: [1, 2, 3, 4, 5]
+workers: 7
+cpus: [0, 1, 2, 3, 4, 5, 6]
+
+# Part 2: energy model (used by reports/experiment23/analysis/energy_model.py).
+# Every value is an ASSUMPTION; the analysis sweeps the uncertain ones (see `sweeps`).
+energy_model:
+  # 45 nm per-operation energies after Horowitz, "Computing's energy problem", ISSCC 2014:
+  # 32-bit FP multiply 3.7 pJ, 32-bit FP add 0.9 pJ, 32-bit int add 0.1 pJ, 32-bit int multiply
+  # 3.1 pJ, 64-bit read from an 8 KB SRAM 10 pJ. 64-bit values are scaled from the 32-bit ones.
+  pj:
+    fmul: 14.8        # 64-bit FP multiply: 4 x 32-bit (multiplier array ~ width^2)
+    fadd: 1.8         # 64-bit FP add/sub: 2 x 32-bit
+    conv: 1.8         # int -> FP conversion: like an FP add (normalising shift)
+    fscale: 0.2       # multiply by a power of two: an exponent add
+    fcmp: 0.2         # FP compare: like a 64-bit integer compare
+    icmp: 0.2         # 64-bit integer compare: 2 x 32-bit int add
+    iadd: 0.2         # 64-bit integer add/sub/abs
+    fdiv: 59.2        # FP divide: 4 x FP multiply (iterative divider)
+    prng_block: 130   # Philox2x64-10 block: 10 rounds x (64x64->128 multiply = 4 x 3.1 pJ, + xor/add)
+  exp_log_in_fmul: 10 # exp() and log() each cost this many FP multiplies (polynomial/CORDIC unit)
+  read_pj_8kb_64bit: 10.0
+  read_size_exponent: 0.5     # read energy ~ (table KiB / 8)^exponent (SRAM bit-line length)
+  word_bits_extra: 2          # word width = b* fraction bits (Experiment 14) + this many integer bits
+  leakage_pj_per_kib_per_slot: 0.01   # static energy per KiB of table per attempt slot (1 slot = 1 clock)
+  sweeps:
+    exp_log_in_fmul: [5, 10, 20, 50]
+    prng_scale: [0.5, 1, 2]
+    read_size_exponent: [0, 0.5]
+    leakage_pj_per_kib_per_slot: [0, 0.01, 0.1, 1]
+  epsilons: [1.0e-6, 1.0e-9, 1.0e-12]   # budgets cover all but this fraction of samples / windows
+  windows: [1, 16, 256]

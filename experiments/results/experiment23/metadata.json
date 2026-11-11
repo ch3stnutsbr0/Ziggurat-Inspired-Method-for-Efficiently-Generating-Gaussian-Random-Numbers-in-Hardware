@@ -1,0 +1,106 @@
+{
+  "experiment_id": "experiment23",
+  "started_utc": "2026-11-11T19:09:36.090280+00:00",
+  "build_command": "gcc -std=c11 -Wall -Wextra -pedantic -O2 -I /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c -DZIGGURAT_COUNT_OPS -DPHILOX_COUNT_BLOCKS /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/experiments/experiment23_count.c /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/ziggurat_basic_philox.c /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/c/ziggurat_trapezoid_philox.c -o /home/newuser/projects/Ziggurat-Inspired-Method-for-Efficiently-Generating-Gaussian-Random-Numbers-in-Hardware/experiments/results/experiment23/bin/experiment23_count -lm",
+  "binary_sha256": "8fbd6f9f87cc99ff326ad78a8c4567f06ba8634dc92297af2ae1b9ba0f45751d",
+  "git_commit": "a37c628380a9d52298d9aefa66f99982b2f43dec",
+  "git_dirty_files": 22,
+  "config": {
+    "experiment_id": "experiment23",
+    "output_dir": "experiments/results/experiment23",
+    "layers": [
+      8,
+      16,
+      32,
+      64,
+      128,
+      256
+    ],
+    "heads": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "tails": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "samples": 268435456,
+    "seeds": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "workers": 7,
+    "cpus": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "energy_model": {
+      "pj": {
+        "fmul": 14.8,
+        "fadd": 1.8,
+        "conv": 1.8,
+        "fscale": 0.2,
+        "fcmp": 0.2,
+        "icmp": 0.2,
+        "iadd": 0.2,
+        "fdiv": 59.2,
+        "prng_block": 130
+      },
+      "exp_log_in_fmul": 10,
+      "read_pj_8kb_64bit": 10.0,
+      "read_size_exponent": 0.5,
+      "word_bits_extra": 2,
+      "leakage_pj_per_kib_per_slot": 0.01,
+      "sweeps": {
+        "exp_log_in_fmul": [
+          5,
+          10,
+          20,
+          50
+        ],
+        "prng_scale": [
+          0.5,
+          1,
+          2
+        ],
+        "read_size_exponent": [
+          0,
+          0.5
+        ],
+        "leakage_pj_per_kib_per_slot": [
+          0,
+          0.01,
+          0.1,
+          1
+        ]
+      },
+      "epsilons": [
+        1e-06,
+        1e-09,
+        1e-12
+      ],
+      "windows": [
+        1,
+        16,
+        256
+      ]
+    }
+  },
+  "finished_utc": "2026-11-11T19:32:58.182124+00:00",
+  "elapsed_s": 1402.0705843110336,
+  "failed": 0
+}

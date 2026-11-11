@@ -15,6 +15,7 @@
 #include "ziggurat_basic.c"
 #include "philox2x64.h"
 #include "ziggurat_philox.h"
+#include "ziggurat_opcount.h"
 
 #define MASK53 ((UINT64_C(1) << 53) - 1)
 
@@ -88,27 +89,39 @@ static inline double zb_sign(double mag, uint64_t A) {
 }
 
 __attribute__((noinline, cold)) static double zb_slow(uint64_t A, uint64_t B) {
+    ZOP_ONLY(int first = 1;)              /* the first attempt's layer and fast tests are counted by the caller */
     for (;;) {
         const uint64_t m = A & MASK53;
         const unsigned layer = (unsigned)(A >> p_shift);
+        ZOP_ONLY(if (!first) { ZOP(attempts); ZOP(icmp); })
         if (layer == 0) {
             double mag;
+            ZOP(icmp);
             if ((B >> 11) < rect_thr) {
+                ZOP(conv); ZOP(fmul); ZOP_SET(outcome, 2);
                 mag = (double)m * cutoff_s;
             } else {
                 for (;;) {
                     philox2x64_block c = philox2x64_next(&prng);
+                    ZOP(tail_iter);
+                    ZOP_N(conv, 2); ZOP_N(fscale, 2); ZOP_N(fadd, 2); ZOP_N(log, 2); ZOP(fdiv);
+                    ZOP(fscale); ZOP(fmul); ZOP(fcmp);
                     double xt = -log(1.0 - (double)(c.v[0] >> 11) * 0x1p-53) / cutoff;
                     double yt = -log(1.0 - (double)(c.v[1] >> 11) * 0x1p-53);
-                    if (2 * yt > xt * xt) { mag = cutoff + xt; break; }
+                    if (2 * yt > xt * xt) { ZOP(fadd); ZOP_SET(outcome, 3); mag = cutoff + xt; break; }
                 }
             }
             return zb_sign(mag, A);
         }
+        ZOP_ONLY(if (!first) { ZOP(conv); ZOP(fmul); ZOP_N(reads, 2); ZOP(fcmp); })
         const double cand = (double)m * xs[layer - 1];
-        if (cand <= x[layer]) return zb_sign(cand, A);
+        if (cand <= x[layer]) { ZOP_SET(outcome, 1); return zb_sign(cand, A); }
+        ZOP_N(reads, 2); ZOP_N(fadd, 2); ZOP(conv); ZOP(fscale); ZOP(fmul);  /* height */
+        ZOP(fmul); ZOP(fscale); ZOP(exp); ZOP(fcmp);                         /* exp(-cand^2/2) test */
         const double height = y[layer - 1] + (y[layer] - y[layer - 1]) * ((double)(B >> 11) * 0x1p-53);
-        if (height <= exp(-cand * cand / 2.0)) return zb_sign(cand, A);
+        if (height <= exp(-cand * cand / 2.0)) { ZOP_SET(outcome, 4); return zb_sign(cand, A); }
+        ZOP(rejections);
+        ZOP_ONLY(first = 0;)
         philox2x64_block b = philox2x64_next(&prng);            /* rejected: next attempt */
         A = b.v[0]; B = b.v[1];
     }
@@ -118,9 +131,11 @@ double zb_gaussian_philox_fast(void) {
     const philox2x64_block b = philox2x64_next(&prng);
     const uint64_t A = b.v[0];
     const unsigned layer = (unsigned)(A >> p_shift);
+    ZOP(attempts); ZOP(icmp);
     if (__builtin_expect(layer != 0, 1)) {
+        ZOP(conv); ZOP(fmul); ZOP_N(reads, 2); ZOP(fcmp);
         const double cand = (double)(A & MASK53) * xs[layer - 1];
-        if (__builtin_expect(cand <= x[layer], 1)) return zb_sign(cand, A);
+        if (__builtin_expect(cand <= x[layer], 1)) { ZOP_SET(outcome, 1); return zb_sign(cand, A); }
     }
     return zb_slow(A, b.v[1]);
 }

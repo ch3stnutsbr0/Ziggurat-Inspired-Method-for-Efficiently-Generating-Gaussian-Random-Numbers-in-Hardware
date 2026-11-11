@@ -28,6 +28,7 @@
 #include "ziggurat_trapezoid.c"
 #include "philox2x64.h"
 #include "ziggurat_philox.h"
+#include "ziggurat_opcount.h"
 
 #define MASK53 ((UINT64_C(1) << 53) - 1)
 #ifdef ZT_PHILOX_WEDGE_SECOND_CALL
@@ -210,21 +211,27 @@ __attribute__((noinline, cold)) static const zp_entry *descend1(uint64_t A, unsi
     const unsigned mask = p_last;                       /* N - 1 */
     unsigned lev = 0;
     if (i == 0) {
-        while (i == 0 && lev < p_nh) { ++lev; i = (unsigned)(A >> (64 - q_k * (lev + 1))) & mask; }
+        while (i == 0 && lev < p_nh) { ++lev; ZOP(icmp); i = (unsigned)(A >> (64 - q_k * (lev + 1))) & mask; }
+        ZOP_SET(depth, lev); ZOP_SET(side, 1);
         return &ztp1[lev][i];
     }
-    while (i == p_last && lev < p_nt) { ++lev; i = (unsigned)(A >> (64 - q_k * (lev + 1))) & mask; }
+    while (i == p_last && lev < p_nt) { ++lev; ZOP(icmp); i = (unsigned)(A >> (64 - q_k * (lev + 1))) & mask; }
+    ZOP_SET(depth, lev); ZOP_SET(side, 2);
     return &ztp1[lev ? ZT_MAX_REFINEMENT + lev : 0][i];
 }
 
 double zt_philox_1call_map(uint64_t A, uint64_t B) {
     const unsigned i = (unsigned)(A >> p_shift);
     const zp_entry *e = &ztp1[0][i];
+    ZOP(attempts); ZOP_N(icmp, 2);                                 /* is it a refined strip (head or tail)? */
     if (__builtin_expect((i == 0 && p_nh) || (i == p_last && p_nt), 0)) e = descend1(A, i);
     double mag;
+    ZOP(reads); ZOP(icmp);                                         /* threshold, rectangle test */
     if ((A & q_dmask) < e->thr) {
+        ZOP(reads); ZOP(conv); ZOP(fmul); ZOP_SET(outcome, 1);
         mag = (double)(B >> 11) * e->ws;
     } else {
+        ZOP_N(reads, 2); ZOP_N(iadd, 2); ZOP(conv); ZOP(fmul); ZOP(fadd); ZOP_SET(outcome, 2);
         int64_t df = (int64_t)(B >> 32) - (int64_t)(B & UINT64_C(0xffffffff));
         mag = e->w + (double)(df < 0 ? -df : df) * e->ds;
     }
