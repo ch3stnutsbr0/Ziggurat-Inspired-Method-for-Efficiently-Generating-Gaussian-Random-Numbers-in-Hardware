@@ -97,3 +97,186 @@ For the recommended **N=128 H1/T2**: support 6.10σ, 1%-reliable reach 5.64σ, t
 3. `fig3_refinement_gain.png`: D and KS versus T for H=0 and H=1.
 4. `fig4_divergence_by_region.png`: share of D by |x| region for selected H/T at N=64 and 128.
 5. `fig5_tail_ratio_curves.png`: P(|X|>t)/P(|Z|>t) for T=0…4 at N=64 and 128 (H=1).
+6. `fig6_bin_error_by_N.png` to `fig10_bin_detect_samples.png`: per-bin errors (section 6).
+
+## 6. Per-bin errors by N, H and T (added 2026-11-12)
+
+Sections 1–5 summarise the error as one number per region. This section shows it **bin by bin**:
+the probability of |X| falling in each 0.1σ-wide bin, compared with N(0,1).
+
+**Method:**
+- Bin probabilities are differences of the exact survival P(|X| > t) stored in `tail_curves.csv`.
+  No new computation was needed.
+- Rebuilding the 100 χ² bins this way reproduces the stored `delta_binned` to every printed digit.
+- Script: `analysis/bin_errors.py`. Tables:
+  - `tables/bin_errors_0p1.csv`: every configuration × bin, giving p, q, p/q − 1, the bin's
+    χ² term, and the single-bin detection size.
+  - `tables/bin_error_summary.csv`: zone summaries per configuration.
+- **Zones:** head |x| < 0.5, body 0.5–3, shoulder 3–4, tail 4 to the support. The tail is
+  further split into the inner tail and the edge (the last 0.5σ before the support).
+- **Single-bin detection size:** the number of samples at which that one bin's count is off by
+  1.96 binomial standard deviations. It is a per-bin view of "how visible is this error".
+
+### What the bins show
+
+![per-bin error by N](figures/fig6_bin_error_by_N.png)
+
+*Figure 6. Signed per-bin error p/q − 1 for H1/T2, from −7σ to 7σ and centred at 0, log scale both
+ways: orange means too many samples, blue too few, gray means no samples at all (beyond the
+support). The light bell is the N(0,1) density, for orientation. The law is symmetric, so each
+negative bin mirrors its positive one.*
+
+![per-bin error at N=128, H/T 0/0 to 4/4](figures/fig6b_bin_error_N128_HT.png)
+
+*Figure 6b. N = 128 with head and tail refinement added together, H/T = 0/0 to 4/4, same scale
+as Figure 6 (−8σ to 8σ).*
+
+Reading Figure 6b from top to bottom:
+- **H0/T0.** The support ends at ±4.11σ.
+  - The bins from 3.5σ to the support are off by +10% to +43%, then fall to −100%.
+  - The head bins around 0 are off by about ±0.1%.
+  - 8 of 41 bins exceed 1%.
+- **H1/T1.** Both problems shrink at once.
+  - The head bins drop to about 0.001%.
+  - The old shoulder error collapses into a narrow cluster at 3.3–3.4σ (1.4%).
+  - The support moves to ±5.21σ.
+- **H2/T2.** The body from −3σ to 3σ is identical to H1/T1, because a second head level changes
+  nothing at N=128.
+  - The tail gains a small cluster at 4.5–4.6σ (≤ 0.45%).
+  - The support moves to ±6.10σ.
+  - 6 of 60 bins exceed 1%.
+- **H3/T3 and H4/T4.** Every bin inside ±5.5σ stays the same as at H2/T2, to within 10⁻¹⁰.
+  - Each extra level only adds one more small cluster at the base of the new tail table, and
+    moves the support (and its +40% overshoot) out by about 0.7σ, to ±6.87σ and ±7.55σ.
+  - The number of bins over 1% stays at 6.
+
+So past H1/T2, refinement buys reach, not accuracy: the error pattern near the centre is fixed by N.
+
+![per-bin error heatmap](figures/fig7_bin_error_heatmap.png)
+
+*Figure 7. |p/q − 1| per bin for every N, centred at 0: without refinement (H0/T0, top) and
+recommended (H1/T2, bottom).*
+
+1. **The error is not spread evenly. It sits in clusters at the base of each table.** At H1/T2
+   with N ≥ 64:
+   - bins from 0.5σ to 2.5σ are accurate to 0.012% (N=64), 0.0011% (N=128) and 0.0001% (N=256);
+   - the error gathers in three places: the bottom of the root table (the shoulder, 3–3.5σ), the
+     bottom of the first tail level (about 4.3–4.9σ, up to 0.2–0.46%), and the last bins before
+     the support.
+   - The bottom strips of each table cover the steepest relative fall of the Gaussian, so a
+     straight trapezoid edge fits them worst.
+2. **The edge always overshoots by about +40–45%, then drops to −100%.** In every configuration,
+   the last trapezoid holds all of the remaining tail mass inside the support. Its last bins
+   therefore carry too much, and everything beyond carries nothing.
+   - These bins hold very little probability, so the overshoot is hard to see.
+   - At T=2 the edge needs 2^20.7 samples to show at N=8, 2^33.4 at N=128 and 2^36.2 at N=256
+     (single-bin test).
+   - Each extra tail level pushes it about log2 N further: at N=128 with T=4 it needs 2^47.9.
+3. **The body floor does not shrink with N in relative terms; it moves outwards.**
+   - The largest shoulder error at T ≥ 1 is about 1–1.6% for every N ≥ 32 (N=32 1.4%, N=64 0.97%,
+     N=128 1.43%, N=256 1.58%).
+   - It sits further out as N grows (2.8σ → 3.5σ), where the Gaussian has less probability.
+   - So it needs more samples to expose: 2^23.1 (N=32) to 2^26.6 (N=256).
+   - This is why D, which weights errors by probability, falls with N even though the worst
+     relative error does not (section 4).
+
+### Number of bins with a visible error (H1/T2, bins fully inside the support)
+
+| N | bins inside | \|p/q − 1\| > 1% | > 0.1% | weakest single bin (samples to expose) |
+|---|---|---|---|---|
+| 8 | 44 | 10 | 25 | 2^20.5 at 4.5σ |
+| 16 | 49 | 10 | 17 | 2^21.7 at 2.5σ |
+| 32 | 53 | 9 | 14 | 2^23.1 at 2.8σ |
+| 64 | 57 | 5 | 10 | 2^25.7 at 3.0σ |
+| 128 | 60 | 6 | 10 | 2^25.9 at 3.3σ |
+| 256 | 64 | 6 | 10 | 2^26.6 at 3.5σ |
+
+At N ≥ 64 only 5–6 bins exceed 1%:
+- **N=64:** all 5 are edge bins (its shoulder peaks at 0.97%).
+- **N=128 and N=256:** two shoulder bins (±1.3–1.6%) and four edge bins.
+
+The weakest single bin at N=128 (2^25.9) is consistent with the full χ² test needing 2^27.7: the χ²
+test spreads its power over 100 bins, so it needs a little more.
+
+### What H changes: the head
+
+![head and tail zoom](figures/fig8_head_tail_zoom.png)
+
+*Figure 8. Left: head bins (−1.5σ to 1.5σ, centred at 0) for H = 0…4 at T=2. Right: positive-tail
+bins for T = 0…4 at H=1, with each T's support dotted (the negative tail mirrors it).*
+
+| N | largest head error (\|x\| < 0.5), H=0 | H=1 | H=2 |
+|---|---|---|---|
+| 8 | 1.43% | 0.383% | 0.029% |
+| 16 | 0.92% | 0.129% | 0.0022% |
+| 32 | 0.55% | 0.0005% | 0.0002% |
+| 64 | 0.38% | 0.005% | 0.005% |
+| 128 | 0.14% | 0.0012% | 0.0012% |
+| 256 | 0.13% | 0.0022% | 0.0022% |
+
+- **Without H, the head is the weakest part of a tail-refined design.** At H0/T2 with N ≥ 32 the
+  weakest bin is at 0.1–0.4σ (2^20.6–2^24.7 samples). The head also holds 76–91% of the χ²
+  divergence (Figure 9).
+- **H=1 removes the head error.** It falls 3.7× at N=8, 7× at N=16, 1,100× at N=32 and 60–110× at
+  N ≥ 64. The weakest bin then moves to the shoulder, and the samples needed to expose the design
+  rise by a factor 2^1.4–2^4.1 (N=128: 2^24.5 → 2^25.9; N=64: 2^21.6 → 2^25.7).
+- **H ≥ 2 changes nothing from N=64 up**, because the remaining error in the first 0.5σ comes from
+  ordinary body strips that H does not touch. At small N it still helps.
+- **The head error depends on N^(H+1)**, just as the tail depends on N^(T+1) (section 1). N=8 with
+  H=1 has exactly the head error of N=64 with H=0 (0.383%), and N=16 with H=1 that of N=256 with
+  H=0 (0.129%): the refined top strip is the same shape.
+
+### What T changes: the shoulder and the tail
+
+| N | shoulder (3–4σ), largest error: T=0 | T=1 | T=2 | bin 4.0–4.1σ: T=0 | T=1 | T=2 | bin 5.0–5.1σ, T=2 | inner tail, T=2 |
+|---|---|---|---|---|---|---|---|---|
+| 8 | 65.5% | 96.2% | 12.2% | none (beyond support) | none | +22.7% | none | — |
+| 16 | 99.1% | 36.7% | 1.6% | none | +43.2% | +0.066% | none | 8.5% |
+| 32 | 95.8% | 1.0% | 1.4% | none | −12.0% | −1.13% | +31.1% (edge) | 1.1% |
+| 64 | 96.2% | 0.97% | 0.97% | none | +0.066% | +0.066% | −0.013% | 0.20% |
+| 128 | 42.9% | 1.43% | 1.43% | −28.8% | −0.0005% | −0.0005% | −0.0002% | 0.45% |
+| 256 | 36.7% | 1.58% | 1.58% | +43.2% (edge) | −0.00002% | −0.00002% | −0.019% | 0.46% |
+
+"None" means the bin lies beyond the support (p = 0, error −100%).
+
+- **T=0 is unusable beyond about 3.5σ.** The shoulder bins are off by 37–99%, and the support
+  ends at 3.3–4.3σ.
+- **T=1 fixes the shoulder for N ≥ 32**, bringing it to about 1%, the body floor. It is
+  the largest single improvement in the whole grid.
+- **T=2 makes the 4–5σ bins accurate**: at N ≥ 64, bins at 4σ and 5σ are within 0.07% and 0.02%.
+  The inner tail (4σ to 0.5σ before the support) stays within 0.2–0.46%.
+- **T ≥ 3 adds reach, not accuracy.** At T=4 the inner tail error is still 0.45–0.68% for
+  N ≥ 64. The extra levels only move the edge overshoot further out, where it needs far more
+  samples to expose (N=128: 2^33.4 at T=2 → 2^47.9 at T=4).
+
+### Where the remaining error sits
+
+![error share by zone](figures/fig9_error_share_by_zone.png)
+
+*Figure 9. Share of the per-bin divergence Σ(p − q)²/q (0–8σ) in each zone.*
+
+| Configuration | dominant zone |
+|---|---|
+| H0/T0 | beyond the support (37–53%), plus the shoulder (25–60%; 13% at N=8, where the body has 35%) |
+| H1/T0 | the same: H alone does not help while the tail is unrefined |
+| H0/T2 | the head (68–91% for N ≥ 16) |
+| H1/T2 | N=8: body, tail and beyond the support (33 / 30 / 27%); N=16–32: the body (51–81%); N ≥ 64: the shoulder (64% at N=64, 98–100% at N ≥ 128) |
+| H1/T4 | the body at N ≤ 32 (82–99%), the shoulder at N ≥ 64 (72–100%); tail and edge ≤ 1% |
+
+![detection per bin](figures/fig10_bin_detect_samples.png)
+
+*Figure 10. Samples needed for each bin on its own to show its error (darker = weaker), for H0/T0
+and H1/T2, centred at 0. × marks the weakest bin of each N, on both sides. At H0/T0 it is the bin containing the support:
+without tail refinement, the missing mass beyond the support is the easiest error to see.*
+
+### Summary
+
+- **N** sets how far out the body floor sits, and so how many samples expose it. Its largest
+  relative error stays at about 1–1.6%.
+- **H=1** removes the head error (7–1,000×). Without it, the head is the weakest region once the
+  tail is refined.
+- **T=1** removes the shoulder error, and **T=2** makes 4–5σ accurate to ≤ 0.07% (N ≥ 64).
+  Beyond that, T only moves the support and its +40–45% edge overshoot outwards, making the
+  overshoot exponentially harder to see.
+- **For N=128 H1/T2,** 6 of 60 bins inside the support exceed 1%: two at 3.3–3.4σ and four at the
+  5.6–6.0σ edge. Bins from 0 to 3σ are within 0.03%, and from 3.5 to 5.5σ within 0.45%.
